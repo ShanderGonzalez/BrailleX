@@ -197,18 +197,19 @@ body{
     box-shadow: 0px 5px 5px #00000040;
 }
 
-.content button{ 
+.content .botonTraducir{ 
     width: 150px;
     height: 50px;
     background-color: #000000;
     border-radius: 10px;
     color: #ffffff;
-    margin: 0;
+    margin: 5px 0;
     padding: 0;
     text-align: center;
     font-size: 20px;
+
 }
-.content button:hover{
+.content .botonTraducir:hover{
     background-color: #0a0a23;
 }
 
@@ -229,24 +230,92 @@ body{
 }
 
 /*CONTENIDO COMPONENTE*/
-.content .respuesta .component{
+.componentes {
     /*width: 50px;
     height: 50px;*/
     display: grid;
-    grid-template-columns: repeat(2, 50px);
-    grid-template-rows: repeat(3, 50px);
+    grid-template-columns: repeat(2, 35px);
+    grid-template-rows: repeat(3, 35px);
     gap: 10px;  
 }
 
 
+
+#limpiarBoton{
+    width: 30px;
+    height: 30px;
+    padding: 0%;
+    margin: 0;
+    float: right;
+    border: none;
+}
+#limpiarBoton img{
+    height: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+
+/*otrooo*/
+
+
+.entradas .entradaTexto{
+    width: 100%;
+    display: inline-block;
+   /* height: 100px;*/
+    height: 70%;
+    text-align: center;
+    font-size: 100%;
+    margin: 0 0 20px 0;
+    padding: 0;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0px 5px 5px #00000040;
+}
+
+ #collectButton{ 
+    width: 75%;
+    height: 30px;
+    background-color: #000000;
+    border-radius: 10px;
+    color: #ffffff;
+    margin: 8px;
+    padding: 0;
+    font-size: 15px;
+}
+#collectButton:hover{
+    background-color: #0a0a23;
+}
+
+/**/
+/**/
+.divComponentesplusentrada{
+    display: flex;
+}
+
+.divComponentesplusentrada .divComponentes{
+    width: 13%;
+    display: inline-block;
+
+}
+.divComponentes .componentes{
+    margin-top: 30px;
+    margin-left: 17px;
+}
+.divComponentesplusentrada .entradas{
+    width: 87%;
+}
+
+
 /*CONTENIDO ELLIPSE*/
-.component .ellipse{
-    width: 50px;
-    height: 50px;
+.componentes .ellipse{
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     background-color: gray;
     cursor: pointer;
+    padding: 0;
+    margin: 0;
 }
-.component .ellipse.painted {
+.componentes .ellipse.painted {
     background-color: black;
 }

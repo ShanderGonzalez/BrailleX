@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traductor Español - Braille</title>
+  <link rel="stylesheet" href="/Version1/implementation/templates/css/misEstilos.css" />
+</head>
+
+<body>
+  <div class="header">
+    <div class="logo">
+      <img src="/Version1/implementation/images/logo-proyecto.png" alt="Dev-Sentinels Logo">
+      <p>Dev-Sentinels</p>
+    </div>
+    <div class="info">
+      <div class="Conocenos">
+        <div class="ConocenosTitulo">Conocenos</div>
+        <div class="ConocenosOpciones">
+          <a href="#">Mision</a>
+          <a href="#">Vision</a>
+          <a href="#">Equipo</a>
+        </div>
+      </div>
+      <img src="/Version1/implementation/images/info-icon.png" alt="icono de informacion">
+    </div>
+  </div>
+  <div class="Titulo">
+    BrailleX
+  </div>
+  <div class="container">
+    <div class="sidebar">
+      <h3>Traductor</h3>
+      <ul>
+        <li><img src="/Version1/implementation/images/search-icon.png" alt="icono de buscar">
+          <a href="index.html">Español - Braille</a>
+        </li>
+        <li><img src="/Version1/implementation/images/search-icon.png" alt="icono de buscar">
+          <a href="brailleEs.html">Braille - Español</a>
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="content">
+      <!-- <p id="traduce">Traduce un texto de español a braille</p>-->
+      <p class="warningCaracteres">* Texto inválido: no se permiten caracteres especiales</p>
+      <button id="limpiarBoton" type="reset" onclick="p()"> <img src="/Version1/implementation/images/clear-icon.png"
+          alt="boton de limpiar texto"></button>
+      <input class="entradaTexto" type="text" placeholder="Escribe texto en español">
+
+      <button class="botonTraducir">Traducir</button>
+
+      <div class="divImpresion">
+        <input type="checkbox" id="mirror" name="mirror">
+        <p>Impresión en espejo</p>
+      </div>
+      <div class="respuesta"> hola
+      </div>
+    </div>
+  </div>
+</body>
+<script src="/Version1/implementation/templates/js/limpiar.js"></script>
+</html>
