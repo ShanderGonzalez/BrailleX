@@ -74,7 +74,7 @@
           placeholder="Escribe texto en español"
         ></textarea>
 
-        <button class="botonTraducir">Traducir</button>
+        <button id="traducirBoton" class="botonTraducir">Traducir</button>
 
         <div class="respuesta"></div>
         <div class="divImpresion">
@@ -88,5 +88,17 @@
   </body>
   <script src="/Version1/implementation/templates/js/limpiar.js"></script>
   <script src="/Version1/implementation/templates/js/mostrarBoton.js"></script>
-  <script src="/Version1/implementation/app/services/traductor.js"></script>
+  <script type="module">
+    import Traductor from "/Version1/implementation/app/services/traductor.js";
+    document
+      .getElementById("traducirBoton")
+      .addEventListener("click", function () {
+        var texto = document.querySelector(".entradaTexto").value;
+        var traductor = new Traductor();
+        var traduccion = traductor.traducirEspanolABraille(texto);
+
+        // Mostrar la traducción en el div con clase 'respuesta'
+        document.querySelector(".respuesta").innerText = traduccion;
+      });
+  </script>
 </html>
