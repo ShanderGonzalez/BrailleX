@@ -44,7 +44,7 @@
 
 
     <div class="content">
-      <!-- <p id="traduce">Traduce un texto de español a braille</p>-->
+     <p id="traduce">Traduce un texto de Braille a Español</p>
       <div class="divComponentesplusentrada">
         
         <div class="divComponentes">
@@ -63,18 +63,14 @@
         <div class="entradas">
           <button id="limpiarBoton" type="reset" onclick="p()"> <img src="/Version1/implementation/images/clear-icon.png"
               alt="boton de limpiar texto"></button>
-          <input class="entradaTexto" type="text" placeholder="Escribe texto en español">
+          <textarea name="entradaTexto" class="entradaTexto" placeholder="Colocar Braille" id="output"></textarea>
+          <!--<input class="entradaTexto" type="text" placeholder="Escribe texto en español">-->
         </div>  
      </div>
 
       <button class="botonTraducir">Traducir</button>
 
-      <div class="divImpresion">
-        <input type="checkbox" id="mirror" name="mirror">
-        <p>Impresión en espejo</p>
-      </div>
-      <div class="respuesta"> hola
-      </div>
+      <div class="respuesta"> </div>
     </div>
   </div>
 </body>

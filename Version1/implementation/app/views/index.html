@@ -44,22 +44,26 @@
 
 
     <div class="content">
-      <!-- <p id="traduce">Traduce un texto de español a braille</p>-->
+      <p id="traduce">Traduce un texto de Español a Braille</p>
       <p class="warningCaracteres">* Texto inválido: no se permiten caracteres especiales</p>
       <button id="limpiarBoton" type="reset" onclick="p()"> <img src="/Version1/implementation/images/clear-icon.png"
           alt="boton de limpiar texto"></button>
-      <input class="entradaTexto" type="text" placeholder="Escribe texto en español">
+     <!-- <input class="entradaTexto" type="text" placeholder="Escribe texto en español">-->
+      <textarea name="entradaTexto" class="entradaTexto" placeholder="Escribe texto en español"></textarea>
 
       <button class="botonTraducir">Traducir</button>
 
+      
+      <div class="respuesta">  </div>
       <div class="divImpresion">
         <input type="checkbox" id="mirror" name="mirror">
         <p>Impresión en espejo</p>
       </div>
-      <div class="respuesta"> hola
-      </div>
+
+      <button class="botonDescargar">Descargar</button>
     </div>
   </div>
 </body>
 <script src="/Version1/implementation/templates/js/limpiar.js"></script>
+<script src="/Version1/implementation/templates/js/mostrarBoton.js"></script>
 </html>

@@ -1,4 +1,4 @@
-var elementos = document.getElementsByTagName('input');
+var elementos = document.getElementsByTagName('textarea');
 var respuesta = document.querySelector('.respuesta');
 var limpiar = document.getElementById('limpiarBoton');
 
