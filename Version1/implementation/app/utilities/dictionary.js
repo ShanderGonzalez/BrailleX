@@ -139,6 +139,23 @@ class BrailleDictionary {
             '8': '1256',
             '9': '246'
         };
+
+        this.invertAlfabetoBrailleEspanol = this.invertDictionary(this.alfabetoBrailleEspanol);
+        this.invertAlfabetoBrailleEspanolMayus = this.invertDictionary(this.alfabetoBrailleEspanolMayus);
+        this.invertSignosPuntuacion = this.invertDictionary(this.signosPuntuacion);
+        this.invertSignosAuxiliares = this.invertDictionary(this.signosAuxiliares);
+        this.invertNumerosBraille = this.invertDictionary(this.numerosBraille);
+        this.invertNumeroComputarizado = this.invertDictionary(this.numeroComputarizado);
+    }
+
+    invertDictionary(dictionary) {
+        let invertedDictionary = {};
+
+        for (let key in dictionary) {
+            invertedDictionary[dictionary[key]] = key;
+        }
+
+        return invertedDictionary;
     }
 
     getLetraBraille(letra) {
@@ -166,6 +183,36 @@ class BrailleDictionary {
             return this.numerosBraille[numero];
         } else if (this.numeroComputarizado[numero] && esNumComp) {
             return this.numeroComputarizado[numero];
+        } else {
+            return null;
+        }
+    }
+
+    getLetraEspañol(braille) {
+        if (this.invertAlfabetoBrailleEspanol[braille]) {
+            return this.invertAlfabetoBrailleEspanol[braille];
+        } else if (this.invertAlfabetoBrailleEspanolMayus[braille]) {
+            return this.invertAlfabetoBrailleEspanolMayus[braille];
+        } else {
+            return null;
+        }
+    }
+
+    getInvertSigno(braille) {
+        if (this.invertSignosPuntuacion[braille]) {
+            return this.invertSignosPuntuacion[braille];
+        } else if (this.invertSignosAuxiliares[braille]) {
+            return this.invertSignosAuxiliares[braille];
+        } else {
+            return null;
+        }
+    }
+
+    getInvertNumeroBraille(braille) {
+        if (this.invertNumerosBraille[braille]) {
+            return this.invertNumerosBraille[braille];
+        } else if (this.invertNumeroComputarizado[braille]) {
+            return this.invertNumeroComputarizado[braille];
         } else {
             return null;
         }
