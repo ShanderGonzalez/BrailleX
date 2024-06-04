@@ -21,11 +21,17 @@ if (validador.esEspanol(textoEspanol)) {
 
     console.log(textoBrailleFormateado);
     const brailleUnicode = traductor.getBrailleUnicode(textoBrailleFormateado);
-    console.log("Braille:");
+    console.log("Signo Braille:");
     console.log(brailleUnicode);
+
+
+    const brailleCode = traductor.unicodeToBraille(brailleUnicode);
+    console.log("Punto Braille:");
+    console.log(brailleCode);
+    const brailleText = traductor.traducirBrailleAEspanol(brailleCode);
+    console.log("Codigo en español:");
+    console.log(brailleText);
 } else {
     console.log("El texto no está en español");
 }
-
-
 
