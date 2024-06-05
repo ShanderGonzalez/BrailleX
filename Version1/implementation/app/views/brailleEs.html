@@ -97,12 +97,12 @@
   <script type="module">
     import Traductor from "/Version1/implementation/app/services/traductor.js";
 
-    //BOTON SIGUIENTE
     document.addEventListener("DOMContentLoaded", () => {
       const ellipses = document.querySelectorAll(".ellipse");
       const output = document.getElementById("output");
       const collectButton = document.getElementById("collectButton");
       const traducirBoton = document.getElementById("traducirBoton");
+      const respuesta = document.querySelector(".respuesta");
 
       ellipses.forEach((ellipse) => {
         ellipse.addEventListener("click", () => {
@@ -118,29 +118,28 @@
             paintedEllipses.push(i);
           }
         }
-        output.textContent = `Elipses pintadas: ${paintedEllipses.join(", ")}`;
+        const traductor = new Traductor();
+        const brailleCode = paintedEllipses.join("");
+        const unicodeBraille = traductor.getBrailleUnicode(brailleCode);
+
+        // Agregar el Braille traducido al contenido existente del textarea
+        output.value += unicodeBraille;
+
+        // Limpiar las elipses pintadas para la próxima letra
+        ellipses.forEach((ellipse) => ellipse.classList.remove("painted"));
       });
 
       traducirBoton.addEventListener("click", function () {
-        const texto = document.querySelector(".entradaTexto").value;
-        let paintedEllipses = [];
-        for (let i = 1; i <= 6; i++) {
-          const ellipse = document.getElementById(`ellipse-${i}`);
-          if (ellipse.classList.contains("painted")) {
-            paintedEllipses.push(i);
-          }
-        }
-        paintedEllipses = paintedEllipses.join("");
-        console.log(paintedEllipses);
+        const textoBraille = document.querySelector(".entradaTexto").value;
         const traductor = new Traductor();
-        const unicodeBraille = traductor.getBrailleUnicode(paintedEllipses);
-        console.log(unicodeBraille);
-        output.textContent = unicodeBraille;
-        const traduccion = traductor.traducirBrailleAEspanol(unicodeBraille);
-        console.log(traduccion);
+        let traduccion = "";
+        for (let letra of textoBraille.trim()) {
+          const letraTraducida = traductor.traducirBrailleAEspanol(letra);
+          traduccion += letraTraducida || letra; // Si la letra no se puede traducir, se mantiene igual
+        }
 
         // Mostrar la traducción en el div con clase 'respuesta'
-        document.querySelector(".respuesta").innerText = traduccion;
+        respuesta.innerText = traduccion;
       });
     });
   </script>
