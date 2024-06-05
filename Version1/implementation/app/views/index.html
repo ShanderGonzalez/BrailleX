@@ -10,18 +10,6 @@
     />
   </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Traductor Español - Braille</title>
-  <link rel="stylesheet" href="../../templates/css/estilosPrincipal.css">
-  <style>
-    .hidden {
-        display: none;
-    }
-  </style>
-</head>
-
   <body>
     <div class="header">
       <div class="logo">
@@ -35,21 +23,17 @@
         <div class="Conocenos">
           <div class="ConocenosTitulo">Conocenos</div>
           <div class="ConocenosOpciones">
-            <a href="#">Mision</a>
-            <a href="#">Vision</a>
-            <a href="#">Equipo</a>
+            <a href="/Version1/implementation/app/views/MisionVision.html"
+              >Misión y Visión</a
+            >
+            <a href="/Version1/implementation/app/views/Equipo.html">Equipo</a>
           </div>
-          <img
-            src="/Version1/implementation/images/info-icon.png"
-            alt="icono de informacion"
-          />
         </div>
         <img
           src="/Version1/implementation/images/info-icon.png"
           alt="icono de informacion"
         />
       </div>
-      <img src="../../images/info-icon.png" alt="icono de informacion">
     </div>
     <div class="Titulo">BrailleX</div>
     <div class="container">
@@ -72,23 +56,6 @@
           </li>
         </ul>
       </div>
-  </div>
-  <div class="Titulo">
-    BrailleX
-  </div>
-  <div class="container">
-    <div class="sidebar">
-      <h3>Traductor</h3>
-      <ul>
-        <li><img src="../../images/search-icon.png" alt="icono de buscar">
-          <a href="index.html">Español - Braille</a>
-        </li>
-        <li><img src="../../images/search-icon.png" alt="icono de buscar">
-          <a href="brailleEs.html">Braille - Español</a>
-        </li>
-      </ul>
-    </div>
-
 
       <div class="content">
         <p id="traduce">Traduce un texto de Español a Braille</p>
@@ -107,13 +74,6 @@
           class="entradaTexto"
           placeholder="Escribe texto en español"
         ></textarea>
-    <div class="content">
-      <p id="traduce">Traduce un texto de Español a Braille</p>
-      <p class="warningCaracteres hidden" id="warningCaracteres" onclick="hola()">* Texto inválido: no se permiten caracteres especiales</p>
-      <button id="limpiarBoton" type="reset" onclick="p()"> <img src="../../images/clear-icon.png"
-          alt="boton de limpiar texto"></button>
-     <!-- <input class="entradaTexto" type="text" placeholder="Escribe texto en español">-->
-      <textarea name="entradaTexto" class="entradaTexto" placeholder="Escribe texto en español" id="entradaTexto" ></textarea>
 
         <button id="traducirBoton" class="botonTraducir">Traducir</button>
 
@@ -129,4 +89,17 @@
   </body>
   <script src="/Version1/implementation/templates/js/limpiar.js"></script>
   <script src="/Version1/implementation/templates/js/mostrarBoton.js"></script>
+  <script type="module">
+    import Traductor from "/Version1/implementation/app/services/traductor.js";
+    document
+      .getElementById("traducirBoton")
+      .addEventListener("click", function () {
+        var texto = document.querySelector(".entradaTexto").value;
+        var traductor = new Traductor();
+        var traduccion = traductor.traducirEspanolABraille(texto);
+
+        // Mostrar la traducción en el div con clase 'respuesta'
+        document.querySelector(".respuesta").innerText = traduccion;
+      });
+  </script>
 </html>

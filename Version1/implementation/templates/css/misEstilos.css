@@ -18,25 +18,6 @@ body {
     padding: 0;
 }
 
-@media screen and (max-width: 600px){
-    #traduce{
-        font-size: 15px;
-        color: #828282;
-        padding: 0 0 10px 0;
-        margin: 0;
-    }
-
-    .container .sidebar{
-        width: 20%;
-        margin: 0 10px 0 0;
-        padding: 0px 50px 0 0px;
-    }
-
-}
-
-
-
-
 /*CABECERA*/
 .header {
     height: 80px;
