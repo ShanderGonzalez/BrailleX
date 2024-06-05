@@ -82,7 +82,7 @@
     var texto = document.querySelector(".entradaTexto").value;
     var traductor = new Traductor();
     // Validar si el texto contiene caracteres especiales antes de la traducción
-    const regex = /[~\/\\«»]/g;
+    const regex = /[~\/\\«»`|]/g;
 
     if (regex.test(texto)) {
       texto = "";

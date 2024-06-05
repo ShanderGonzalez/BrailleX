@@ -1,12 +1,28 @@
 import BrailleDictionary from "../utilities/dictionary.js";
 import Validator from "./validate.js";
-
+/**
+ * Clase que se encarga de traducir texto en español a Braille y viceversa.
+ * @class Traductor
+ * @constructor Crea una instancia de la clase Traductor.
+ * @property {BrailleDictionary} diccionarioBraille - Diccionario de Braille.
+ * @property {Validator} validador - Validador de texto.
+ * @module Traductor
+ */
 class Traductor {
+
+  /**
+   * Constructor de la clase Traductor.
+   */
   constructor() {
     this.diccionarioBraille = new BrailleDictionary();
     this.validador = new Validator();
   }
 
+  /**
+   * Traduce texto en español a Braille.
+   * @param {string} texto - El texto en español a traducir.
+   * @returns {string} - El texto traducido a Braille en formato Unicode.
+   */
   traducirEspanolABraille(texto) {
     let lineas = texto.split("\n");
     let brailleTexto = "";
@@ -26,6 +42,11 @@ class Traductor {
     return brailleUnicode.trim();
   }
 
+  /**
+   * Traduce texto en español a Braille invertido.
+   * @param {string} texto - El texto en español a traducir.
+   * @returns {string} - El texto traducido a Braille invertido en formato Unicode.
+   */
   traducirEspanolABrailleInverso(texto) {
     let lineas = texto.split("\n");
     let brailleTexto = "";
@@ -42,6 +63,11 @@ class Traductor {
     return brailleUnicode.trim();
   }
 
+  /**
+   * Reordena los puntos Braille invirtiendo su posición.
+   * @param {string} brailleCode - El código Braille a reordenar.
+   * @returns {string} - El código Braille reordenado.
+   */
   reordenarPuntosBraille(brailleCode) {
     const inversionMap = {
       1: "4",
@@ -61,6 +87,11 @@ class Traductor {
     return reversedBrailleCode;
   }
 
+  /**
+   * Traduce una línea de texto en español a Braille.
+   * @param {string} texto - La línea de texto en español a traducir.
+   * @returns {string} - La línea traducida a Braille.
+   */
   traducirLineaABraille(texto) {
     let brailleTexto = "";
     let esNumero = false;
@@ -153,6 +184,11 @@ class Traductor {
     return brailleTexto.trim();
   }
 
+  /**
+   * Traduce texto en Braille a español.
+   * @param {string} brailleTexto - El texto en Braille a traducir.
+   * @returns {string} - El texto traducido a español.
+   */
   traducirBrailleAEspanol(brailleTexto) {
     const brailleCode = this.unicodeToBraille(brailleTexto);
 
@@ -166,6 +202,11 @@ class Traductor {
     return textoEspanol.trim();
   }
 
+  /**
+   * Traduce una línea de Braille a español.
+   * @param {string} brailleLinea - La línea de Braille a traducir.
+   * @returns {string} - La línea traducida a español.
+   */
   traducirLineaAEspanol(brailleLinea) {
     let textoEspanol = "";
     let esNumero = false;
@@ -250,6 +291,11 @@ class Traductor {
     return textoEspanol.trim();
   }
 
+  /**
+   * Convierte un código Braille a una matriz de puntos Braille.
+   * @param {string} brailleCode - El código Braille a convertir.
+   * @returns {number[]} - La matriz de puntos Braille.
+   */
   getBrailleMatrix(brailleCode) {
     const brailleArray = brailleCode.split("").map(Number);
     const matrix = [0, 0, 0, 0, 0, 0];
@@ -263,6 +309,11 @@ class Traductor {
     return matrix;
   }
 
+  /**
+   * Convierte un código Braille en formato de puntos a su equivalente Unicode.
+   * @param {string} brailleCode - El código Braille a convertir.
+   * @returns {string} - El texto Braille en formato Unicode.
+   */
   getBrailleUnicode(brailleCode) {
     let brailleLines = brailleCode.split("\n");
     let brailleText = "";
@@ -275,10 +326,8 @@ class Traductor {
         const matrix = this.getBrailleMatrix(brailleSgn);
         if (!matrix) return null;
 
-        // Definir Unicode base para punto Braille
         const baseUnicode = 0x2800;
 
-        // Calcular valor Unicode sumando la posición del punto activo
         let unicodeValue = baseUnicode;
         matrix.forEach((point, index) => {
           if (point === 1) {
@@ -293,6 +342,11 @@ class Traductor {
     return brailleText.trim();
   }
 
+  /**
+   * Convierte texto en Braille Unicode a su representación en código Braille.
+   * @param {string} unicodeBraille - El texto Braille en Unicode.
+   * @returns {string} - El código Braille.
+   */
   unicodeToBraille(unicodeBraille) {
     let brailleCode = "";
     let lines = unicodeBraille.split("\n");
@@ -311,10 +365,10 @@ class Traductor {
         }
         brailleCode += brailleCodeStr + " ";
       }
-      brailleCode = brailleCode.trim() + "\n"; // Añadir salto de línea después de cada línea de braille
+      brailleCode = brailleCode.trim() + "\n";
     }
 
-    return brailleCode.trim(); // Eliminar el último salto de línea adicional
+    return brailleCode.trim();
   }
 }
 

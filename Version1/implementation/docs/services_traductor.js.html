@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: services/traductor.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: services/traductor.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import BrailleDictionary from "../utilities/dictionary.js";
+import Validator from "./validate.js";
+/**
+ * Clase que se encarga de traducir texto en español a Braille y viceversa.
+ * @class Traductor
+ * @constructor Crea una instancia de la clase Traductor.
+ * @property {BrailleDictionary} diccionarioBraille - Diccionario de Braille.
+ * @property {Validator} validador - Validador de texto.
+ * @module Traductor
+ */
+class Traductor {
+
+  /**
+   * Constructor de la clase Traductor.
+   */
+  constructor() {
+    this.diccionarioBraille = new BrailleDictionary();
+    this.validador = new Validator();
+  }
+
+  /**
+   * Traduce texto en español a Braille.
+   * @param {string} texto - El texto en español a traducir.
+   * @returns {string} - El texto traducido a Braille en formato Unicode.
+   */
+  traducirEspanolABraille(texto) {
+    let lineas = texto.split("\n");
+    let brailleTexto = "";
+
+    for (let linea of lineas) {
+      brailleTexto += this.traducirLineaABraille(linea) + "\n";
+    }
+
+    const textoBrailleFormateado = brailleTexto
+      .split(" ")
+      .map((braille) => {
+        return braille + " ";
+      })
+      .join("");
+
+    const brailleUnicode = this.getBrailleUnicode(textoBrailleFormateado);
+    return brailleUnicode.trim();
+  }
+
+  /**
+   * Traduce texto en español a Braille invertido.
+   * @param {string} texto - El texto en español a traducir.
+   * @returns {string} - El texto traducido a Braille invertido en formato Unicode.
+   */
+  traducirEspanolABrailleInverso(texto) {
+    let lineas = texto.split("\n");
+    let brailleTexto = "";
+
+    for (let linea of lineas) {
+      let brailleLinea = this.traducirLineaABraille(linea).split(" ");
+      let brailleLineaInversa = brailleLinea.reverse().map((braille) => {
+        return this.reordenarPuntosBraille(braille);
+      });
+      brailleTexto += brailleLineaInversa.join(" ") + "\n";
+    }
+
+    const brailleUnicode = this.getBrailleUnicode(brailleTexto.trim());
+    return brailleUnicode.trim();
+  }
+
+  /**
+   * Reordena los puntos Braille invirtiendo su posición.
+   * @param {string} brailleCode - El código Braille a reordenar.
+   * @returns {string} - El código Braille reordenado.
+   */
+  reordenarPuntosBraille(brailleCode) {
+    const inversionMap = {
+      1: "4",
+      2: "5",
+      3: "6",
+      4: "1",
+      5: "2",
+      6: "3",
+    };
+
+    let brailleArray = brailleCode.replace(/\s/g, "").split("");
+    let invertedBrailleArray = brailleArray.map(
+      (dot) => inversionMap[dot] || dot
+    );
+    let reversedBrailleCode = invertedBrailleArray.join("");
+
+    return reversedBrailleCode;
+  }
+
+  /**
+   * Traduce una línea de texto en español a Braille.
+   * @param {string} texto - La línea de texto en español a traducir.
+   * @returns {string} - La línea traducida a Braille.
+   */
+  traducirLineaABraille(texto) {
+    let brailleTexto = "";
+    let esNumero = false;
+    let esNumComp = false;
+
+    let palabras = texto.split(" ");
+    for (let palabra of palabras) {
+      if (palabra === palabra.toUpperCase() &amp;&amp; palabra.match(/[a-zA-Z]/)) {
+        brailleTexto += " 46 46";
+      }
+      if (
+        this.validador.validarCorreo(palabra) ||
+        this.validador.validarURL(palabra) ||
+        this.validador.validarEtiqueta(palabra)
+      ) {
+        esNumComp = true;
+      }
+      esNumero = false;
+      let i = 0;
+      while (i &lt; palabra.length) {
+        let caracter = palabra[i];
+
+        if (caracter >= "0" &amp;&amp; caracter &lt;= "9") {
+          if (!esNumero &amp;&amp; !esNumComp) {
+            brailleTexto += " 3456";
+            esNumero = true;
+          }
+          let brailleNumero = this.diccionarioBraille.getNumeroBraille(
+            caracter,
+            esNumComp
+          );
+          if (brailleNumero) {
+            brailleTexto += " " + brailleNumero;
+          }
+        } else {
+          if (esNumero) {
+            esNumero = false;
+            if (
+              i + 1 &lt; palabra.length &amp;&amp;
+              !palabra[i + 1].match(/\d/) &amp;&amp;
+              !caracter.match(/\s/)
+            ) {
+              brailleTexto += " 5";
+            }
+          }
+
+          if (caracter.match(/[a-zA-Z\u00C0-\u00FF]/)) {
+            let brailleLetra;
+            if (palabra === palabra.toUpperCase()) {
+              brailleLetra = this.diccionarioBraille.getLetraBraille(
+                caracter.toLowerCase()
+              );
+            } else {
+              if (caracter === caracter.toUpperCase()) {
+                brailleTexto += " 46";
+              }
+              brailleLetra = this.diccionarioBraille.getLetraBraille(
+                caracter.toLowerCase()
+              );
+            }
+            if (brailleLetra) {
+              brailleTexto += " " + brailleLetra;
+            }
+          } else if (caracter.match(/\s/)) {
+            brailleTexto += " ";
+          } else {
+            let brailleSigno;
+            if (
+              palabra[i - 1] &amp;&amp;
+              palabra[i - 1].match(/[0-9]/) &amp;&amp;
+              palabra[i + 1] &amp;&amp;
+              palabra[i + 1].match(/[0-9]/) &amp;&amp;
+              caracter === "."
+            ) {
+              brailleSigno = this.diccionarioBraille.getSigno(",");
+            } else {
+              brailleSigno = this.diccionarioBraille.getSigno(caracter);
+            }
+            if (brailleSigno) {
+              brailleTexto += " " + brailleSigno;
+            }
+          }
+        }
+
+        i++;
+      }
+      brailleTexto += " ";
+    }
+
+    return brailleTexto.trim();
+  }
+
+  /**
+   * Traduce texto en Braille a español.
+   * @param {string} brailleTexto - El texto en Braille a traducir.
+   * @returns {string} - El texto traducido a español.
+   */
+  traducirBrailleAEspanol(brailleTexto) {
+    const brailleCode = this.unicodeToBraille(brailleTexto);
+
+    let lineas = brailleCode.split("\n");
+    let textoEspanol = "";
+
+    for (let linea of lineas) {
+      textoEspanol += this.traducirLineaAEspanol(linea) + "\n";
+    }
+
+    return textoEspanol.trim();
+  }
+
+  /**
+   * Traduce una línea de Braille a español.
+   * @param {string} brailleLinea - La línea de Braille a traducir.
+   * @returns {string} - La línea traducida a español.
+   */
+  traducirLineaAEspanol(brailleLinea) {
+    let textoEspanol = "";
+    let esNumero = false;
+    let esMayuscula = false;
+    let esTextoMayuscula = false;
+
+    // Separar las palabras Braille por espacios dobles
+    let palabrasBraille = brailleLinea.split("  ");
+
+    for (let palabraBraille of palabrasBraille) {
+      let caracteresBraille = palabraBraille.split(" ");
+      let i = 0;
+      let aperturaSigno = true;
+
+      while (i &lt; caracteresBraille.length) {
+        let caracterBraille = caracteresBraille[i];
+
+        if (caracterBraille === "") {
+          i++;
+          continue;
+        }
+
+        if (caracterBraille === "3456") {
+          esNumero = true;
+          i++;
+          continue;
+        }
+
+        if (caracterBraille === "46") {
+          if (caracteresBraille[i + 1] === "46") {
+            esTextoMayuscula = true;
+            i += 2;
+            continue;
+          } else {
+            esMayuscula = true;
+            i++;
+            continue;
+          }
+        }
+
+        let letraEspanol =
+          this.diccionarioBraille.getLetraEspañol(caracterBraille);
+        let signoEspanol =
+          this.diccionarioBraille.getInvertSigno(caracterBraille);
+        let numeroEspanol = esNumero
+          ? this.diccionarioBraille.getInvertNumeroBraille(caracterBraille)
+          : null;
+
+        if (numeroEspanol) {
+          textoEspanol += numeroEspanol;
+        } else if (letraEspanol) {
+          if (esTextoMayuscula) {
+            textoEspanol += letraEspanol.toUpperCase();
+          } else if (esMayuscula) {
+            textoEspanol += letraEspanol.toUpperCase();
+            esMayuscula = false;
+          } else {
+            textoEspanol += letraEspanol;
+          }
+        } else if (signoEspanol) {
+          if (caracterBraille === "26") {
+            textoEspanol += aperturaSigno ? "¿" : "?";
+            aperturaSigno = !aperturaSigno;
+          } else if (caracterBraille === "235") {
+            textoEspanol += aperturaSigno ? "¡" : "!";
+            aperturaSigno = !aperturaSigno;
+          } else {
+            textoEspanol += signoEspanol;
+          }
+        }
+
+        if (esNumero &amp;&amp; !numeroEspanol) {
+          esNumero = false;
+        }
+        i++;
+      }
+
+      textoEspanol += " ";
+      esTextoMayuscula = false;
+    }
+
+    return textoEspanol.trim();
+  }
+
+  /**
+   * Convierte un código Braille a una matriz de puntos Braille.
+   * @param {string} brailleCode - El código Braille a convertir.
+   * @returns {number[]} - La matriz de puntos Braille.
+   */
+  getBrailleMatrix(brailleCode) {
+    const brailleArray = brailleCode.split("").map(Number);
+    const matrix = [0, 0, 0, 0, 0, 0];
+
+    brailleArray.forEach((point) => {
+      if (point > 0 &amp;&amp; point &lt;= 6) {
+        matrix[point - 1] = 1;
+      }
+    });
+
+    return matrix;
+  }
+
+  /**
+   * Convierte un código Braille en formato de puntos a su equivalente Unicode.
+   * @param {string} brailleCode - El código Braille a convertir.
+   * @returns {string} - El texto Braille en formato Unicode.
+   */
+  getBrailleUnicode(brailleCode) {
+    let brailleLines = brailleCode.split("\n");
+    let brailleText = "";
+
+    for (let line of brailleLines) {
+      let brailleSign = line.split(" ");
+      let brailleLine = "";
+
+      for (let brailleSgn of brailleSign) {
+        const matrix = this.getBrailleMatrix(brailleSgn);
+        if (!matrix) return null;
+
+        const baseUnicode = 0x2800;
+
+        let unicodeValue = baseUnicode;
+        matrix.forEach((point, index) => {
+          if (point === 1) {
+            unicodeValue += Math.pow(2, index);
+          }
+        });
+        brailleLine += String.fromCharCode(unicodeValue) + " ";
+      }
+      brailleText += brailleLine.trim() + "\n";
+    }
+
+    return brailleText.trim();
+  }
+
+  /**
+   * Convierte texto en Braille Unicode a su representación en código Braille.
+   * @param {string} unicodeBraille - El texto Braille en Unicode.
+   * @returns {string} - El código Braille.
+   */
+  unicodeToBraille(unicodeBraille) {
+    let brailleCode = "";
+    let lines = unicodeBraille.split("\n");
+
+    for (let line of lines) {
+      let brailleChars = line.split(" ");
+      for (let char of brailleChars) {
+        let unicodeValue = char.charCodeAt(0);
+        let braillePoints = unicodeValue - 0x2800;
+        let brailleCodeStr = "";
+
+        for (let i = 0; i &lt; 6; i++) {
+          if ((braillePoints &amp; (1 &lt;&lt; i)) !== 0) {
+            brailleCodeStr += (i + 1).toString();
+          }
+        }
+        brailleCode += brailleCodeStr + " ";
+      }
+      brailleCode = brailleCode.trim() + "\n";
+    }
+
+    return brailleCode.trim();
+  }
+}
+
+export default Traductor;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-BrailleDictionary.html">BrailleDictionary</a></li><li><a href="module-Traductor.html">Traductor</a></li><li><a href="module-Validator.html">Validator</a></li></ul><h3>Classes</h3><ul><li><a href="module-Traductor-Traductor.html">Traductor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#elementos">elementos</a></li><li><a href="global.html#limpiar">limpiar</a></li><li><a href="global.html#respuesta">respuesta</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Jun 05 2024 11:52:24 GMT-0500 (hora de Ecuador)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
