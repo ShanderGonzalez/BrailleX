@@ -31,19 +31,15 @@ class Traductor {
     let brailleTexto = "";
 
     for (let linea of lineas) {
-      brailleTexto += this.traducirLineaABraille(linea) + "\n";
+      let brailleLinea = this.traducirLineaABraille(linea).split(" ");
+      let brailleLineaInversa = brailleLinea.reverse().map((braille) => {
+        return this.reordenarPuntosBraille(braille);
+      });
+      brailleTexto += brailleLineaInversa.join(" ") + "\n";
     }
 
-    const textoBrailleFormateado2 = brailleTexto
-      .split(" ")
-      .reverse() // Reverse the order of Braille codes for inverse output
-      .map((braille) => {
-        return this.reordenarPuntosBraille(braille) + " "; // Reverse dot positions within each character
-      })
-      .join("");
-
-    const brailleUnicode2 = this.getBrailleUnicode(textoBrailleFormateado2);
-    return brailleUnicode2.trim();
+    const brailleUnicode = this.getBrailleUnicode(brailleTexto.trim());
+    return brailleUnicode.trim();
   }
 
   reordenarPuntosBraille(brailleCode) {
