@@ -1,0 +1,465 @@
+@font-face {
+  font-family: "Inter";
+  src: url("../../templates/fonts/Inter/Inter-VariableFont_slnt\,wght.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Cabecera */
+.header {
+  height: 80px;
+  display: flex;
+  background-color: #ffffff;
+  border-bottom: 1px solid #000;
+  padding: 0;
+  margin: 0;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header .logo {
+  padding: 0 10px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.logo img {
+  width: fit-content;
+  height: 70%;
+  padding: 0;
+  margin: 0 30px;
+}
+
+.logo p {
+  height: 30%;
+  color: #0a0a23;
+  text-decoration: solid;
+  font-weight: 900;
+  padding: 0 10px;
+  margin: 0;
+}
+
+/* Información */
+.header .info {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 10px;
+}
+
+.info img {
+  height: 60%;
+  padding: 0;
+  margin: 0;
+}
+
+/* Conócenos */
+.Conocenos {
+  display: inline-block;
+  position: relative;
+}
+
+.ConocenosTitulo {
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 15px;
+  margin: 0;
+}
+
+.ConocenosTitulo:hover {
+  background-color: #fcfcfc;
+}
+
+.ConocenosOpciones {
+  display: none;
+  position: absolute;
+  overflow: auto;
+  background-color: #fcfcfc;
+  padding: 0;
+  margin: 0;
+}
+
+.Conocenos:hover .ConocenosOpciones {
+  display: block;
+}
+
+.ConocenosOpciones a {
+  display: block;
+  text-decoration: solid;
+  font-size: 17px;
+  padding: 10px 15px;
+  margin: 0;
+}
+
+.ConocenosOpciones a:hover {
+  color: #0a0a23;
+  background-color: #fcfcfc;
+  border-radius: 8px;
+}
+
+/* Titulo */
+.Titulo {
+  width: 100%;
+  font-size: 55px;
+  padding: 30px 0 10px 0;
+  margin: 0;
+  text-align: center;
+  font-weight: 900;
+}
+
+/* Contenedor Sidebar + Contenido */
+.container {
+  width: 100%;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+/* Sidebar */
+.container .sidebar {
+  width: 20%;
+  margin: 0 10px 0 0;
+  padding: 40px 50px 0 40px;
+  border-right: 1px solid #e0e0e0;
+}
+
+.sidebar img {
+  height: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 0;
+  padding: 10px 0px;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar ul li:hover {
+  background: #e0e0e0;
+}
+
+.sidebar ul li a {
+  margin: 0;
+  padding: 0;
+  color: #000;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+/* Contenedor Contenido */
+.container .content {
+  width: 80%;
+  padding: 20px 50px 0 50px;
+  margin: 0;
+  text-align: center;
+}
+
+.content #traduce {
+  font-size: 30px;
+  color: #828282;
+  padding: 0 0 24px 0;
+  margin: 0;
+}
+
+.content .warningCaracteres {
+  font-size: 11px;
+  letter-spacing: 0;
+  line-height: 16.5px;
+  color: #f00;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.content .entradaTexto {
+  width: 100%;
+  text-align: center;
+  height: 100px;
+  font-size: 100%;
+  margin: 0 0 20px 0;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0px 5px 5px #00000040;
+}
+
+.entradaTexto::placeholder {
+  text-align: center;
+  line-height: 60px;
+  display: block;
+}
+
+.content .botonTraducir {
+  width: 150px;
+  height: 50px;
+  background-color: #000000;
+  border-radius: 10px;
+  color: #ffffff;
+  margin: 0px 0 15px 0;
+  padding: 0;
+  text-align: center;
+  font-size: 20px;
+}
+
+.content .botonTraducir:hover {
+  background-color: #0a0a23;
+}
+
+.content .divImpresion {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  justify-content: flex-end;
+}
+
+.content .respuesta {
+  width: 100%;
+  height: 130px;
+  padding: 15px;
+  margin: 0;
+  border: 1px solid #000;
+  box-shadow: 0px 5px 5px #00000040;
+}
+
+.content .botonDescargar {
+  width: 20%;
+  height: 30px;
+  background-color: #000000;
+  border-radius: 10px;
+  color: #ffffff;
+  float: right;
+  margin: 0 0 12px 0;
+  padding: 0;
+  font-size: 15px;
+}
+
+/* BRAILLE - ESPAÑOL */
+
+/* Div Componentes + Entrada */
+.divComponentesplusentrada {
+  display: flex;
+}
+
+.divComponentesplusentrada .divComponentes {
+  width: 13%;
+  border-right: 1px solid #e0e0e0;
+  display: inline-block;
+}
+
+.divComponentesplusentrada .entradas {
+  width: 87%;
+  margin: 0 8px;
+}
+
+.divComponentes .componentes {
+  margin-top: 30px;
+  margin-left: 17px;
+}
+
+.componentes {
+  display: grid;
+  grid-template-columns: repeat(2, 35px);
+  grid-template-rows: repeat(3, 35px);
+  gap: 10px;
+}
+
+.componentes .ellipse {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: gray;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.componentes .ellipse.painted {
+  background-color: black;
+}
+
+.entradas .entradaTexto {
+  width: 100%;
+  display: inline-block;
+  height: 70%;
+  text-align: center;
+  font-size: 100%;
+  margin: 0 0 20px 0;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0px 5px 5px #00000040;
+}
+
+#collectButton {
+  width: 75%;
+  height: 30px;
+  background-color: #000000;
+  border-radius: 10px;
+  color: #ffffff;
+  margin: 8px;
+  padding: 0;
+  font-size: 15px;
+}
+
+#collectButton:hover {
+  background-color: #0a0a23;
+}
+
+/* General */
+#limpiarBoton {
+  width: 30px;
+  height: 30px;
+  padding: 0%;
+  margin: 0;
+  float: right;
+  border: none;
+}
+
+#limpiarBoton img {
+  height: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+/* Centrando el contenedor principal */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+/* Estilos para la página del equipo */
+.team-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+  align-items: start;
+  width: 100%;
+  max-width: 1200px;
+}
+.team-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.team-container div:nth-last-child(-n + 2) {
+  grid-column: span 2;
+}
+.team-container div:nth-last-child(-n + 2) {
+  grid-column: span 2;
+  justify-self: center;
+}
+.team-member {
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0px 5px 5px #00000040;
+  text-align: center;
+  background-color: #fff;
+}
+.team-member img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+.team-member h3 {
+  margin: 10px 0 5px 0;
+  font-size: 18px;
+  color: #000;
+}
+.team-member p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Ajuste para la última fila de dos miembros */
+.team-container div:nth-last-child(-n + 2) {
+  grid-column: span 2;
+}
+
+/* Botón de regresar */
+.backButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 8px 16px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.backButton:hover {
+  background-color: #333;
+}
+
+/* Estilos para la página Nosotros */
+.about-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 30px;
+}
+
+.mission,
+.vision {
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0px 5px 5px #00000040;
+  background-color: #fff;
+  width: 45%;
+  text-align: justify;
+}
+
+.mission {
+  margin-right: 20px;
+}
+
+.vision {
+  margin-left: 20px;
+}
+
+/* Botón de regresar */
+.backButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 8px 16px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.backButton:hover {
+  background-color: #333;
+}
