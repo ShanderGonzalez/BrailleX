@@ -46,7 +46,6 @@ class Traductor {
     return brailleUnicode2.trim();
   }
 
-
   reordenarPuntosBraille(brailleCode) {
     const inversionMap = {
       1: "4",
