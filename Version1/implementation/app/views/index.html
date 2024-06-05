@@ -12,6 +12,7 @@
       .hidden {
         display: none;
       }
+
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
@@ -101,14 +102,18 @@
   <script src="/Version1/implementation/app/utilities/limpiar.js"></script>
   <script type="module">
     import Traductor from "/Version1/implementation/app/services/traductor.js";
-    document
-      .getElementById("traducirBoton")
-      .addEventListener("click", function () {
+    document.getElementById("traducirBoton").addEventListener("click", function () {
         var texto = document.querySelector(".entradaTexto").value;
         var traductor = new Traductor();
+        // Validar si el texto contiene caracteres especiales antes de la traducción
+        const regex = /[~\/\\«»]/g;
+
+        if (regex.test(texto)) {
+          texto = "";  
+            return; // Detener la ejecución del resto del código
+        }
         var traduccion = traductor.traducirEspanolABraille(texto);
 
-        // Mostrar la traducción en el div con clase 'respuesta'
         document.querySelector(".respuesta").innerText = traduccion;
       });
   </script>
@@ -130,15 +135,22 @@
     document
       .getElementById("entradaTexto")
       .addEventListener("input", function () {
+    });
+</script>
+
+<script>
+    document.getElementById("entradaTexto").addEventListener("input", function () {
         const texto = this.value;
         const warning = document.getElementById("warningCaracteres");
-        const regex = /[~\/\\«»]/g; // Ajusta este regex según los caracteres permitidos
+
+        const regex = /[~\/\\«»]/g; //caracteres no permitidos
 
         if (regex.test(texto)) {
-          warning.classList.remove("hidden");
+            warning.classList.remove("hidden");
         } else {
-          warning.classList.add("hidden");
+            warning.classList.add("hidden");
         }
+
       });
     document
       .getElementById("descargarImagenBoton")
@@ -175,4 +187,6 @@
         link.click();
       });
   </script>
+    });
+</script>
 </html>
