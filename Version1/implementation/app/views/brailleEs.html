@@ -8,7 +8,6 @@
       rel="stylesheet"
       href="/Version1/implementation/templates/css/estilosPrincipal.css"
     />
-    
   </head>
 
   <body>
@@ -102,6 +101,7 @@
       const ellipses = document.querySelectorAll(".ellipse");
       const output = document.getElementById("output");
       const collectButton = document.getElementById("collectButton");
+      const spaceButton = document.getElementById("spaceButton");
       const respuesta = document.querySelector(".respuesta");
 
       ellipses.forEach((ellipse) => {
@@ -128,6 +128,10 @@
         // Limpiar las elipses pintadas para la próxima letra
         ellipses.forEach((ellipse) => ellipse.classList.remove("painted"));
       });
+
+      spaceButton.addEventListener("click", () => {
+        output.value += " "; // Agregar un espacio al contenido del textarea
+      });
     });
   </script>
   <script type="module">
@@ -145,18 +149,19 @@
       });
   </script>
 
-
-<script>
-  document.getElementById("output").addEventListener("input", function () {
+  <script>
+    document.getElementById("output").addEventListener("input", function () {
       const textoBraille = this.value;
-      const regex = /^[a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ,¿?¡!«»<>()[\]{}\-—*+\\/&@#%^$€\s]*$/; //
+      const regex =
+        /^[a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ,¿?¡!«»<>()[\]{}\-—*+\\/&@#%^$€\s]*$/; //
 
       if (regex.test(textoBraille)) {
-         
-          this.value = textoBraille.replace(/^[a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ,¿?¡!«»<>()[\]{}\-—*+\\/&@#%^$€\s]*$/g, '');
-        return
+        this.value = textoBraille.replace(
+          /^[a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ,¿?¡!«»<>()[\]{}\-—*+\\/&@#%^$€\s]*$/g,
+          ""
+        );
+        return;
       }
-      
-  });
-</script>
+    });
+  </script>
 </html>
