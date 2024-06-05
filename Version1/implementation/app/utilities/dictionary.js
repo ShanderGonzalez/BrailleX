@@ -1,5 +1,16 @@
+/**
+ * Clase que contiene los diccionarios de los alfabetos Braille y Español, así como los signos de puntuación y auxiliares.
+ * También contiene los métodos para obtener la representación Braille de una letra, signo o número en español, y viceversa.
+ * @class BrailleDictionary
+ * @constructor Crea el constructor de la clase BrailleDictionary
+ * @module BrailleDictionary
+ */
 class BrailleDictionary {
   constructor() {
+    /**
+     * Diccionario de letras minúsculas en español a Braille.
+     * @type {Object.<string, string>}
+     */
     this.alfabetoBrailleEspanol = {
       a: "1",
       b: "12",
@@ -36,6 +47,10 @@ class BrailleDictionary {
       ü: "1256",
     };
 
+    /**
+     * Diccionario de letras mayúsculas en español a Braille.
+     * @type {Object.<string, string>}
+     */
     this.alfabetoBrailleEspanolMayus = {
       A: "1",
       B: "12",
@@ -71,6 +86,10 @@ class BrailleDictionary {
       Ú: "23456",
     };
 
+    /**
+     * Diccionario de signos de puntuación a Braille.
+     * @type {Object.<string, string>}
+     */
     this.signosPuntuacion = {
       ".": "3",
       ",": "2",
@@ -88,6 +107,10 @@ class BrailleDictionary {
       ")": "345",
     };
 
+    /**
+     * Diccionario de signos auxiliares a Braille.
+     * @type {Object.<string, string>}
+     */
     this.signosAuxiliares = {
       "[": "12356",
       "]": "23456",
@@ -114,6 +137,10 @@ class BrailleDictionary {
       "€": "456 15",
     };
 
+    /**
+     * Diccionario de números a Braille.
+     * @type {Object.<number, string>}
+     */
     this.numerosBraille = {
       0: "1456",
       1: "1",
@@ -127,6 +154,10 @@ class BrailleDictionary {
       9: "24",
     };
 
+    /**
+     * Diccionario de números computarizados a Braille.
+     * @type {Object.<number, string>}
+     */
     this.numeroComputarizado = {
       0: "346",
       1: "16",
@@ -140,20 +171,54 @@ class BrailleDictionary {
       9: "246",
     };
 
+    /**
+     * Diccionario invertido de letras minúsculas en español a Braille.
+     * @type {Object.<string, string>}
+     */
     this.invertAlfabetoBrailleEspanol = this.invertDictionary(
       this.alfabetoBrailleEspanol
     );
+
+    /**
+     *  Diccionario invertido de letras mayúsculas en español a Braille.
+     * @type {Object.<string, string>}
+     * */
     this.invertAlfabetoBrailleEspanolMayus = this.invertDictionary(
       this.alfabetoBrailleEspanolMayus
     );
+
+    /**
+     * Diccionario invertido de signos de puntuación a Braille.
+     * @type {Object.<string, string>}
+     */
     this.invertSignosPuntuacion = this.invertDictionary(this.signosPuntuacion);
+
+    /**
+     * Diccionario invertido de signos auxiliares a Braille.
+     * @type {Object.<string, string>}
+     */
     this.invertSignosAuxiliares = this.invertDictionary(this.signosAuxiliares);
+
+    /**
+     * Diccionario invertido de números a Braille.
+     * @type {Object.<string, string>}
+     */
     this.invertNumerosBraille = this.invertDictionary(this.numerosBraille);
+
+    /**
+     * Diccionario invertido de números computarizados a Braille.
+     * @type {Object.<string, string>}
+     */
     this.invertNumeroComputarizado = this.invertDictionary(
       this.numeroComputarizado
     );
   }
 
+  /**
+   * Invierte un diccionario, intercambiando las claves y los valores.
+   * @param {Object.<string, string>} dictionary - El diccionario a invertir.
+   * @returns {Object.<string, string>} - El diccionario invertido.
+   */
   invertDictionary(dictionary) {
     let invertedDictionary = {};
 
@@ -164,6 +229,11 @@ class BrailleDictionary {
     return invertedDictionary;
   }
 
+  /**
+   * Obtiene el carácter Braille correspondiente a una letra en español.
+   * @param {string} letra - La letra en español.
+   * @returns {string|null} - El carácter Braille correspondiente, o `null` si no existe.
+   */
   getLetraBraille(letra) {
     if (this.alfabetoBrailleEspanol[letra]) {
       return this.alfabetoBrailleEspanol[letra];
@@ -174,6 +244,11 @@ class BrailleDictionary {
     }
   }
 
+  /**
+   * Obtiene el carácter Braille correspondiente a un signo de puntuación o auxiliar.
+   * @param {string} signo - El signo de puntuación o auxiliar.
+   * @returns {string|null} - El carácter Braille correspondiente, o `null` si no existe.
+   */
   getSigno(signo) {
     if (this.signosPuntuacion[signo]) {
       return this.signosPuntuacion[signo];
@@ -184,6 +259,12 @@ class BrailleDictionary {
     }
   }
 
+  /**
+   * Obtiene el carácter Braille correspondiente a un número.
+   * @param {number} numero - El número.
+   * @param {boolean} esNumComp - Indica si se trata de un número computarizado.
+   * @returns {string|null} - El carácter Braille correspondiente, o `null` si no existe.
+   */
   getNumeroBraille(numero, esNumComp) {
     if (this.numerosBraille[numero] && !esNumComp) {
       return this.numerosBraille[numero];
@@ -194,6 +275,11 @@ class BrailleDictionary {
     }
   }
 
+  /**
+   * Obtiene la letra en español correspondiente a un carácter Braille.
+   * @param {string} braille - El carácter Braille.
+   * @returns {string|null} - La letra en español correspondiente, o `null` si no existe.
+   */
   getLetraEspañol(braille) {
     if (this.invertAlfabetoBrailleEspanol[braille]) {
       return this.invertAlfabetoBrailleEspanol[braille];
@@ -204,6 +290,11 @@ class BrailleDictionary {
     }
   }
 
+  /**
+   * Obtiene el signo de puntuación o auxiliar correspondiente a un carácter Braille.
+   * @param {string} braille - El carácter Braille.
+   * @returns {string|null} - El signo de puntuación o auxiliar correspondiente, o `null` si no existe.
+   */
   getInvertSigno(braille) {
     if (this.invertSignosPuntuacion[braille]) {
       return this.invertSignosPuntuacion[braille];
@@ -214,6 +305,11 @@ class BrailleDictionary {
     }
   }
 
+  /**
+   * Obtiene el número correspondiente a un carácter Braille.
+   * @param {*} braille - El carácter Braille.
+   * @returns {number|null} - El número correspondiente, o `null` si no existe.
+   */
   getInvertNumeroBraille(braille) {
     if (this.invertNumerosBraille[braille]) {
       return this.invertNumerosBraille[braille];
