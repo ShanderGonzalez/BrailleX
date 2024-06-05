@@ -104,6 +104,15 @@
       const spaceButton = document.getElementById("spaceButton");
       const respuesta = document.querySelector(".respuesta");
 
+      const validateInput = () => {
+        const textoBraille = output.value;
+        const regex = /^[⠁-⠿\s]*$/; // Solo caracteres braille y espacios
+
+        if (!regex.test(textoBraille)) {
+          output.value = textoBraille.replace(/[^⠁-⠿\s]/g, "");
+        }
+      };
+
       ellipses.forEach((ellipse) => {
         ellipse.addEventListener("click", () => {
           ellipse.classList.toggle("painted");
@@ -124,6 +133,7 @@
 
         // Agregar el Braille traducido al contenido existente del textarea
         output.value += unicodeBraille + " ";
+        validateInput(); // Validar después de agregar el Braille
 
         // Limpiar las elipses pintadas para la próxima letra
         ellipses.forEach((ellipse) => ellipse.classList.remove("painted"));
@@ -131,7 +141,10 @@
 
       spaceButton.addEventListener("click", () => {
         output.value += " "; // Agregar un espacio al contenido del textarea
+        validateInput(); // Validar después de agregar el espacio
       });
+
+      output.addEventListener("input", validateInput);
     });
   </script>
   <script type="module">
@@ -147,21 +160,5 @@
         // Mostrar la traducción en el div con clase 'respuesta'
         document.querySelector(".respuesta").innerText = traduccion;
       });
-  </script>
-
-  <script>
-    document.getElementById("output").addEventListener("input", function () {
-      const textoBraille = this.value;
-      const regex =
-        /^[a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ,¿?¡!«»<>()[\]{}\-—*+\\/&@#%^$€\s]*$/; //
-
-      if (regex.test(textoBraille)) {
-        this.value = textoBraille.replace(
-          /^[a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ,¿?¡!«»<>()[\]{}\-—*+\\/&@#%^$€\s]*$/g,
-          ""
-        );
-        return;
-      }
-    });
   </script>
 </html>
