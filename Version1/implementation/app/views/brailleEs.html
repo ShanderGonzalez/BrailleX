@@ -8,6 +8,7 @@
       rel="stylesheet"
       href="/Version1/implementation/templates/css/estilosPrincipal.css"
     />
+    
   </head>
 
   <body>
@@ -68,6 +69,7 @@
               <div class="ellipse" id="ellipse-6"></div>
             </div>
             <button id="collectButton">Siguiente</button>
+            <button id="spaceButton">Espacio</button>
           </div>
 
           <div class="entradas">
@@ -142,4 +144,19 @@
         document.querySelector(".respuesta").innerText = traduccion;
       });
   </script>
+
+
+<script>
+  document.getElementById("output").addEventListener("input", function () {
+      const textoBraille = this.value;
+      const regex = /^[a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ,¿?¡!«»<>()[\]{}\-—*+\\/&@#%^$€\s]*$/; //
+
+      if (regex.test(textoBraille)) {
+         
+          this.value = textoBraille.replace(/^[a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ,¿?¡!«»<>()[\]{}\-—*+\\/&@#%^$€\s]*$/g, '');
+        return
+      }
+      
+  });
+</script>
 </html>
