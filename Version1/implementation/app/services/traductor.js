@@ -22,12 +22,50 @@ class Traductor {
       })
       .join("");
 
-    console.log(textoBrailleFormateado);
+    const textoBrailleFormateado2 = brailleTexto
+      .split(" ")
+      .reverse() // Reverse the order of Braille codes for inverse output
+      .map((braille) => {
+        return this.reordenarPuntosBraille(braille) + " "; // Reverse dot positions within each character
+      })
+      .join("");
+
+    //console.log(textoBrailleFormateado);
     const brailleUnicode = this.getBrailleUnicode(textoBrailleFormateado);
+    const brailleUnicode2 = this.getBrailleUnicode(textoBrailleFormateado2);
     console.log(brailleUnicode);
+    console.log(brailleUnicode2);
     return brailleUnicode.trim();
   }
+  reordenarPuntosBraille(brailleCode) {
+    // Convert Braille code to an array of dot positions (0s and 1s), excluding spaces
+    let brailleArray = brailleCode.replace(/\s/g, "").split("").map(Number);
 
+    // Map each dot position to its inverse value
+    let invertedBrailleArray = brailleArray.map((dot) => {
+      switch (dot) {
+        case 1:
+          return 4;
+        case 2:
+          return 5;
+        case 3:
+          return 6;
+        case 4:
+          return 1;
+        case 5:
+          return 2;
+        case 6:
+          return 3;
+        default:
+          return dot; // Handle non-Braille characters
+      }
+    });
+
+    // Convert modified array back to Braille code, including spaces
+    let reversedBrailleCode = invertedBrailleArray.join("");
+
+    return reversedBrailleCode;
+  }
   traducirLineaABraille(texto) {
     let brailleTexto = "";
     let esNumero = false;
