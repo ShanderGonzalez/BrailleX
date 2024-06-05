@@ -13,6 +13,8 @@
         display: none;
       }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
   </head>
 
   <body>
@@ -83,17 +85,19 @@
 
         <button id="traducirBoton" class="botonTraducir">Traducir</button>
 
-        <div class="respuesta"></div>
+        <div class="respuesta" id="resultadoTraduccion"></div>
         <div class="divImpresion">
           <input type="checkbox" id="mirror" name="mirror" />
           <p>Impresión en espejo</p>
         </div>
 
-        <button class="botonDescargar">Descargar</button>
+        <button class="botonDescargar" id="descargarImagenBoton" disabled>
+          Descargar
+        </button>
       </div>
     </div>
   </body>
-  <script src="../../app/services/validate.js"></script>
+  <script src="../../app/services/validate.js" type="module"></script>
   <script src="/Version1/implementation/app/utilities/limpiar.js"></script>
   <script type="module">
     import Traductor from "/Version1/implementation/app/services/traductor.js";
@@ -108,7 +112,21 @@
         document.querySelector(".respuesta").innerText = traduccion;
       });
   </script>
-  <script>
+  <script type="module">
+    import Traductor from "/Version1/implementation/app/services/traductor.js";
+    function actualizarBotonDescargar() {
+      var checkboxMirror = document.getElementById("mirror");
+      var botonDescargar = document.getElementById("descargarImagenBoton");
+
+      if (checkboxMirror.checked) {
+        botonDescargar.disabled = false;
+      } else {
+        botonDescargar.disabled = true;
+      }
+    }
+    document
+      .getElementById("mirror")
+      .addEventListener("change", actualizarBotonDescargar);
     document
       .getElementById("entradaTexto")
       .addEventListener("input", function () {
@@ -121,6 +139,40 @@
         } else {
           warning.classList.add("hidden");
         }
+      });
+    document
+      .getElementById("descargarImagenBoton")
+      .addEventListener("click", function () {
+        // Obtener el texto traducido
+
+        let textoTraducido = document.getElementById("entradaTexto").value;
+        var traductor = new Traductor();
+        textoTraducido =
+          traductor.traducirEspanolABrailleInverso(textoTraducido);
+
+        // Crear un canvas y establecer sus dimensiones
+        var canvas = document.createElement("canvas");
+        var context = canvas.getContext("2d");
+
+        // Establecer el tamaño del canvas
+        canvas.width = 1000; // Ancho en píxeles
+        canvas.height = 150; // Alto en píxeles
+
+        // Establecer la fuente y el color del texto
+        context.font = "20px Arial";
+        context.fillStyle = "#FFFFFF"; // Negro
+
+        // Dibujar el texto en el canvas
+        context.fillText(textoTraducido, 10, 50); // Texto en coordenadas x=10, y=50
+
+        // Convertir el canvas a una URL de datos
+        var imgData = canvas.toDataURL("image/png");
+
+        // Crear un enlace para descargar la imagen
+        var link = document.createElement("a");
+        link.download = "traduccion_braille.png";
+        link.href = imgData;
+        link.click();
       });
   </script>
 </html>
