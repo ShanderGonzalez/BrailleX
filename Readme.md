@@ -25,12 +25,12 @@ Las **principales características** de BrailleX son:
 
 
 # Contenidos 
-- [Documentación]()
-- [Implementación]()
+- [Documentación](https://github.com/ShanderGonzalez/BrailleX/tree/main/Version1/documentation)
+- [Implementación](https://github.com/ShanderGonzalez/BrailleX/tree/main/Version1/implementation)
 - [ReadMe](https://github.com/ShanderGonzalez/BrailleX/blob/main/Readme.md)
 
 # Acceso a Brailex
-xxxxx
+[Proximamente]
 
 # Insights
 ![Lenguaje principal](https://img.shields.io/github/languages/top/ShanderGonzalez/BrailleX)
