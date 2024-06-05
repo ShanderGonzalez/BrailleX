@@ -68,6 +68,7 @@
               <div class="ellipse" id="ellipse-6"></div>
             </div>
             <button id="collectButton">Siguiente</button>
+            <button id="spaceButton">Espacio</button>
           </div>
 
           <div class="entradas">
@@ -100,7 +101,17 @@
       const ellipses = document.querySelectorAll(".ellipse");
       const output = document.getElementById("output");
       const collectButton = document.getElementById("collectButton");
+      const spaceButton = document.getElementById("spaceButton");
       const respuesta = document.querySelector(".respuesta");
+
+      const validateInput = () => {
+        const textoBraille = output.value;
+        const regex = /^[⠁-⠿\s]*$/; // Solo caracteres braille y espacios
+
+        if (!regex.test(textoBraille)) {
+          output.value = textoBraille.replace(/[^⠁-⠿\s]/g, "");
+        }
+      };
 
       ellipses.forEach((ellipse) => {
         ellipse.addEventListener("click", () => {
@@ -122,10 +133,18 @@
 
         // Agregar el Braille traducido al contenido existente del textarea
         output.value += unicodeBraille + " ";
+        validateInput(); // Validar después de agregar el Braille
 
         // Limpiar las elipses pintadas para la próxima letra
         ellipses.forEach((ellipse) => ellipse.classList.remove("painted"));
       });
+
+      spaceButton.addEventListener("click", () => {
+        output.value += " "; // Agregar un espacio al contenido del textarea
+        validateInput(); // Validar después de agregar el espacio
+      });
+
+      output.addEventListener("input", validateInput);
     });
   </script>
   <script type="module">
