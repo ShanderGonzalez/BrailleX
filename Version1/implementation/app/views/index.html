@@ -6,8 +6,13 @@
     <title>Traductor Español - Braille</title>
     <link
       rel="stylesheet"
-      href="/Version1/implementation/templates/css/misEstilos.css"
+      href="/Version1/implementation/templates/css/estilosPrincipal.css"
     />
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
   </head>
 
   <body>
@@ -59,7 +64,7 @@
 
       <div class="content">
         <p id="traduce">Traduce un texto de Español a Braille</p>
-        <p class="warningCaracteres">
+        <p class="warningCaracteres hidden" id="warningCaracteres">
           * Texto inválido: no se permiten caracteres especiales
         </p>
         <button id="limpiarBoton" type="reset" onclick="p()">
@@ -73,6 +78,7 @@
           name="entradaTexto"
           class="entradaTexto"
           placeholder="Escribe texto en español"
+          id="entradaTexto"
         ></textarea>
 
         <button id="traducirBoton" class="botonTraducir">Traducir</button>
@@ -87,8 +93,8 @@
       </div>
     </div>
   </body>
-  <script src="/Version1/implementation/templates/js/limpiar.js"></script>
-  <script src="/Version1/implementation/templates/js/mostrarBoton.js"></script>
+  <script src="../../app/services/validate.js"></script>
+  <script src="/Version1/implementation/app/utilities/limpiar.js"></script>
   <script type="module">
     import Traductor from "/Version1/implementation/app/services/traductor.js";
     document
@@ -100,6 +106,21 @@
 
         // Mostrar la traducción en el div con clase 'respuesta'
         document.querySelector(".respuesta").innerText = traduccion;
+      });
+  </script>
+  <script>
+    document
+      .getElementById("entradaTexto")
+      .addEventListener("input", function () {
+        const texto = this.value;
+        const warning = document.getElementById("warningCaracteres");
+        const regex = /[~\/\\«»]/g; // Ajusta este regex según los caracteres permitidos
+
+        if (regex.test(texto)) {
+          warning.classList.remove("hidden");
+        } else {
+          warning.classList.add("hidden");
+        }
       });
   </script>
 </html>
