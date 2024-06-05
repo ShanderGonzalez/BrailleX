@@ -2,8 +2,8 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Traductor Español - Braille</title>
   <link rel="stylesheet" href="/Version1/implementation/templates/css/misEstilos.css" />
 </head>
@@ -11,7 +11,7 @@
 <body>
   <div class="header">
     <div class="logo">
-      <img src="/Version1/implementation/images/logo-proyecto.png" alt="Dev-Sentinels Logo">
+      <img src="/Version1/implementation/images/logo-proyecto.png" alt="Dev-Sentinels Logo" />
       <p>Dev-Sentinels</p>
     </div>
     <div class="info">
@@ -23,64 +23,63 @@
           <a href="#">Equipo</a>
         </div>
       </div>
-      <img src="/Version1/implementation/images/info-icon.png" alt="icono de informacion">
+      <img src="/Version1/implementation/images/info-icon.png" alt="icono de informacion" />
     </div>
   </div>
-  <div class="Titulo">
-    BrailleX
-  </div>
+  <div class="Titulo">BrailleX</div>
   <div class="container">
     <div class="sidebar">
       <h3>Traductor</h3>
       <ul>
-        <li><img src="/Version1/implementation/images/search-icon.png" alt="icono de buscar">
+        <li>
+          <img src="/Version1/implementation/images/search-icon.png" alt="icono de buscar" />
           <a href="index.html">Español - Braille</a>
         </li>
-        <li><img src="/Version1/implementation/images/search-icon.png" alt="icono de buscar">
+        <li>
+          <img src="/Version1/implementation/images/search-icon.png" alt="icono de buscar" />
           <a href="brailleEs.html">Braille - Español</a>
         </li>
       </ul>
     </div>
 
-
     <div class="content">
-     <p id="traduce">Traduce un texto de Braille a Español</p>
+      <p id="traduce">Traduce un texto de Braille a Español</p>
       <div class="divComponentesplusentrada">
-        
         <div class="divComponentes">
           <div class="componentes">
             <div class="ellipse" id="ellipse-1"></div>
-            <div class="ellipse" id="ellipse-2"></div>
-            <div class="ellipse" id="ellipse-3"></div>
             <div class="ellipse" id="ellipse-4"></div>
+            <div class="ellipse" id="ellipse-2"></div>
             <div class="ellipse" id="ellipse-5"></div>
+            <div class="ellipse" id="ellipse-3"></div>
             <div class="ellipse" id="ellipse-6"></div>
-          <!-- <div style="border: 1px solid black;" id="output"></div>-->
           </div>
-         <button id="collectButton">Siguiente</button>
+          <button id="collectButton">Siguiente</button>
         </div>
-        
+
         <div class="entradas">
-          <button id="limpiarBoton" type="reset" onclick="p()"> <img src="/Version1/implementation/images/clear-icon.png"
-              alt="boton de limpiar texto"></button>
+          <button id="limpiarBoton" type="reset" onclick="p()">
+            <img src="/Version1/implementation/images/clear-icon.png" alt="boton de limpiar texto" />
+          </button>
           <textarea name="entradaTexto" class="entradaTexto" placeholder="Colocar Braille" id="output"></textarea>
-          <!--<input class="entradaTexto" type="text" placeholder="Escribe texto en español">-->
-        </div>  
-     </div>
+        </div>
+      </div>
 
-      <button class="botonTraducir">Traducir</button>
+      <button class="botonTraducir" id="traducirBoton">Traducir</button>
 
-      <div class="respuesta"> </div>
+      <div class="respuesta"></div>
     </div>
   </div>
 </body>
 <script src="/Version1/implementation/templates/js/limpiar.js"></script>
-<script>
+<script type="module">
+  import Traductor from "/Version1/implementation/app/services/traductor.js";
 
   document.addEventListener("DOMContentLoaded", () => {
     const ellipses = document.querySelectorAll(".ellipse");
     const output = document.getElementById("output");
     const collectButton = document.getElementById("collectButton");
+    const respuesta = document.querySelector(".respuesta");
 
     ellipses.forEach((ellipse) => {
       ellipse.addEventListener("click", () => {
@@ -90,13 +89,34 @@
 
     collectButton.addEventListener("click", () => {
       const paintedEllipses = [];
-      ellipses.forEach((ellipse) => {
+      for (let i = 1; i <= 6; i++) {
+        const ellipse = document.getElementById(`ellipse-${i}`);
         if (ellipse.classList.contains("painted")) {
-          paintedEllipses.push(ellipse.id.split("-")[1]);
+          paintedEllipses.push(i);
         }
-      });
-      output.textContent = `Elipses pintadas: ${paintedEllipses.join(", ")}`;
+      }
+      const traductor = new Traductor();
+      const brailleCode = paintedEllipses.join("");
+      const unicodeBraille = traductor.getBrailleUnicode(brailleCode);
+
+      // Agregar el Braille traducido al contenido existente del textarea
+      output.value += unicodeBraille + " ";
+
+      // Limpiar las elipses pintadas para la próxima letra
+      ellipses.forEach((ellipse) => ellipse.classList.remove("painted"));
     });
+  });
+</script>
+<script type="module">
+  import Traductor from "/Version1/implementation/app/services/traductor.js";
+  document.getElementById("traducirBoton").addEventListener("click", function () {
+    var textoBraille = document.querySelector(".entradaTexto").value;
+    var traductor = new Traductor();
+
+    var traduccion = traductor.traducirBrailleAEspanol(textoBraille);
+
+    // Mostrar la traducción en el div con clase 'respuesta'
+    document.querySelector(".respuesta").innerText = traduccion;
   });
 </script>
 
