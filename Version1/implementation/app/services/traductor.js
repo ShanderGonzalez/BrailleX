@@ -38,30 +38,19 @@ class Traductor {
     return brailleUnicode.trim();
   }
   reordenarPuntosBraille(brailleCode) {
-    // Convert Braille code to an array of dot positions (0s and 1s), excluding spaces
-    let brailleArray = brailleCode.replace(/\s/g, "").split("").map(Number);
+    const inversionMap = {
+      1: "4",
+      2: "5",
+      3: "6",
+      4: "1",
+      5: "2",
+      6: "3",
+    };
 
-    // Map each dot position to its inverse value
-    let invertedBrailleArray = brailleArray.map((dot) => {
-      switch (dot) {
-        case 1:
-          return 4;
-        case 2:
-          return 5;
-        case 3:
-          return 6;
-        case 4:
-          return 1;
-        case 5:
-          return 2;
-        case 6:
-          return 3;
-        default:
-          return dot; // Handle non-Braille characters
-      }
-    });
-
-    // Convert modified array back to Braille code, including spaces
+    let brailleArray = brailleCode.replace(/\s/g, "").split("");
+    let invertedBrailleArray = brailleArray.map(
+      (dot) => inversionMap[dot] || dot
+    );
     let reversedBrailleCode = invertedBrailleArray.join("");
 
     return reversedBrailleCode;
