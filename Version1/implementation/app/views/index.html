@@ -138,7 +138,8 @@
     });
 </script>
 
-<script>
+<script type="module">
+    import Traductor from "/Version1/implementation/app/services/traductor.js";
     document.getElementById("entradaTexto").addEventListener("input", function () {
         const texto = this.value;
         const warning = document.getElementById("warningCaracteres");
