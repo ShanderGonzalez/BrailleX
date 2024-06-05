@@ -14,6 +14,20 @@ body {
   margin: 0;
   padding: 0;
 }
+@media screen and (max-width: 600px) {
+  #traduce {
+    font-size: 15px;
+    color: #828282;
+    padding: 0 0 10px 0;
+    margin: 0;
+  }
+
+  .container .sidebar {
+    width: 20%;
+    margin: 0 10px 0 0;
+    padding: 0px 50px 0 0px;
+  }
+}
 
 /* Cabecera */
 .header {
@@ -352,29 +366,18 @@ body {
 
 /* Estilos para la página del equipo */
 .team-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  justify-items: center;
-  align-items: start;
-  width: 100%;
-  max-width: 1200px;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px 0;
 }
-.team-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+.team-container2 {
+  display: flex;
+  justify-content: space-evenly;
 }
 
-.team-container div:nth-last-child(-n + 2) {
-  grid-column: span 2;
-}
-.team-container div:nth-last-child(-n + 2) {
-  grid-column: span 2;
-  justify-self: center;
-}
 .team-member {
   padding: 20px;
+  margin: 0 20px;
   border: 1px solid #e0e0e0;
   box-shadow: 0px 5px 5px #00000040;
   text-align: center;
@@ -399,9 +402,6 @@ body {
 }
 
 /* Ajuste para la última fila de dos miembros */
-.team-container div:nth-last-child(-n + 2) {
-  grid-column: span 2;
-}
 
 /* Botón de regresar */
 .backButton {
