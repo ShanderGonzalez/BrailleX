@@ -22,10 +22,48 @@ class Traductor {
       })
       .join("");
 
-    console.log(textoBrailleFormateado);
     const brailleUnicode = this.getBrailleUnicode(textoBrailleFormateado);
-    console.log(brailleUnicode);
     return brailleUnicode.trim();
+  }
+
+  traducirEspanolABrailleInverso(texto) {
+    let lineas = texto.split("\n");
+    let brailleTexto = "";
+
+    for (let linea of lineas) {
+      brailleTexto += this.traducirLineaABraille(linea) + "\n";
+    }
+
+    const textoBrailleFormateado2 = brailleTexto
+      .split(" ")
+      .reverse() // Reverse the order of Braille codes for inverse output
+      .map((braille) => {
+        return this.reordenarPuntosBraille(braille) + " "; // Reverse dot positions within each character
+      })
+      .join("");
+
+    const brailleUnicode2 = this.getBrailleUnicode(textoBrailleFormateado2);
+    return brailleUnicode2.trim();
+  }
+
+
+  reordenarPuntosBraille(brailleCode) {
+    const inversionMap = {
+      1: "4",
+      2: "5",
+      3: "6",
+      4: "1",
+      5: "2",
+      6: "3",
+    };
+
+    let brailleArray = brailleCode.replace(/\s/g, "").split("");
+    let invertedBrailleArray = brailleArray.map(
+      (dot) => inversionMap[dot] || dot
+    );
+    let reversedBrailleCode = invertedBrailleArray.join("");
+
+    return reversedBrailleCode;
   }
 
   traducirLineaABraille(texto) {
@@ -116,7 +154,105 @@ class Traductor {
       }
       brailleTexto += " ";
     }
+
     return brailleTexto.trim();
+  }
+
+  traducirBrailleAEspanol(brailleTexto) {
+    const brailleCode = this.unicodeToBraille(brailleTexto);
+
+    let lineas = brailleCode.split("\n");
+    let textoEspanol = "";
+
+    for (let linea of lineas) {
+      textoEspanol += this.traducirLineaAEspanol(linea) + "\n";
+    }
+
+    return textoEspanol.trim();
+  }
+
+  traducirLineaAEspanol(brailleLinea) {
+    let textoEspanol = "";
+    let esNumero = false;
+    let esMayuscula = false;
+    let esTextoMayuscula = false;
+
+    // Separar las palabras Braille por espacios dobles
+    let palabrasBraille = brailleLinea.split("  ");
+
+    for (let palabraBraille of palabrasBraille) {
+      let caracteresBraille = palabraBraille.split(" ");
+      let i = 0;
+      let aperturaSigno = true;
+
+      while (i < caracteresBraille.length) {
+        let caracterBraille = caracteresBraille[i];
+
+        if (caracterBraille === "") {
+          i++;
+          continue;
+        }
+
+        if (caracterBraille === "3456") {
+          esNumero = true;
+          i++;
+          continue;
+        }
+
+        if (caracterBraille === "46") {
+          if (caracteresBraille[i + 1] === "46") {
+            esTextoMayuscula = true;
+            i += 2;
+            continue;
+          } else {
+            esMayuscula = true;
+            i++;
+            continue;
+          }
+        }
+
+        let letraEspanol =
+          this.diccionarioBraille.getLetraEspañol(caracterBraille);
+        let signoEspanol =
+          this.diccionarioBraille.getInvertSigno(caracterBraille);
+        let numeroEspanol = esNumero
+          ? this.diccionarioBraille.getInvertNumeroBraille(caracterBraille)
+          : null;
+
+        if (numeroEspanol) {
+          textoEspanol += numeroEspanol;
+        } else if (letraEspanol) {
+          if (esTextoMayuscula) {
+            textoEspanol += letraEspanol.toUpperCase();
+          } else if (esMayuscula) {
+            textoEspanol += letraEspanol.toUpperCase();
+            esMayuscula = false;
+          } else {
+            textoEspanol += letraEspanol;
+          }
+        } else if (signoEspanol) {
+          if (caracterBraille === "26") {
+            textoEspanol += aperturaSigno ? "¿" : "?";
+            aperturaSigno = !aperturaSigno;
+          } else if (caracterBraille === "235") {
+            textoEspanol += aperturaSigno ? "¡" : "!";
+            aperturaSigno = !aperturaSigno;
+          } else {
+            textoEspanol += signoEspanol;
+          }
+        }
+
+        if (esNumero && !numeroEspanol) {
+          esNumero = false;
+        }
+        i++;
+      }
+
+      textoEspanol += " ";
+      esTextoMayuscula = false;
+    }
+
+    return textoEspanol.trim();
   }
 
   getBrailleMatrix(brailleCode) {
@@ -132,28 +268,58 @@ class Traductor {
     return matrix;
   }
 
-  // Método para obtener el carácter Unicode correspondiente al código Braille
   getBrailleUnicode(brailleCode) {
-    let braille = "";
-    let brailleSign = brailleCode.split(" ");
+    let brailleLines = brailleCode.split("\n");
+    let brailleText = "";
 
-    for (let brailleSgn of brailleSign) {
-      const matrix = this.getBrailleMatrix(brailleSgn);
-      if (!matrix) return null;
+    for (let line of brailleLines) {
+      let brailleSign = line.split(" ");
+      let brailleLine = "";
 
-      // Definir Unicode base para punto Braille
-      const baseUnicode = 0x2800;
+      for (let brailleSgn of brailleSign) {
+        const matrix = this.getBrailleMatrix(brailleSgn);
+        if (!matrix) return null;
 
-      // Calcular valor Unicode sumando la posición del punto activo
-      let unicodeValue = baseUnicode;
-      matrix.forEach((point, index) => {
-        if (point === 1) {
-          unicodeValue += Math.pow(2, index);
-        }
-      });
-      braille += String.fromCharCode(unicodeValue) + " ";
+        // Definir Unicode base para punto Braille
+        const baseUnicode = 0x2800;
+
+        // Calcular valor Unicode sumando la posición del punto activo
+        let unicodeValue = baseUnicode;
+        matrix.forEach((point, index) => {
+          if (point === 1) {
+            unicodeValue += Math.pow(2, index);
+          }
+        });
+        brailleLine += String.fromCharCode(unicodeValue) + " ";
+      }
+      brailleText += brailleLine.trim() + "\n";
     }
-    return braille.trim();
+
+    return brailleText.trim();
+  }
+
+  unicodeToBraille(unicodeBraille) {
+    let brailleCode = "";
+    let lines = unicodeBraille.split("\n");
+
+    for (let line of lines) {
+      let brailleChars = line.split(" ");
+      for (let char of brailleChars) {
+        let unicodeValue = char.charCodeAt(0);
+        let braillePoints = unicodeValue - 0x2800;
+        let brailleCodeStr = "";
+
+        for (let i = 0; i < 6; i++) {
+          if ((braillePoints & (1 << i)) !== 0) {
+            brailleCodeStr += (i + 1).toString();
+          }
+        }
+        brailleCode += brailleCodeStr + " ";
+      }
+      brailleCode = brailleCode.trim() + "\n"; // Añadir salto de línea después de cada línea de braille
+    }
+
+    return brailleCode.trim(); // Eliminar el último salto de línea adicional
   }
 }
 
