@@ -22,6 +22,18 @@ class Traductor {
       })
       .join("");
 
+    const brailleUnicode = this.getBrailleUnicode(textoBrailleFormateado);
+    return brailleUnicode.trim();
+  }
+
+  traducirEspanolABrailleInverso(texto) {
+    let lineas = texto.split("\n");
+    let brailleTexto = "";
+
+    for (let linea of lineas) {
+      brailleTexto += this.traducirLineaABraille(linea) + "\n";
+    }
+
     const textoBrailleFormateado2 = brailleTexto
       .split(" ")
       .reverse() // Reverse the order of Braille codes for inverse output
@@ -30,13 +42,11 @@ class Traductor {
       })
       .join("");
 
-    //console.log(textoBrailleFormateado);
-    const brailleUnicode = this.getBrailleUnicode(textoBrailleFormateado);
     const brailleUnicode2 = this.getBrailleUnicode(textoBrailleFormateado2);
-    console.log(brailleUnicode);
-    console.log(brailleUnicode2);
-    return brailleUnicode.trim();
+    return brailleUnicode2.trim();
   }
+
+
   reordenarPuntosBraille(brailleCode) {
     const inversionMap = {
       1: "4",
@@ -55,6 +65,7 @@ class Traductor {
 
     return reversedBrailleCode;
   }
+
   traducirLineaABraille(texto) {
     let brailleTexto = "";
     let esNumero = false;
