@@ -30,7 +30,7 @@ Las **principales características** de BrailleX son:
 - [ReadMe](https://github.com/ShanderGonzalez/BrailleX/blob/main/Readme.md)
 
 # Acceso a Brailex
-xxxxx
+[BraileX](https://shandergonzalez.github.io/BrailleX/Version1/implementation/app/views/index.html)
 
 # Insights
 ![Lenguaje principal](https://img.shields.io/github/languages/top/ShanderGonzalez/BrailleX)
