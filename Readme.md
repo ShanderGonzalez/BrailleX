@@ -17,7 +17,7 @@ Las **principales características** de BrailleX son:
 
 🛠️ Programador ~  [Mateo Espinoza](https://github.com/Theo-17)
 
-🛠️ Programador ~  [Shander Gonzalez](https://github.com/ShanderG)    
+🛠️ Programador ~  [Shander Gonzalez](https://github.com/ShanderGonzalez)    
 
 ✅ Tester   ~     [Joselyn Pilco](https://github.com/jossC11)
 
