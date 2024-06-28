@@ -1,174 +1,230 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Traductor Español - Braille</title>
-  <link rel="stylesheet" href="/Version1/implementation/templates/css/estilosPrincipal.css" />
-  <style>
-    .hidden {
-      display: none;
-    }
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-</head>
-
-<body>
-  <div class="header">
-    <div class="logo">
-      <img src="/Version1/implementation/images/logo-proyecto.png" alt="Dev-Sentinels Logo" />
-      <p>Dev-Sentinels</p>
-    </div>
-    <div class="info">
-      <div class="Conocenos">
-        <div class="ConocenosTitulo">Conocenos</div>
-        <div class="ConocenosOpciones">
-          <a href="/Version1/implementation/app/views/MisionVision.html">Misión y Visión</a>
-          <a href="/Version1/implementation/app/views/Equipo.html">Equipo</a>
-        </div>
-      </div>
-      <img src="/Version1/implementation/images/info-icon.png" alt="icono de informacion" />
-    </div>
-  </div>
-  <div class="Titulo">BrailleX</div>
-  <div class="container">
-    <div class="sidebar">
-      <h3>Traductor</h3>
-      <ul>
-        <li>
-          <img src="/Version1/implementation/images/search-icon.png" alt="icono de buscar" />
-          <a href="index.html">Español - Braille</a>
-        </li>
-        <li>
-          <img src="/Version1/implementation/images/search-icon.png" alt="icono de buscar" />
-          <a href="brailleEs.html">Braille - Español</a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="content">
-      <p id="traduce">Traduce un texto de Español a Braille</p>
-      <p class="warningCaracteres hidden" id="warningCaracteres">
-        * Texto inválido: no se permiten caracteres especiales
-      </p>
-      <button id="limpiarBoton" type="reset" onclick="p()">
-        <img src="/Version1/implementation/images/clear-icon.png" alt="boton de limpiar texto" />
-      </button>
-      <!-- <input class="entradaTexto" type="text" placeholder="Escribe texto en español">-->
-      <textarea name="entradaTexto" class="entradaTexto" placeholder="Escribe texto en español"
-        id="entradaTexto"></textarea>
-
-      <button id="traducirBoton" class="botonTraducir">Traducir</button>
-
-      <div class="respuesta" id="resultadoTraduccion"></div>
-      <div class="divImpresion">
-        <input type="checkbox" id="mirror" name="mirror" />
-        <p>Impresión en espejo</p>
-      </div>
-
-      <button class="botonDescargar" id="descargarImagenBoton" disabled>
-        Descargar
-      </button>
-    </div>
-  </div>
-</body>
-<script src="../../app/services/validate.js" type="module"></script>
-<script src="/Version1/implementation/app/utilities/limpiar.js"></script>
-<script type="module">
-  import Traductor from "/Version1/implementation/app/services/traductor.js";
-  document.getElementById("traducirBoton").addEventListener("click", function () {
-    var texto = document.querySelector(".entradaTexto").value;
-    var traductor = new Traductor();
-    // Validar si el texto contiene caracteres especiales antes de la traducción
-    const regex = /[~\/\\«»`|]/g;
-
-    if (regex.test(texto)) {
-      texto = "";
-      return; // Detener la ejecución del resto del código
-    }
-    var traduccion = traductor.traducirEspanolABraille(texto);
-
-    document.querySelector(".respuesta").innerText = traduccion;
-  });
-</script>
-<script type="module">
-  import Traductor from "/Version1/implementation/app/services/traductor.js";
-  function actualizarBotonDescargar() {
-    var checkboxMirror = document.getElementById("mirror");
-    var botonDescargar = document.getElementById("descargarImagenBoton");
-
-    if (checkboxMirror.checked) {
-      botonDescargar.disabled = false;
-    } else {
-      botonDescargar.disabled = true;
-    }
-  }
-  document
-    .getElementById("mirror")
-    .addEventListener("change", actualizarBotonDescargar);
-  document
-    .getElementById("entradaTexto")
-    .addEventListener("input", function () {
-    });
-</script>
-
-<script type="module">
-  import Traductor from "/Version1/implementation/app/services/traductor.js";
-  document.getElementById("entradaTexto").addEventListener("input", function () {
-    const texto = this.value;
-    const warning = document.getElementById("warningCaracteres");
-
-    const regex = /[~\/\\«»`|]/g; //caracteres no permitidos
-
-    if (regex.test(texto)) {
-      warning.classList.remove("hidden");
-    } else {
-      warning.classList.add("hidden");
-    }
-
-  });
-  document
-    .getElementById("descargarImagenBoton")
-    .addEventListener("click", function () {
-      // Obtener el texto traducido
-      let textoTraducido = document.getElementById("entradaTexto").value;
-      var traductor = new Traductor();
-      textoTraducido = traductor.traducirEspanolABrailleInverso(textoTraducido);
-
-      // Crear un canvas y establecer sus dimensiones
-      var canvas = document.createElement("canvas");
-      var context = canvas.getContext("2d");
-
-      // Establecer el tamaño del canvas
-      canvas.width = 1000; // Ancho en píxeles
-      canvas.height = 150; // Alto en píxeles (ajusta según el contenido)
-
-      // Establecer la fuente y el color del texto
-      context.font = "20px Arial";
-      context.fillStyle = "#FFFFFF"; // Negro
-
-      // Dividir el texto traducido en líneas y dibujar cada línea por separado
-      const lineas = textoTraducido.split("\n");
-      const x = 10; // Coordenada x de inicio
-      let y = 50; // Coordenada y de inicio
-      const lineHeight = 25; // Altura de línea (ajusta según el tamaño de fuente y el interlineado deseado)
-
-      for (let linea of lineas) {
-        context.fillText(linea, x, y);
-        y += lineHeight; // Mover la coordenada y hacia abajo para la siguiente línea
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Traductor Español - Braille</title>
+    <link
+      rel="stylesheet"
+      href="/Version1/implementation/templates/css/estilosPrincipal.css"
+    />
+    <style>
+      .hidden {
+        display: none;
       }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  </head>
 
-      // Convertir el canvas a una URL de datos
-      var imgData = canvas.toDataURL("image/png");
+  <body>
+    <div class="header">
+      <div class="logo">
+        <img
+          src="/Version1/implementation/images/logo-proyecto.png"
+          alt="Dev-Sentinels Logo"
+        />
+        <p>Dev-Sentinels</p>
+      </div>
+      <div class="info">
+        <div class="Conocenos">
+          <div class="ConocenosTitulo">Conocenos</div>
+          <div class="ConocenosOpciones">
+            <a href="/Version1/implementation/app/views/MisionVision.html"
+              >Misión y Visión</a
+            >
+            <a href="/Version1/implementation/app/views/Equipo.html">Equipo</a>
+          </div>
+        </div>
+        <img
+          src="/Version1/implementation/images/info-icon.png"
+          alt="icono de informacion"
+        />
+      </div>
+    </div>
+    <div class="Titulo">BrailleX</div>
+    <div class="container">
+      <div class="sidebar">
+        <h3>Traductor</h3>
+        <ul>
+          <li>
+            <img
+              src="/Version1/implementation/images/search-icon.png"
+              alt="icono de buscar"
+            />
+            <a href="index.html">Español - Braille</a>
+          </li>
+          <li>
+            <img
+              src="/Version1/implementation/images/search-icon.png"
+              alt="icono de buscar"
+            />
+            <a href="brailleEs.html">Braille - Español</a>
+          </li>
+        </ul>
+      </div>
 
-      // Crear un enlace para descargar la imagen
-      var link = document.createElement("a");
-      link.download = "traduccion_braille.png";
-      link.href = imgData;
-      link.click();
-    });
-</script>
+      <div class="content">
+        <p id="traduce">Traduce un texto de Español a Braille</p>
+        <p class="warningCaracteres hidden" id="warningCaracteres">
+          * Texto inválido: no se permiten caracteres especiales
+        </p>
+        <button id="limpiarBoton" type="reset" onclick="p()">
+          <img
+            src="/Version1/implementation/images/clear-icon.png"
+            alt="boton de limpiar texto"
+          />
+        </button>
+        <!-- <input class="entradaTexto" type="text" placeholder="Escribe texto en español">-->
+        <textarea
+          name="entradaTexto"
+          class="entradaTexto"
+          placeholder="Escribe texto en español"
+          id="entradaTexto"
+        ></textarea>
 
+        <button id="traducirBoton" class="botonTraducir">Traducir</button>
+
+        <div class="respuesta" id="resultadoTraduccion"></div>
+        <div class="divImpresion">
+          <input type="checkbox" id="mirror" name="mirror" />
+          <p>Impresión en espejo</p>
+        </div>
+
+        <button class="botonDescargar" id="descargarImagenBoton">
+          Descargar
+        </button>
+      </div>
+    </div>
+  </body>
+
+  <script src="../../app/services/validate.js" type="module"></script>
+  <script src="/Version1/implementation/app/utilities/limpiar.js"></script>
+  <script type="module">
+    import Traductor from "/Version1/implementation/app/services/traductor.js";
+    document
+      .getElementById("traducirBoton")
+      .addEventListener("click", function () {
+        var texto = document.querySelector(".entradaTexto").value;
+        var traductor = new Traductor();
+        // Validar si el texto contiene caracteres especiales antes de la traducción
+        const regex = /[~\/\\«»`|]/g;
+
+        if (regex.test(texto)) {
+          texto = "";
+          return; // Detener la ejecución del resto del código
+        }
+        var traduccion = traductor.traducirEspanolABraille(texto);
+
+        document.querySelector(".respuesta").innerText = traduccion;
+      });
+  </script>
+  <script type="module">
+    import Traductor from "/Version1/implementation/app/services/traductor.js";
+
+    function actualizarBotonDescargar() {
+      var checkboxMirror = document.getElementById("mirror");
+      var botonDescargar = document.getElementById("descargarImagenBoton");
+    }
+    document
+      .getElementById("mirror")
+      .addEventListener("change", actualizarBotonDescargar);
+    document
+      .getElementById("entradaTexto")
+      .addEventListener("input", function () {});
+  </script>
+
+  <script type="module">
+    import Traductor from "/Version1/implementation/app/services/traductor.js";
+
+    document
+      .getElementById("entradaTexto")
+      .addEventListener("input", function () {
+        const texto = this.value;
+        const warning = document.getElementById("warningCaracteres");
+
+        const regex = /[~\/\\«»`|]/g; //caracteres no permitidos
+
+        if (regex.test(texto)) {
+          warning.classList.remove("hidden");
+        } else {
+          warning.classList.add("hidden");
+        }
+      });
+    document
+      .getElementById("descargarImagenBoton")
+      .addEventListener("click", function () {
+        // Obtener el texto traducido
+
+        var checkboxMirror = document.getElementById("mirror");
+        var traductor = new Traductor();
+
+        if (checkboxMirror.checked) {
+          var textoTraducido = document.getElementById("entradaTexto").value;
+          //textoTraducido =
+          //traductor.traducirEspanolABrailleInverso(textoTraducido);
+
+          // Obtener el texto traducido
+          console.log("texto traducido:" + textoTraducido);
+          // Crear una nueva instancia de jsPDF
+          window.jsPDF = window.jspdf.jsPDF;
+          var doc = new jsPDF();
+          var braille =
+            "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eABiAHUAcgB5ACAAUwB5AHMAdABlAG0AcwA6ACAAQgByAGEAaQBsAGwAZQAgADEAMAAwACUAIABSAGUAZwB1AGwAYQByADoAIAAyADAAMQA4AFYAZQByAHMAaQBvAG4AIAAyAC4AMwA7ACAARABlAGMAZQBtAGIAZQByACAAMQAwACwAIAAyADAAMQA4AEIAcgBhAGkAbABsAGUAAAIAAAAAAAD/zwAMAAAAAQAAAAAAAAAAAAAAAAAAAAAAYQAAAAEAAwECAQMBBAEFAQYBBwEIAQkBCgELAQwBDQEOAQ8BEAERARIBEwEUARUBFgEXARgBGQEaARsBHAEdAR4BHwEgASEBIgEjASQBJQEmAScBKAEpASoBKwEsAS0BLgEvATABMQEyATMBNAE1ATYBNwE4ATkBOgE7ATwBPQE+AT8BQAFBAUIBQwFEAUUBRgFHAUgBSQFKAUsBTAFNAU4BTwFQAVEBUgFTAVQBVQFWAVcBWAFZAVoBWwFcAV0BXgFfBVBkb3QxBVBkb3QyBVBkb3QzBVBkb3Q0BVBkb3Q1BVBkb3Q2B1Bkb3RzMTIHUGRvdHMxMwdQZG90czIzCFBkb3RzMTIzB1Bkb3RzMTQHUGRvdHMyNAhQZG90czEyNAdQZG90czM0CFBkb3RzMTM0CFBkb3RzMjM0CVBkb3RzMTIzNAdQZG90czE1B1Bkb3RzMjUIUGRvdHMxMjUHUGRvdHMzNQhQZG90czEzNQhQZG90czIzNQlQZG90czEyMzUHUGRvdHM0NQhQZG90czE0NQhQZG90czI0NQlQZG90czEyNDUIUGRvdHMzNDUJUGRvdHMxMzQ1CVBkb3RzMjM0NQpQZG90czEyMzQ1B1Bkb3RzMTYHUGRvdHMyNghQZG90czEyNgdQZG90czM2CFBkb3RzMTM2CFBkb3RzMjM2CVBkb3RzMTIzNgdQZG90czQ2CFBkb3RzMTQ2CFBkb3RzMjQ2CVBkb3RzMTI0NghQZG90czM0NglQZG90czEzNDYJUGRvdHMyMzQ2ClBkb3RzMTIzNDYHUGRvdHM1NghQZG90czE1NghQZG90czI1NglQZG90czEyNTYIUGRvdHMzNTYJUGRvdHMxMzU2CVBkb3RzMjM1NgpQZG90czEyMzU2CFBkb3RzNDU2CVBkb3RzMTQ1NglQZG90czI0NTYKUGRvdHMxMjQ1NglQZG90czM0NTYKUGRvdHMxMzQ1NgpQZG90czIzNDU2C1Bkb3RzMTIzNDU2BVBET1Q0BVBET1QxB1BET1RTMTIHUERPVFMxNAhQRE9UUzE0NQdQRE9UUzE1CFBET1RTMTI0CVBET1RTMTI0NQhQRE9UUzEyNQdQRE9UUzI0CFBET1RTMjQ1B1BET1RTMTMIUERPVFMxMjMIUERPVFMxMzQJUERPVFMxMzQ1CFBET1RTMTM1CVBET1RTMTIzNApQRE9UUzEyMzQ1CVBET1RTMTIzNQhQRE9UUzIzNAlQRE9UUzIzNDUIUERPVFMxMzYJUERPVFMxMjM2CVBET1RTMjQ1NglQRE9UUzEzNDYKUERPVFMxMzQ1NglQRE9UUzEzNTYIUERPVFMyNDYJUERPVFMxMjU2ClBET1RTMTI0NTYHUERPVFM0NQABuwAHAAYABgDoGXBFaLwAAgACARQABgAFJUQYcEVoYEQAuwAIAAoACgA5GXBFaLwABQAFARQACgAFJUQYcEVoIIpgILgACSNEYES0HhsZExFLUlixCwArG0tSWLENACsbS1JYsQsAKxtLUlixDQArG0tSWLEMACtZWVlZWSIAAA==";
+
+          doc.addFileToVFS(
+            "Version1/implementation/templates/fonts/SimBraille/Braille.ttf",
+            braille
+          );
+          doc.addFont(
+            "Version1/implementation/templates/fonts/SimBraille/Braille.ttf",
+            "braille",
+            "normal"
+          );
+
+          doc.setFont("braille"); // set custom font
+
+          // Agregar el texto traducido al documento
+
+          doc.text(textoTraducido, 10, 10);
+
+          // Guardar el documento como un archivo PDF
+          doc.save("traduccion_braille.pdf");
+        } else {
+          var textoTraducido = document.getElementById("entradaTexto").value;
+          textoTraducido = traductor.traducirEspanolABraille(textoTraducido);
+          // Crear un canvas y establecer sus dimensiones
+          var canvas = document.createElement("canvas");
+          var context = canvas.getContext("2d");
+
+          // Establecer el tamaño del canvas
+          canvas.width = 1000; // Ancho en píxeles
+          canvas.height = 150; // Alto en píxeles (ajusta según el contenido)
+
+          // Establecer la fuente y el color del texto
+          context.font = "20px Arial";
+          context.fillStyle = "#FFFFFF"; // Negro
+
+          // Dividir el texto traducido en líneas y dibujar cada línea por separado
+          const lineas = textoTraducido.split("\n");
+          const x = 10; // Coordenada x de inicio
+          let y = 50; // Coordenada y de inicio
+          const lineHeight = 25; // Altura de línea (ajusta según el tamaño de fuente y el interlineado deseado)
+
+          for (let linea of lineas) {
+            context.fillText(linea, x, y);
+            y += lineHeight; // Mover la coordenada y hacia abajo para la siguiente línea
+          }
+
+          // Convertir el canvas a una URL de datos
+          var imgData = canvas.toDataURL("image/png");
+
+          // Crear un enlace para descargar la imagen
+          var link = document.createElement("a");
+          link.download = "traduccion_braille.png";
+          link.href = imgData;
+          link.click();
+        }
+      });
+  </script>
 </html>
