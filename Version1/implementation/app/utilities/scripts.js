@@ -33,23 +33,23 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
     var checkboxMirror = document.getElementById("mirror");
     var traductor = new Traductor();
 
+    var textoTraducido = document.querySelector(".entradaTexto").value;
+    window.jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF();
+
+    doc.addFont(
+        "/Version1/implementation/templates/fonts/SimBraille/Braille.ttf",
+        "braille",
+        "normal"
+    );
+
+    doc.setFont("braille"); // Establecer la fuente personalizada
+    var fontSize = 12; // Ajusta el tamaño de fuente según sea necesario
+    doc.setFontSize(fontSize);
+
     if (checkboxMirror.checked) {
-        var textoTraducido = document.querySelector(".entradaTexto").value;
         textoTraducido = traductor.traducirEspanolABrailleInverso(textoTraducido);
-        console.log("Texto traducido: " + textoTraducido);
 
-        window.jsPDF = window.jspdf.jsPDF;
-        var doc = new jsPDF();
-
-        doc.addFont(
-            "/Version1/implementation/templates/fonts/SimBraille/Braille.ttf",
-            "braille",
-            "normal"
-        );
-
-        doc.setFont("braille"); // Establecer la fuente personalizada
-        var fontSize = 12; // Ajusta el tamaño de fuente según sea necesario
-        doc.setFontSize(fontSize);
         var pageWidth = doc.internal.pageSize.getWidth();
         var lineas = textoTraducido.split("\n");
         var yPos = 10;
@@ -83,6 +83,50 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
         }
 
         doc.save("traduccion_braille_espejo.pdf");
+    } else {
+        textoTraducido = traductor.traducirEspanolABraille(textoTraducido);
+        var lineas = textoTraducido.split("\n");
+
+        // Configurar la posición Y inicial
+        var yPos = 10;
+        // Ajustar la altura de línea manualmente
+        var lineHeight = fontSize * 1.2; // Ajusta este valor según sea necesario
+
+        lineas.forEach(function (linea) {
+            // Dividir la línea en fragmentos de 40 caracteres como máximo
+            var palabras = linea.split(" ");
+            var lineaActual = "";
+
+            palabras.forEach(function (palabra) {
+                if ((lineaActual + palabra).length <= 40) {
+                    lineaActual += palabra + " ";
+                } else {
+                    // Calcular la posición X constante para alinear a la izquierda
+                    var xPos = 10; // 10 es el margen izquierdo
+
+                    // Agregar la línea al documento en la posición calculada
+                    doc.text(lineaActual.trim(), xPos, yPos);
+
+                    // Incrementar la posición Y para la siguiente línea
+                    yPos += lineHeight;
+
+                    // Empezar una nueva línea con la palabra actual
+                    lineaActual = palabra + " ";
+                }
+            });
+
+            // Agregar la última parte de la línea si existe
+            if (lineaActual.length > 0) {
+                var xPos = 10; // 10 es el margen izquierdo
+                doc.text(lineaActual.trim(), xPos, yPos);
+
+                yPos += lineHeight;
+            }
+        });
+
+        // Guardar el documento como un archivo PDF
+        doc.save("traduccion_braille.pdf");
+
     }
 });
 
