@@ -17,20 +17,141 @@ body {
   padding: 0;
 }
 
-@media screen and (max-width: 600px) {
-  #traduce {
-    font-size: 15px;
-    color: #828282;
-    padding: 0 0 10px 0;
+
+/* Estilo responsive para pantallas pequeñas (teléfonos móviles) */
+@media (max-width: 480px) {
+  .header {
+    height: 80px;
+    display: flex;
+    background-color: #ffffff;
+    border-bottom: 1px solid #000;
+    padding: 0;
     margin: 0;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
   }
 
-  .container .sidebar {
-    width: 20%;
-    margin: 0 10px 0 0;
-    padding: 0px 50px 0 0px;
+  .header .logo {
+    padding: 0 10px;
+    margin: 0;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
   }
+  .logo img {
+    width: fit-content;
+    height: 70%;
+    padding: 0;
+    margin: 0 30px;
+  }
+
+  .Conocenos button  {
+    font-size: 38px;
+  }
+
+  .Conocenos .ConocenosOpciones a {
+    font-size: 17px;
+  }
+
+  main .Titulo {
+    width: 100%;
+    font-size: 25px;
+    padding: 20px 0 10px 0;
+    margin: 0;
+    text-align: center;
+    font-weight: 900;
+  }
+  
+  main #traduce{
+    font-size: 17px;
+  } 
+.sidebar h3 {
+  display: none;
 }
+
+.sidebar{
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 10px;
+}
+
+.sidebar ul{
+  display: flex;
+  justify-content: space-evenly; 
+  width: 100%;
+  
+}
+
+.sidebar li{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.sidebar a {
+  font-size: 12px !important;
+}
+
+.container .content {
+  width: 100% !important;
+  padding: 20px 15px !important;
+  margin: 0;
+  text-align: center;
+}
+
+.botonesDescargar{
+  display: block !important;
+}
+.botonDescargarPNG,
+.botonDescargarPDF {
+  width: 50% !important;
+  font-size: 12px !important;
+  float: right;
+}
+
+.divComponentesplusentrada .divComponentes {
+  width: 30% !important;
+  border-right: 1px solid #e0e0e0;
+  display: inline-block;
+}
+
+/*CAJA DE COMPONENETES Y ENTRADA - ENTRADAS*/
+.divComponentesplusentrada .entradas {
+  width: 70% !important;
+  margin: 0 8px;
+}
+
+.componentes .ellipse {
+  width: 30px !important;
+  height: 30px!important;
+}
+.divComponentes .componentes {
+  margin-top: 40px!important;
+  margin-left: 10px !important;
+}
+
+#collectButton {
+  width: 70%;
+  height: 20px!important;
+  margin: 2px 0 0 0 !important;
+  font-size: 12px !important;
+}
+
+#spaceButton {
+  width: 60%;
+  height: 20px!important;
+  margin: 4px !important;
+  padding: 0;
+  font-size: 11px !important;
+}
+
+.entradas .entradaTexto{
+  height: 80% !important;
+}
+
+
+}
+
 
 /*CABECERA*/
 .header {
@@ -105,10 +226,6 @@ body {
 }
 
 /*CABECERA -CONOCENOS LISTA DESPLEGABLE*/
-.ConocenosTitulo:hover {
-  background-color: #fcfcfc;
-}
-
 .ConocenosOpciones {
   display: none;
   position: absolute;
@@ -124,6 +241,7 @@ body {
 
 .ConocenosOpciones a {
   display: block;
+  color: #000000;
   text-decoration: solid;
   font-size: 17px;
   padding: 10px 15px;
@@ -131,8 +249,7 @@ body {
 }
 
 .ConocenosOpciones a:hover {
-  color: #0a0a23;
-  background-color: #fcfcfc;
+  color: #2e2d38;
   border-radius: 8px;
 }
 
@@ -157,8 +274,8 @@ body {
 /*CONTENIDO SIDE BAR */
 .container .sidebar {
   width: 20%;
-  margin: 0 10px 0 0;
-  padding: 40px 50px 0 40px;
+  margin: 0;
+  padding: 40px 10px 0 40px;
   border-right: 1px solid #e0e0e0;
 }
 
@@ -166,7 +283,8 @@ body {
 .sidebar img {
   height: 20px;
   padding: 0;
-  margin: 0;
+  margin: 0 10px 0 0;
+  border:1px solid #000;
 }
 
 /*CONTENIDO SIDE BAR LISTA*/
@@ -181,6 +299,7 @@ body {
   padding: 10px 0px;
   display: flex;
   align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar ul li:hover {
@@ -189,7 +308,7 @@ body {
 
 .sidebar ul li a {
   margin: 0;
-  padding: 0;
+  padding: 0 5px 0 0;
   color: #000;
   font-size: 16px;
   text-decoration: none;
@@ -203,12 +322,14 @@ body {
   text-align: center;
 }
 
+
 /*CONTENIDO SUBTITULO TRADUCIR*/
-.content #traduce {
+#traduce {
   font-size: 30px;
-  color: #828282;
+  color: #104868;
   padding: 0 0 24px 0;
   margin: 0;
+  text-align: center;
 }
 
 /*CONTENIDO LETRAS DE ADVERTENCIAS*/
@@ -248,14 +369,14 @@ body {
   background-color: #000000;
   border-radius: 10px;
   color: #ffffff;
-  margin: 0px 0 15px 0;
+  margin: 15px 0 15px 0;
   padding: 0;
   text-align: center;
   font-size: 20px;
 }
 
 .content .botonTraducir:hover {
-  background-color: #0a0a23;
+  background-color: #104868;
 }
 
 /*CONTENIDO AREA DE OUTPUT*/
@@ -279,7 +400,6 @@ body {
 .botonesDescargar {
   display: flex;
   justify-content: right;
-
 }
 
 .botonDescargarPNG,
@@ -296,6 +416,8 @@ body {
 }
 
 /*BOTON DE DESCARGAR*/
+
+
 
 /*BRAILLE - ESPAÑOL*/
 
@@ -374,7 +496,7 @@ body {
 }
 
 #collectButton:hover {
-  background-color: #0a0a23;
+  background-color: #104868;
 }
 
 /*BOTON DE ESPACIO BRAILLE*/
@@ -390,7 +512,7 @@ body {
 }
 
 #spaceButton:hover {
-  background-color: #0a0a23;
+  background-color: #104868;
 }
 
 
@@ -425,98 +547,21 @@ body {
 }
 
 
+
 /*navegacion por teclado*/
 /* Estilo general para elementos enfocados */
 :focus {
-  outline: 2px solid #005fcc;
-  /* Azul sólido como ejemplo */
+  outline: 2px solid #535658; /* Azul sólido como ejemplo */
   outline-offset: 2px;
 }
 
 /* Puedes personalizar aún más para diferentes elementos si es necesario */
-a:focus,
-button:focus,
-input:focus {
-  background-color: #bbc7ce;
-  /* Fondo claro para mayor visibilidad */
-  color: #000;
+a:focus, button:focus, input:focus {
+  border: #828282; /* Fondo claro para mayor visibilidad */
 }
 
 :focus:not(:focus-visible) {
   outline: none;
 }
 
-/* Estilos para el contenedor del botón de alternancia */
-.dark-mode-toggle-container {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 1000;
-}
 
-/* Estilo para el botón de alternancia */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked+.slider {
-  background-color: #2196F3;
-}
-
-input:focus+.slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked+.slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Estilo redondeado */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-
-/* Estilos para el modo oscuro */
-body.dark-mode {
-  background-color: #333;
-  color: white;
-}
