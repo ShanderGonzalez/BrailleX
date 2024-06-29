@@ -1,0 +1,194 @@
+/* Estilos para el contenedor del botón de alternancia */
+.dark-mode-toggle-container {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 100;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff460;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "☀️";
+    text-align: center;
+    padding: 0 0 0 3px;
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #a2c6ce;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #a2c6ce;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Estilo redondeado */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+
+
+
+
+/* Estilos para el modo oscuro */
+.dark-mode {
+    background-color: #121212;
+    color: #fff;
+}
+
+.dark-mode header {
+    background-color: #121212;
+    color: #ffffff;
+    border-bottom: 1px solid #2C2C2C;
+}
+
+.dark-mode .entradaTexto,
+.dark-mode .respuesta {
+    background-color: #121212;
+    color: #ffffff;
+    border: 1px solid #2C2C2C;
+}
+
+.dark-mode .divImpresion {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-mode .botonTraducir {
+    background-color: #000000;
+    color: #fff;
+    border: 3px solid #2C2C2C;
+}
+
+/* boton traducir blanco 
+.dark-mode .botonTraducir{
+    background-color: #fff;
+    color: #121212;
+    font-weight: bold;
+    border: 3px solid #2C2C2C ;
+}
+
+.dark-mode .botonTraducir:hover{
+    background-color: #104868;
+    color: #fff;
+    font-weight: bold;
+    border: 3px solid #2C2C2C ;
+}*/
+
+.dark-mode .botonDescargarPNG,
+.dark-mode .botonDescargarPDF {
+    background-color: #fff;
+    color: #121212;
+}
+
+.dark-mode .ConocenosOpciones {
+    background-color: #121212;
+    color: #fff;
+}
+
+/* Estilo para las imágenes dentro de la lista en modo oscuro */
+.dark-mode ul li img,
+.dark-mode .info> :last-child {
+    filter: invert(1);
+}
+
+/* Estilo para los párrafos en modo oscuro */
+.dark-mode p,
+.dark-mode .ConocenosTitulo {
+    color: #fff;
+}
+
+.dark-mode .ConocenosOpciones a {
+    color: #ffffff;
+    background-color: #121212;
+    text-decoration: none;
+}
+
+.dark-mode .ConocenosOpciones a:hover {
+    background-color: #1b1b1b;
+    text-decoration: none;
+}
+
+.dark-mode .ConocenosOpciones ul li:hover {
+    color: #aaa;
+    background-color: #121212;
+    text-decoration: none;
+}
+
+.dark-mode .sidebar ul li:hover {
+    background: #181414;
+    text-decoration: none;
+}
+
+.dark-mode .sidebar ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: none;
+}
+
+.dark-mode .container .sidebar {
+    border-right: 1px solid #2C2C2C;
+}
+
+.dark-mode:focus {
+    outline: 2px solid #d8d6d6;
+    outline-offset: 2px;
+}
+
+.dark-mode a:focus,
+.dark-mode button:focus,
+.dark-mode input:focus {
+    border: #d8d6d6;
+}
+
+.dark-mode:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.dark-mode .slider:before {
+
+    background-color: #ffae00;
+}
