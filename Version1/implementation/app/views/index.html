@@ -78,8 +78,14 @@
       </div>
     </div>
   </main>
-  
-</body>
+  <!-- Agrega esto al final de tu body en index.html -->
+  <div class="dark-mode-toggle-container">
+    <label class="switch">
+      <input type="checkbox" id="darkModeToggle">
+      <span class="slider round"></span>
+    </label>
+  </div>
+
 
 <!--SCRIPTS-->
 <script src="../../app/services/validate.js"></script>
@@ -117,4 +123,12 @@
   });
 </script>
 
+<!--scrip modo oscuro -->
+<script>
+  const toggleSwitch = document.getElementById('darkModeToggle');
+  toggleSwitch.addEventListener('change', () => {
+    document.body.classList.toggle('dark-mode');
+  });
+</script>
+</body>
 </html>
