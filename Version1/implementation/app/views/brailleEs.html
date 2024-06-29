@@ -6,37 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Traductor Español - Braille</title>
   <link rel="stylesheet" href="../../templates/css/estilosPrincipal.css" />
+  <link rel="stylesheet" href="../../templates/css/estilosModoOscuro.css"/>
 </head>
 
 <body>
-  <div class="header">
+  <header class="header">
     <div class="logo">
       <img src="../../images/logo-proyecto.png" alt="Dev-Sentinels Logo" />
       <p>Dev-Sentinels</p>
     </div>
     <div class="info">
       <div class="Conocenos">
-        <div class="ConocenosTitulo">Conocenos</div>
+        <button class="ConocenosTitulo">Conocenos</button>
         <div class="ConocenosOpciones">
-          <a href="MisionVision.html">Mision y Vision</a>
-          <a href="Equipo.html">Equipo</a>
+          <a href="MisionVision.html" aria-label="Leer más sobre nuestra misión y visión">Misión y
+            Visión</a>
+          <a href="Equipo.html" aria-label="Conoce a nuestro equipo">Equipo</a>
         </div>
       </div>
       <img src="../../images/info-icon.png" alt="icono de informacion" />
     </div>
-  </div>
-  <div class="Titulo">BrailleX</div>
+  </header>
+  <main>
+  <h1 class="Titulo">BrailleX</h1>
   <div class="container">
     <div class="sidebar">
       <h3>Traductor</h3>
       <ul>
         <li>
           <img src="../../images/search-icon.png" alt="icono de buscar" />
-          <a href="index.html">Español - Braille</a>
+          <a href="index.html" aria-label="Traducir Español a Braille">Español - Braille</a>
         </li>
         <li>
           <img src="../../images/search-icon.png" alt="icono de buscar" />
-          <a href="brailleEs.html">Braille - Español</a>
+          <a href="brailleEs.html" aria-label="Traducir Braille a Español">Braille - Español</a>
         </li>
       </ul>
     </div>
@@ -58,7 +61,7 @@
         </div>
 
         <div class="entradas">
-          <button id="limpiarBoton" type="reset" onclick="p()">
+          <button id="limpiarBoton" type="reset" onclick="p()" aria-label="Limpiar Entrada de Texto">
             <img src="../../images/clear-icon.png" alt="boton de limpiar texto" />
           </button>
           <textarea name="entradaTexto" class="entradaTexto" placeholder="Colocar Braille" id="output"></textarea>
@@ -70,8 +73,17 @@
       <div class="respuesta"></div>
     </div>
   </div>
-</body>
+</main>
+  <div class="dark-mode-toggle-container">
+    <label class="switch">
+      <input type="checkbox" id="darkModeToggle">
+      <span class="slider round"></span>
+    </label>
+  </div>
+
 <script src="../../app/utilities/limpiar.js"></script>
 <script src="../../app/utilities/pointActions.js" type="module"></script>
+<script type="module" src="../../app/utilities/toggleDarkMode.js"></script>
 
+</body>
 </html>

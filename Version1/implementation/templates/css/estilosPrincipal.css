@@ -251,7 +251,7 @@ body {
 }
 
 .content .botonTraducir:hover {
-  background-color: #0a0a23;
+  background-color: #104868;
 }
 
 /*CONTENIDO AREA DE OUTPUT*/
@@ -370,7 +370,7 @@ body {
 }
 
 #collectButton:hover {
-  background-color: #0a0a23;
+  background-color: #104868;
 }
 
 /*BOTON DE ESPACIO BRAILLE*/
@@ -386,7 +386,7 @@ body {
 }
 
 #spaceButton:hover {
-  background-color: #0a0a23;
+  background-color: #104868;
 }
 
 

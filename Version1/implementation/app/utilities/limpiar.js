@@ -31,5 +31,7 @@ limpiar.onclick = (e) => {
     // Si 'respuesta' es un input o textarea, usa:
     // respuesta.value = '';
   }
+
+  ellipses.forEach((ellipse) => ellipse.classList.remove("painted"));
 }
 

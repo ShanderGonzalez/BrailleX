@@ -72,8 +72,7 @@ input:checked+.slider:before {
 
 
 
-
-/* Estilos para el modo oscuro */
+/* Estilos para el modo oscuro en la página de incio */
 .dark-mode {
     background-color: #121212;
     color: #fff;
@@ -97,26 +96,17 @@ input:checked+.slider:before {
     color: #ffffff;
 }
 
-.dark-mode .botonTraducir {
-    background-color: #000000;
-    color: #fff;
-    border: 3px solid #2C2C2C;
-}
 
-/* boton traducir blanco 
 .dark-mode .botonTraducir{
-    background-color: #fff;
+    background-color: gray;
     color: #121212;
-    font-weight: bold;
     border: 3px solid #2C2C2C ;
 }
 
 .dark-mode .botonTraducir:hover{
-    background-color: #104868;
     color: #fff;
-    font-weight: bold;
     border: 3px solid #2C2C2C ;
-}*/
+}
 
 .dark-mode .botonDescargarPNG,
 .dark-mode .botonDescargarPDF {
@@ -192,3 +182,43 @@ input:checked+.slider:before {
 
     background-color: #ffae00;
 }
+
+
+/* Estilos para el modo oscuro en la página de braille a español  */
+
+.dark-mode .divComponentes {
+    border-right: 1px solid #2C2C2C;
+}
+
+  
+.dark-mode .componentes .ellipse.painted {
+    background-color: #104868;
+}
+
+
+.dark-mode #collectButton , .dark-mode #spaceButton {
+    background-color: #494949;
+    color: #000;
+}
+
+.dark-mode #collectButton:hover , .dark-mode #spaceButton:hover {
+    background-color: #104868;
+    color: #fff;
+  }
+
+/* Estilos para el modo oscuro en la página conocenos */
+
+.dark-mode .mission,
+.dark-mode .vision {
+  box-shadow: 0px 5px 5px #1b1b1b;
+  background-color: #000000;
+}
+
+.dark-mode .team-member {
+    box-shadow: 0px 5px 5px #1b1b1b;
+    background-color: #000000;
+}
+
+.dark-mode .team-member h3 {
+    color: #fff;
+  }
