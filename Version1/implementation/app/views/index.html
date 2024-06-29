@@ -10,7 +10,7 @@
       display: none;
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </head>
 
@@ -99,14 +99,14 @@
     // Validar si el texto contiene caracteres especiales antes de la traducción
     const regex = /[~\/\\«»]/g;
 
-    if (regex.test(texto)) {
-      texto = "";
-      return; // Detener la ejecución del resto del código
-    }
-    var traduccion = traductor.traducirEspanolABraille(texto);
+      if (regex.test(texto)) {
+        texto = "";
+        return; // Detener la ejecución del resto del código
+      }
+      var traduccion = traductor.traducirEspanolABraille(texto);
 
-    document.querySelector(".respuesta").innerText = traduccion;
-  });
+      document.querySelector(".respuesta").innerText = traduccion;
+    });
 </script>
 
 <script>
