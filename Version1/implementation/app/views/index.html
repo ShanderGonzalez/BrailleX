@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,7 +25,8 @@
       <div class="Conocenos">
         <button class="ConocenosTitulo">Conocenos</button>
         <div class="ConocenosOpciones">
-          <a href="../../app/views/MisionVision.html" aria-label="Leer más sobre nuestra misión y visión">Misión y Visión</a>
+          <a href="../../app/views/MisionVision.html" aria-label="Leer más sobre nuestra misión y visión">Misión y
+            Visión</a>
           <a href="../../app/views/Equipo.html" aria-label="Conoce a nuestro equipo">Equipo</a>
         </div>
       </div>
@@ -57,13 +59,14 @@
           <button id="BotonVoz" aria-label="Habla algo...">
             <img src="../../images/voice-icon.png" alt="boton de hablar" />
           </button>
-      
+
           <button id="limpiarBoton" type="reset" onclick="p()" aria-label="Limpiar Entrada de Texto">
             <img src="../../images/clear-icon.png" alt="boton de limpiar texto" />
           </button>
         </div>
         <!-- <input class="entradaTexto" type="text" placeholder="Escribe texto en español">-->
-        <textarea name="entradaTexto" class="entradaTexto" placeholder="Escribe texto en español" id="entradaTexto"></textarea>
+        <textarea name="entradaTexto" class="entradaTexto" placeholder="Escribe texto en español"
+          id="entradaTexto"></textarea>
 
         <button id="traducirBoton" class="botonTraducir" aria-label="Traducir Español a Braille">Traducir</button>
 
@@ -72,9 +75,11 @@
           <input type="checkbox" id="mirror" name="mirror" />
           <p>Impresión en espejo</p>
         </div>
-        <div class="botonesDescargar"> 
-          <button class="botonDescargarPNG" aria-label="Descargar traduccion en PNG">Descargar en PNG</button>
-          <button class="botonDescargarPDF" aria-label="Descargar contenido en PDF">Descargar en PDF</button>
+        <div class="botonesDescargar">
+          <button class="botonDescargarPNG" id="descargarPNG" aria-label="Descargar traduccion en PNG">Descargar en
+            PNG</button>
+          <button class="botonDescargarPDF" id="descargarPDF" aria-label="Descargar contenido en PDF">Descargar en
+            PDF</button>
         </div>
       </div>
     </div>
@@ -87,49 +92,11 @@
     </label>
   </div>
 
-
-<!--SCRIPTS-->
-<script src="../../app/services/validate.js" type="module"></script>
-<script src="../../app/utilities/limpiar.js"></script>
-<script type="module">
-  import Traductor from "../../app/services/traductor.js";
-  document.getElementById("traducirBoton").addEventListener("click", function () {
-    var texto = document.querySelector(".entradaTexto").value;
-    var traductor = new Traductor();
-    // Validar si el texto contiene caracteres especiales antes de la traducción
-    const regex = /[~\/\\«»]/g;
-
-      if (regex.test(texto)) {
-        texto = "";
-        return; // Detener la ejecución del resto del código
-      }
-      var traduccion = traductor.traducirEspanolABraille(texto);
-
-      document.querySelector(".respuesta").innerText = traduccion;
-    });
-</script>
-
-<script>
-  document.getElementById("entradaTexto").addEventListener("input", function () {
-    const texto = this.value;
-    const warning = document.getElementById("warningCaracteres");
-
-    const regex = /[~\/\\«»]/g; //caracteres no permitidos
-
-    if (regex.test(texto)) {
-      warning.classList.remove("hidden");
-    } else {
-      warning.classList.add("hidden");
-    }
-  });
-</script>
-
-<!--scrip modo oscuro -->
-<script>
-  const toggleSwitch = document.getElementById('darkModeToggle');
-  toggleSwitch.addEventListener('change', () => {
-    document.body.classList.toggle('dark-mode');
-  });
-</script>
+  <!--SCRIPTS-->
+  <script src="../../app/services/validate.js" type="module"></script>
+  <script src="../../app/utilities/limpiar.js"></script>
+  <script type="module" src="../../app/utilities/scripts.js"></script>
+  <script type="module" src="../../app/utilities/toggleDarkMode.js"></script>
 </body>
+
 </html>
