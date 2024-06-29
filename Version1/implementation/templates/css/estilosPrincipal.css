@@ -109,6 +109,47 @@ body {
   float: right;
 }
 
+.divComponentesplusentrada .divComponentes {
+  width: 30% !important;
+  border-right: 1px solid #e0e0e0;
+  display: inline-block;
+}
+
+/*CAJA DE COMPONENETES Y ENTRADA - ENTRADAS*/
+.divComponentesplusentrada .entradas {
+  width: 70% !important;
+  margin: 0 8px;
+}
+
+.componentes .ellipse {
+  width: 30px !important;
+  height: 30px!important;
+}
+.divComponentes .componentes {
+  margin-top: 40px!important;
+  margin-left: 10px !important;
+}
+
+#collectButton {
+  width: 70%;
+  height: 20px!important;
+  margin: 2px 0 0 0 !important;
+  font-size: 12px !important;
+}
+
+#spaceButton {
+  width: 60%;
+  height: 20px!important;
+  margin: 4px !important;
+  padding: 0;
+  font-size: 11px !important;
+}
+
+.entradas .entradaTexto{
+  height: 80% !important;
+}
+
+
 }
 
 
@@ -328,7 +369,7 @@ body {
   background-color: #000000;
   border-radius: 10px;
   color: #ffffff;
-  margin: 0px 0 15px 0;
+  margin: 15px 0 15px 0;
   padding: 0;
   text-align: center;
   font-size: 20px;
