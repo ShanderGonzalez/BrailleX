@@ -69,8 +69,16 @@
       </div>
 
       <button class="botonTraducir" id="traducirBoton">Traducir</button>
+      <br>
+      <button id="BotonVoz" aria-label="Escucha algo..." onclick="leerTexto()">
+        <img src="../../images/speaker-icon.png" alt="boton de hablar" />
+      </button>
+      <br>
+      <br>
 
-      <div class="respuesta"></div>
+      <div class="respuesta" id="respuestaTexto"></div>
+      <br>
+
     </div>
   </div>
 </main>
@@ -85,6 +93,7 @@
 <script src="../../app/utilities/pointActions.js" type="module"></script>
 <script type="module" src="../../app/utilities/toggleDarkMode.js"></script>
 <script src="../../app/utilities/responsive.js"></script>
+
 
 </body>
 </html>
