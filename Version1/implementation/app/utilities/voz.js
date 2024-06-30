@@ -34,3 +34,22 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 });
 
+
+
+// Función para leer el texto 
+function leerTexto() {
+    // Obtener el texto del elemento
+    const texto = document.getElementById('textoParaLeer').textContent;
+
+    // Crear un nuevo objeto SpeechSynthesisUtterance
+    const mensaje = new SpeechSynthesisUtterance();
+
+    // Configurar la voz en español
+    mensaje.lang = 'es-ES'; // Español de España
+
+    // Establecer el texto que se va a leer en voz alta
+    mensaje.text = texto;
+
+    // Hacer que el navegador hable el texto
+    window.speechSynthesis.speak(mensaje);
+}
