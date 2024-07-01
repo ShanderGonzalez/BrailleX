@@ -44,8 +44,12 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
     );
 
     doc.setFont("braille"); // Establecer la fuente personalizada
-    var fontSize = 12; // Ajusta el tamaño de fuente según sea necesario
+    var fontSize = 11.5; // Ajusta el tamaño de fuente según sea necesario
     doc.setFontSize(fontSize);
+
+    function agregarLineaAPDF(doc, linea, xPos, yPos) {
+        doc.text(linea.trim(), xPos, yPos);
+    }
 
     if (checkboxMirror.checked) {
         textoTraducido = traductor.traducirEspanolABrailleInverso(textoTraducido);
@@ -54,6 +58,8 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
         var lineas = textoTraducido.split("\n");
         var yPos = 10;
         var lineHeight = fontSize * 1.2;
+        var maxLineasPorPagina = 20;
+        var lineasActuales = 0;
 
         for (var i = 0; i < lineas.length; i++) {
             var linea = lineas[i];
@@ -68,17 +74,31 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
                 } else {
                     var textWidth = doc.getTextDimensions(lineaActual).w;
                     var xPos = pageWidth - textWidth - 10;
-                    doc.text(lineaActual.trim(), xPos, yPos);
+                    agregarLineaAPDF(doc, lineaActual, xPos, yPos);
                     yPos += lineHeight;
                     lineaActual = palabra + " ";
+                    lineasActuales++;
+
+                    if (lineasActuales >= maxLineasPorPagina) {
+                        doc.addPage();
+                        yPos = 10;
+                        lineasActuales = 0;
+                    }
                 }
             }
 
             if (lineaActual.length > 0) {
                 var textWidth = doc.getTextDimensions(lineaActual).w;
                 var xPos = pageWidth - textWidth - 10;
-                doc.text(lineaActual.trim(), xPos, yPos);
+                agregarLineaAPDF(doc, lineaActual, xPos, yPos);
                 yPos += lineHeight;
+                lineasActuales++;
+
+                if (lineasActuales >= maxLineasPorPagina) {
+                    doc.addPage();
+                    yPos = 10;
+                    lineasActuales = 0;
+                }
             }
         }
 
@@ -87,13 +107,12 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
         textoTraducido = traductor.traducirEspanolABraille(textoTraducido);
         var lineas = textoTraducido.split("\n");
 
-        // Configurar la posición Y inicial
         var yPos = 10;
-        // Ajustar la altura de línea manualmente
-        var lineHeight = fontSize * 1.2; // Ajusta este valor según sea necesario
+        var lineHeight = fontSize * 1.0;
+        var maxLineasPorPagina = 25;
+        var lineasActuales = 0;
 
         lineas.forEach(function (linea) {
-            // Dividir la línea en fragmentos de 40 caracteres como máximo
             var palabras = linea.split(" ");
             var lineaActual = "";
 
@@ -101,34 +120,38 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
                 if ((lineaActual + palabra).length <= 40) {
                     lineaActual += palabra + " ";
                 } else {
-                    // Calcular la posición X constante para alinear a la izquierda
-                    var xPos = 10; // 10 es el margen izquierdo
-
-                    // Agregar la línea al documento en la posición calculada
-                    doc.text(lineaActual.trim(), xPos, yPos);
-
-                    // Incrementar la posición Y para la siguiente línea
+                    var xPos = 10;
+                    agregarLineaAPDF(doc, lineaActual, xPos, yPos);
                     yPos += lineHeight;
-
-                    // Empezar una nueva línea con la palabra actual
                     lineaActual = palabra + " ";
+                    lineasActuales++;
+
+                    if (lineasActuales >= maxLineasPorPagina) {
+                        doc.addPage();
+                        yPos = 10;
+                        lineasActuales = 0;
+                    }
                 }
             });
 
-            // Agregar la última parte de la línea si existe
             if (lineaActual.length > 0) {
-                var xPos = 10; // 10 es el margen izquierdo
-                doc.text(lineaActual.trim(), xPos, yPos);
-
+                var xPos = 10;
+                agregarLineaAPDF(doc, lineaActual, xPos, yPos);
                 yPos += lineHeight;
+                lineasActuales++;
+
+                if (lineasActuales >= maxLineasPorPagina) {
+                    doc.addPage();
+                    yPos = 10;
+                    lineasActuales = 0;
+                }
             }
         });
 
-        // Guardar el documento como un archivo PDF
         doc.save("traduccion_braille.pdf");
-
     }
 });
+
 
 // Descargar en PNG
 document.getElementById("descargarPNG").addEventListener("click", function () {
