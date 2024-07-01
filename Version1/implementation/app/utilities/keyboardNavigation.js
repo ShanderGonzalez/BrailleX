@@ -44,41 +44,52 @@ function closeMenu() {
 
 /*funcion para hacer la navegacion por teclado un ciclo*/
 document.addEventListener('DOMContentLoaded', function() {
-  var descargarPDFBtn = document.getElementById('descargarPDF');
-  var conocenosBtn = document.getElementById('conocenosBoton'); 
+    var conocenosBtn = document.getElementById('conocenosBoton');
+    var descargarPDFBtn = document.getElementById('descargarPDF');
 
-  descargarPDFBtn.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter' || event.keyCode === 13 && !event.shiftKey) {
-      event.preventDefault(); 
-      conocenosBtn.focus(); 
+    if (conocenosBtn && descargarPDFBtn) {
+        descargarPDFBtn.addEventListener('keydown', function(event) {
+            if (event.key === 'Tab') { // Tab con Shift
+                event.preventDefault();
+                conocenosBtn.focus(); // Enfoca el botón 'conocenosBoton' con Shift + Tab
+            }
+        });
+    } else {
+        console.error('El ID esta en otra pagina tranqui');
     }
-  });
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    var descargarPDFBtn = document.getElementById('respuestaTexto');
-    var conocenosBtn = document.getElementById('conocenosBoton'); 
-  
-    descargarPDFBtn.addEventListener('keydown', function(event) {
-      if (event.key === 'Enter' || event.keyCode === 13 && !event.shiftKey) {
-        event.preventDefault(); 
-        conocenosBtn.focus(); 
-      }
-    });
+    var conocenosBtn = document.getElementById('conocenosBoton');
+    var areaRespuesta = document.getElementById('respuestaTexto');
+
+    if (conocenosBtn && areaRespuesta) {
+        areaRespuesta.addEventListener('keydown', function(event) {
+            if (event.key === 'Tab') { 
+                event.preventDefault();
+                conocenosBtn.focus(); 
+            }
+        });
+    } else {
+        console.error('El ID esta en otra pagina tranqui');
+    }
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    var descargarPDFBtn = document.querySelector('backButton');
-    var conocenosBtn = document.getElementById('conocenosBoton'); 
-  
-    descargarPDFBtn.addEventListener('keydown', function(event) {
-      if (event.key === 'Enter' || event.keyCode === 13 && !event.shiftKey) {
-        event.preventDefault(); 
-        conocenosBtn.focus(); 
-      }
-    });
-});
+    var conocenosBtn = document.getElementById('conocenosBoton');
+    var RegresarBtn = document.querySelector('backButton');
 
+    if (conocenosBtn && RegresarBtn) {
+        RegresarBtn.addEventListener('keydown', function(event) {
+            if (event.key === 'Tab') { 
+                event.preventDefault();
+                conocenosBtn.focus(); 
+            }
+        });
+    } else {
+        console.error('El ID esta en otra pagina tranqui');
+    }
+});
 
 
 /*funcion para que las ellipses se pinten cuando se da enter*/
