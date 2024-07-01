@@ -16,6 +16,10 @@ document.getElementById("entradaTexto").addEventListener("input", function () {
 
 // Traducción y actualización de la respuesta
 document.getElementById("traducirBoton").addEventListener("click", function () {
+
+    document.getElementById('descargarPNG').disabled = false;
+    document.getElementById('descargarPDF').disabled = false;
+
     var texto = document.querySelector(".entradaTexto").value;
     var traductor = new Traductor();
     const regex = /[~\/\\«»]/g;
@@ -186,5 +190,6 @@ document.getElementById("descargarPNG").addEventListener("click", function () {
 document.getElementById("mirror").addEventListener("change", function () {
     actualizarBotonDescargar();
 });
+
 
 
