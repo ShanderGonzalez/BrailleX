@@ -69,16 +69,18 @@
       </div>
 
       <button class="botonTraducir" id="traducirBoton">Traducir</button>
-      <br>
+      <div class="BotonCopiar">
       <button id="BotonVoz" aria-label="Escucha algo..." onclick="leerTexto()">
         <img src="../../images/speaker-icon.png" alt="boton de hablar" />
       </button>
-      <br>
-      <br>
+      </div>
 
       <div class="respuesta" id="respuestaTexto" tabindex="0" ></div>
-      <br>
-
+      <div class="BotonCopiar">
+        <button id="BotonCopiar" aria-label="Copiar Texto Traducido">
+          <img src="../../images/copy-icon.png" alt="boton de copiar texto traducido" />
+        </button>
+      </div >
     </div>
   </div>
 </main>
@@ -94,6 +96,7 @@
 <script type="module" src="../../app/utilities/toggleDarkMode.js"></script>
 <script src="../../app/utilities/responsive.js"></script>
 <script src="../../app/utilities/keyboardNavigation.js"></script>
+<script src="../../app/utilities/copyboard.js"></script>
 
 
 </body>

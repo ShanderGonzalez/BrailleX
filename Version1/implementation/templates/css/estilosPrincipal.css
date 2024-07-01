@@ -150,7 +150,7 @@ body {
   height: 80% !important;
 }
 
-.content .divImpresion {
+.divImpresion, .BotonCopiar {
   display: flex;
   margin: 0;
   padding: 0;
@@ -390,7 +390,7 @@ body {
 }
 
 /*CONTENIDO AREA DE OUTPUT*/
-.content .divImpresion {
+.divImpresion, .BotonCopiar {
   display: flex;
   margin: 0;
   padding: 0;
@@ -536,7 +536,8 @@ body {
 }
 
 #limpiarBoton,
-#BotonVoz {
+#BotonVoz,
+#BotonCopiar  {
   width: 30px;
   height: 30px;
   padding: 0%;
@@ -546,39 +547,34 @@ body {
 }
 
 #limpiarBoton:hover,
-#BotonVoz:hover {
+#BotonVoz:hover,
+#BotonCopiar:hover {
   background-color: #5BC1FB;;
 }
 
 
-#limpiarBoton img {
+#limpiarBoton img,
+#BotonVoz img ,
+#BotonCopiar img {
   height: 20px;
   padding: 0;
   margin: 0;
 }
-
-#BotonVoz img {
-  height: 20px;
-  padding: 0;
-  margin: 0;
-}
-
-
 
 /*navegacion por teclado*/
-/* Estilo general para elementos enfocados */
 :focus {
-  outline: 2px solid #535658; /* Azul sólido como ejemplo */
+  outline: 2px solid #535658; 
   outline-offset: 2px;
 }
 
-/* Puedes personalizar aún más para diferentes elementos si es necesario */
+
 a:focus, button:focus, input:focus {
-  border: #828282; /* Fondo claro para mayor visibilidad */
+  border: #828282; 
 }
 
 :focus:not(:focus-visible) {
   outline: none;
 }
+
 
 

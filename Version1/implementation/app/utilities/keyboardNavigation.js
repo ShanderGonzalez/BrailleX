@@ -97,9 +97,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const ellipses = document.querySelectorAll(".ellipse");
 
     ellipses.forEach((ellipse) => {
-        ellipse.addEventListener("click", () => {
-            ellipse.classList.toggle("painted");
-        });
 
         ellipse.addEventListener("keyup", (event) => {
             if (event.key === 'Enter' || event.keyCode === 13) { 
