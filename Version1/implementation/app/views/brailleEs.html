@@ -69,12 +69,15 @@
       </div>
 
       <button class="botonTraducir" id="traducirBoton">Traducir</button>
-      <div class="BotonCopiar">
-      <button id="BotonVoz" aria-label="Escucha algo..." onclick="leerTexto()">
-        <img src="../../images/speaker-icon.png" alt="boton de hablar" />
-      </button>
+      <div class="botonesZoom2">
+          <button id="BotonVoz" aria-label="Escucha algo..." onclick="leerTexto()">
+            <img src="../../images/speaker-icon.png" alt="boton de hablar" />
+          </button>
+        <div>
+          <button id="zoomIn" aria-label="Aumentar tamaño de fuente">+</button>
+          <button id="zoomOut" aria-label="Disminuir tamaño de fuente">-</button>
+        </div>
       </div>
-
       <div class="respuesta" id="respuestaTexto" tabindex="0" ></div>
       <div class="BotonCopiar">
         <button id="BotonCopiar" aria-label="Copiar Texto Traducido">
@@ -97,7 +100,6 @@
 <script src="../../app/utilities/responsive.js"></script>
 <script src="../../app/utilities/keyboardNavigation.js"></script>
 <script src="../../app/utilities/copyboard.js"></script>
-
 
 </body>
 </html>

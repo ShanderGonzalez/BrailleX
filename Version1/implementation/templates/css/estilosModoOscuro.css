@@ -88,7 +88,7 @@ input:checked+.slider:before {
 .dark-mode .respuesta {
     background-color: #121212;
     color: #ffffff;
-    border: 1px solid #2C2C2C;
+    border: 1px solid #d8d6d6;
 }
 
 .dark-mode .divImpresion {
@@ -233,6 +233,7 @@ input:checked+.slider:before {
 .dark-mode .backButton{
     border: 1px solid #fff;
 }
+
 
 
 

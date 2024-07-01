@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /*funcion para que el boton concenos se seleccione con el enter*/
 document.getElementById("conocenosBoton").addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) { 
+    if (event.key === 'Enter' || event.keyCode === 13) { 
         toggleMenu();
     }
 });

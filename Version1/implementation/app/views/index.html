@@ -62,7 +62,7 @@
           </button>
 
           <button id="limpiarBoton" type="reset" onclick="p()" aria-label="Limpiar Entrada de Texto">
-            <img src="../../images/clear-icon.png" alt="boton de limpiar texto" />
+           <img src="../../images/clear-icon.png" alt="boton de limpiar texto" />
           </button>
         </div>
         <!-- <input class="entradaTexto" type="text" placeholder="Escribe texto en español">-->
@@ -70,7 +70,10 @@
           id="entradaTexto"></textarea>
 
         <button id="traducirBoton" class="botonTraducir" aria-label="Traducir Español a Braille">Traducir</button>
-
+        <div class="botonesZoom1">
+          <button id="zoomIn" aria-label="Aumentar tamaño de fuente">+</button>
+          <button id="zoomOut" aria-label="Disminuir tamaño de fuente">-</button>
+        </div>
         <div class="respuesta"></div>
         <div class="BotonCopiar">
           <button id="BotonCopiar" aria-label="Copiar Texto Traducido">
@@ -105,6 +108,7 @@
   <script src="../../app/utilities/responsive.js"></script>
   <script src="../../app/utilities/keyboardNavigation.js"></script>
   <script src="../../app/utilities/copyboard.js"></script>
+
 </body>
 
 </html>

@@ -426,9 +426,6 @@ body {
   font-size: 15px;
 }
 
-/*BOTON DE DESCARGAR*/
-
-
 
 /*BRAILLE - ESPAÑOL*/
 
@@ -528,29 +525,55 @@ body {
 
 
 /*BOTONES GENERALES*/
-/*BOTON DE LIMPIAR*/
-.botonesEntradaTexto {
+/*BOTON DE LIMPIAR, COPIAR, VOZ, ZOOM*/
+.botonesEntradaTexto, .botonesZoom2{
   display: flex;
   justify-content: space-between;
+}
 
+#limpiarBoton,
+#BotonCopiar{
+  display: flex;
+  float: right;
+}
+.botonesZoom1{
+  display: flex;
+  justify-content: right;
 }
 
 #limpiarBoton,
 #BotonVoz,
-#BotonCopiar  {
-  width: 30px;
+#BotonCopiar,
+#zoomOut,
+#zoomIn{
+  width: 60px;
   height: 30px;
-  padding: 0%;
-  margin: 0;
-  float: right;
-  border: none;
+  padding: 0;
+  margin: 0 5px;
+  border: 1px solid #849ab8;
+  border-radius: 5px; 
+  background-color: #f0f0f0; 
+  cursor: pointer; 
+  box-shadow: 0 4px 8px rgba(0, 0.2, 0.2, 0.2);
+  align-items: center;
+  justify-content: center;
+}
+
+#zoomIn,
+#zoomOut {
+  font-size: 25px;
+  font-weight: bold;
 }
 
 #limpiarBoton:hover,
 #BotonVoz:hover,
-#BotonCopiar:hover {
-  background-color: #5BC1FB;;
+#BotonCopiar:hover,
+#zoomIn:hover,
+#zoomOut:hover  {
+  background-color: #5BC1FB;
 }
+
+
 
 
 #limpiarBoton img,
@@ -572,7 +595,7 @@ a:focus, button:focus, input:focus {
   border: #828282; 
 }
 
-:focus:not(:focus-visible) {
+:focus:not(:focus-visible){
   outline: none;
 }
 
