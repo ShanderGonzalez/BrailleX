@@ -70,12 +70,12 @@
 
       <button class="botonTraducir" id="traducirBoton">Traducir</button>
       <div class="botonesZoom2">
-          <button id="BotonVoz" aria-label="Escucha algo..." onclick="leerTexto()">
+          <button  id="BotonVoz" aria-label="Escucha algo..." onclick="leerTexto()">
             <img src="../../images/speaker-icon.png" alt="boton de hablar" />
           </button>
         <div>
-          <button id="zoomIn" aria-label="Aumentar tamaño de fuente">+</button>
-          <button id="zoomOut" aria-label="Disminuir tamaño de fuente">-</button>
+          <button onclick="zoomIn1()"  id="zoomIn" aria-label="Aumentar tamaño de fuente">+</button>
+          <button onclick="zoomOut1()"  id="zoomOut" aria-label="Disminuir tamaño de fuente">-</button>
         </div>
       </div>
       <div class="respuesta" id="respuestaTexto" tabindex="0" ></div>
@@ -100,6 +100,7 @@
 <script src="../../app/utilities/responsive.js"></script>
 <script src="../../app/utilities/keyboardNavigation.js"></script>
 <script src="../../app/utilities/copyboard.js"></script>
+<script src="../../app/utilities/zoom.js"></script>
 
 </body>
 </html>
