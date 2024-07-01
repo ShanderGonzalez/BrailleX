@@ -192,6 +192,10 @@ input:checked+.slider:before {
     border-right: 1px solid #2C2C2C;
 }
 
+.dark-mode .componentes .ellipse {
+    background-color: #D9D9D9;
+
+}
   
 .dark-mode .componentes .ellipse.painted {
     background-color: #5BC1FB;

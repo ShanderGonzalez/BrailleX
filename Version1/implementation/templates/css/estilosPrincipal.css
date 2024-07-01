@@ -543,6 +543,12 @@ body {
   border: none;
 }
 
+#limpiarBoton:hover,
+#BotonVoz:hover {
+  background-color: #5BC1FB;;
+}
+
+
 #limpiarBoton img {
   height: 20px;
   padding: 0;
