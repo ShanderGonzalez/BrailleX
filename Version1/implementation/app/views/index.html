@@ -24,7 +24,7 @@
     </div>
     <div class="info">
       <div class="Conocenos">
-        <button class="ConocenosTitulo">Conócenos</button>
+        <a class="ConocenosTitulo" id="conocenosBoton" tabindex="0" aria-label="Conócenos" aria-expanded="false">Conócenos</a>
         <div class="ConocenosOpciones">
           <a href="MisionVision.html" aria-label="Leer más sobre nuestra misión y visión">Misión y Visión</a>
           <a href="Equipo.html" aria-label="Conoce a nuestro equipo">Equipo</a>
@@ -34,11 +34,11 @@
     </div>
   </header>
   <main>
-    <h1 class="Titulo">BrailleX</h1>
+    <h1 class="Titulo" >BrailleX</h1>
     <p id="traduce">Traduce un texto de Español a Braille</p>
     <div class="container">
       <div class="sidebar">
-        <h3>Traductor</h3>
+        <h3 >Traductor</h3>
         <ul>
           <li>
             <img src="../../images/EspBra-icon.png" alt="icono de traduccion español a braille" />
@@ -72,7 +72,7 @@
         <button id="traducirBoton" class="botonTraducir" aria-label="Traducir Español a Braille">Traducir</button>
 
         <div class="respuesta"></div>
-        <div class="divImpresion">
+        <div class="divImpresion" >
           <input type="checkbox" id="mirror" name="mirror" />
           <p>Impresión en espejo</p>
         </div>
@@ -85,7 +85,7 @@
       </div>
     </div>
   </main>
-  <div class="dark-mode-toggle-container">
+  <div class="dark-mode-toggle-container" >
     <label class="switch">
       <input type="checkbox" id="darkModeToggle">
       <span class="slider round"></span>
@@ -98,6 +98,7 @@
   <script type="module" src="../../app/utilities/scripts.js"></script>
   <script type="module" src="../../app/utilities/toggleDarkMode.js"></script>
   <script src="../../app/utilities/responsive.js"></script>
+  <script src="../../app/utilities/keyboardNavigation.js"></script>
 </body>
 
 </html>
