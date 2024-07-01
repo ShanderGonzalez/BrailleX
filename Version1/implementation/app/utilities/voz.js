@@ -11,8 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const botonVoz = document.getElementById('BotonVoz');
     const textareaResultado = document.getElementById('entradaTexto');
 
+    // Verificar compatibilidad con el navegador
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        console.error('El reconocimiento de voz no es compatible con este navegador.');
+        return;
+    }
+
     // Configurar reconocimiento de voz
-    const reconocimientoVoz = new webkitSpeechRecognition();
+    const reconocimientoVoz = new SpeechRecognition();
     reconocimientoVoz.lang = 'es-ES'; // Configurar el idioma (español)
     reconocimientoVoz.interimResults = false; // Mostrar resultados parciales o no
 
@@ -33,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Error en el reconocimiento de voz:', event.error);
     };
 });
-
 
 
 // Función para leer el texto 
