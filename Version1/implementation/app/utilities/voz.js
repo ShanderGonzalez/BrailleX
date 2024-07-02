@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Obtener elementos del DOM
     const botonVoz = document.getElementById('BotonVoz');
     const textareaResultado = document.getElementById('entradaTexto');
+    let escuchando = false;
 
     // Verificar compatibilidad con el navegador
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -25,7 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Evento al hacer clic en el botón de voz
     botonVoz.addEventListener('click', () => {
-        reconocimientoVoz.start(); // Iniciar reconocimiento de voz
+        if (!escuchando) {
+            reconocimientoVoz.start(); // Iniciar reconocimiento de voz
+            alert('Empiece a hablar. Haga clic de nuevo en el micrófono para detener la escucha.');
+            escuchando = true;
+        } else {
+            reconocimientoVoz.stop(); // Detener reconocimiento de voz
+            escuchando = false;
+        }
     });
 
     // Manejar el resultado del reconocimiento de voz
@@ -38,24 +46,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // Manejar errores en el reconocimiento de voz
     reconocimientoVoz.onerror = function (event) {
         console.error('Error en el reconocimiento de voz:', event.error);
+        escuchando = false;
+    };
+
+    // Asegurarse de que el estado de escuchando sea falso cuando se detiene el reconocimiento
+    reconocimientoVoz.onend = function () {
+        escuchando = false;
     };
 });
-
 
 // Función para leer el texto 
 function leerTexto() {
     // Obtener el texto del elemento
     const texto = document.getElementById('textoParaLeer').textContent;
+    const synth = window.speechSynthesis;
 
-    // Crear un nuevo objeto SpeechSynthesisUtterance
-    const mensaje = new SpeechSynthesisUtterance();
+    if (synth.speaking) {
+        synth.cancel();
+        alert('Lectura de texto detenida.');
+    } else {
+        // Crear un nuevo objeto SpeechSynthesisUtterance
+        const mensaje = new SpeechSynthesisUtterance();
 
-    // Configurar la voz en español
-    mensaje.lang = 'es-ES'; // Español de España
+        // Configurar la voz en español
+        mensaje.lang = 'es-ES'; // Español de España
 
-    // Establecer el texto que se va a leer en voz alta
-    mensaje.text = texto;
+        // Establecer el texto que se va a leer en voz alta
+        mensaje.text = texto;
 
-    // Hacer que el navegador hable el texto
-    window.speechSynthesis.speak(mensaje);
+        // Hacer que el navegador hable el texto
+        synth.speak(mensaje);
+        alert('Leyendo el texto. Haga clic de nuevo para detener.');
+    }
 }
