@@ -48,7 +48,7 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
     );
 
     doc.setFont("braille"); // Establecer la fuente personalizada
-    var fontSize = 11.5; // Ajusta el tamaño de fuente según sea necesario
+    var fontSize = 9.5; // Ajusta el tamaño de fuente según sea necesario
     doc.setFontSize(fontSize);
 
     function agregarLineaAPDF(doc, linea, xPos, yPos) {
@@ -62,7 +62,7 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
         var lineas = textoTraducido.split("\n");
         var yPos = 10;
         var lineHeight = fontSize * 1.2;
-        var maxLineasPorPagina = 20;
+        var maxLineasPorPagina = 25;
         var lineasActuales = 0;
 
         for (var i = 0; i < lineas.length; i++) {
@@ -73,7 +73,7 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
             for (var j = palabras.length - 1; j >= 0; j--) {
                 var palabra = palabras[j];
 
-                if ((palabra + " " + lineaActual).length <= 40) {
+                if ((lineaActual.replace(/\s/g, "").length + palabra.length) <= 40) {
                     lineaActual = palabra + " " + lineaActual;
                 } else {
                     var textWidth = doc.getTextDimensions(lineaActual).w;
@@ -121,7 +121,7 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
             var lineaActual = "";
 
             palabras.forEach(function (palabra) {
-                if ((lineaActual + palabra).length <= 40) {
+                if ((lineaActual.replace(/\s/g, "").length + palabra.length) <= 40) {
                     lineaActual += palabra + " ";
                 } else {
                     var xPos = 10;
