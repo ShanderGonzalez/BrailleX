@@ -20,10 +20,12 @@ var limpiar = document.getElementById('limpiarBoton');
  * Función que se ejecuta cuando se hace clic en el botón de limpieza.
  * @param {MouseEvent} e - El evento de clic del mouse.
  */
-limpiar.onclick = (e) => { 
+limpiar.onclick = (e) => {
+  document.getElementById('descargarPNG').disabled = true;
+  document.getElementById('descargarPDF').disabled = true;
   e.preventDefault();
   for (let i = 0; i < elementos.length; i++) {
-    elementos[i].value = '';          
+    elementos[i].value = '';
   }
   if (respuesta) {
     // Si 'respuesta' es un div, span, etc.
