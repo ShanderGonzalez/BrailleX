@@ -88,7 +88,7 @@ input:checked+.slider:before {
 .dark-mode .respuesta {
     background-color: #121212;
     color: #ffffff;
-    border: 1px solid #2C2C2C;
+    border: 1px solid #d8d6d6;
 }
 
 .dark-mode .divImpresion {
@@ -96,22 +96,23 @@ input:checked+.slider:before {
     color: #ffffff;
 }
 
-
-.dark-mode .botonTraducir{
-    background-color: gray;
-    color: #121212;
-    border: 3px solid #2C2C2C ;
+.dark-mode #traduce {
+    color: #5BC1FB;
 }
 
+.dark-mode .botonDescargarPNG:hover,
+.dark-mode .botonDescargarPDF:hover, 
 .dark-mode .botonTraducir:hover{
-    color: #fff;
     border: 3px solid #2C2C2C ;
+    background-color: #5BC1FB;
 }
 
 .dark-mode .botonDescargarPNG,
-.dark-mode .botonDescargarPDF {
+.dark-mode .botonDescargarPDF, 
+.dark-mode .botonTraducir {
     background-color: #fff;
     color: #121212;
+    font-weight: bold;
 }
 
 .dark-mode .ConocenosOpciones {
@@ -140,6 +141,7 @@ input:checked+.slider:before {
 .dark-mode .ConocenosOpciones a:hover {
     background-color: #1b1b1b;
     text-decoration: none;
+    border-bottom: 1px solid #fff;
 }
 
 .dark-mode .ConocenosOpciones ul li:hover {
@@ -190,20 +192,25 @@ input:checked+.slider:before {
     border-right: 1px solid #2C2C2C;
 }
 
+.dark-mode .componentes .ellipse {
+    background-color: #D9D9D9;
+
+}
   
 .dark-mode .componentes .ellipse.painted {
-    background-color: #104868;
+    background-color: #5BC1FB;
 }
 
 
 .dark-mode #collectButton , .dark-mode #spaceButton {
-    background-color: #494949;
-    color: #000;
+    background-color: #fff;
+    color: #121212;
+    font-weight: bold;
 }
 
 .dark-mode #collectButton:hover , .dark-mode #spaceButton:hover {
-    background-color: #104868;
-    color: #fff;
+    border: 3px solid #2C2C2C ;
+    background-color: #5BC1FB;
   }
 
 /* Estilos para el modo oscuro en la página conocenos */
@@ -221,4 +228,13 @@ input:checked+.slider:before {
 
 .dark-mode .team-member h3 {
     color: #fff;
-  }
+}
+
+.dark-mode .backButton{
+    border: 1px solid #fff;
+}
+
+
+
+
+

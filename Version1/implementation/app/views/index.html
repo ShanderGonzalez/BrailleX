@@ -24,7 +24,7 @@
     </div>
     <div class="info">
       <div class="Conocenos">
-        <button class="ConocenosTitulo">Conócenos</button>
+        <a class="ConocenosTitulo" id="conocenosBoton" tabindex="0" aria-label="Conócenos" aria-expanded="false">Conócenos</a>
         <div class="ConocenosOpciones">
           <a href="MisionVision.html" aria-label="Leer más sobre nuestra misión y visión">Misión y Visión</a>
           <a href="Equipo.html" aria-label="Conoce a nuestro equipo">Equipo</a>
@@ -34,11 +34,11 @@
     </div>
   </header>
   <main>
-    <h1 class="Titulo">BrailleX</h1>
+    <h1 class="Titulo" >BrailleX</h1>
     <p id="traduce">Traduce un texto de Español a Braille</p>
     <div class="container">
       <div class="sidebar">
-        <h3>Traductor</h3>
+        <h3 >Traductor</h3>
         <ul>
           <li>
             <img src="../../images/EspBra-icon.png" alt="icono de traduccion español a braille" />
@@ -62,7 +62,7 @@
           </button>
 
           <button id="limpiarBoton" type="reset" onclick="p()" aria-label="Limpiar Entrada de Texto">
-            <img src="../../images/clear-icon.png" alt="boton de limpiar texto" />
+           <img src="../../images/clear-icon.png" alt="boton de limpiar texto" />
           </button>
         </div>
         <!-- <input class="entradaTexto" type="text" placeholder="Escribe texto en español">-->
@@ -70,9 +70,17 @@
           id="entradaTexto"></textarea>
 
         <button id="traducirBoton" class="botonTraducir" aria-label="Traducir Español a Braille">Traducir</button>
-
+        <div class="botonesZoom1">
+          <button onclick="zoomIn()" id="zoomIn" aria-label="Aumentar tamaño de fuente">+</button>
+          <button onclick="zoomOut()" id="zoomOut" aria-label="Disminuir tamaño de fuente">-</button>
+        </div>
         <div class="respuesta"></div>
-        <div class="divImpresion">
+        <div class="BotonCopiar">
+          <button id="BotonCopiar" aria-label="Copiar Texto Traducido">
+            <img src="../../images/copy-icon.png" alt="boton de copiar texto traducido" />
+          </button>
+        </div >
+        <div class="divImpresion" >
           <input type="checkbox" id="mirror" name="mirror" />
           <p>Impresión en espejo</p>
         </div>
@@ -85,7 +93,7 @@
       </div>
     </div>
   </main>
-  <div class="dark-mode-toggle-container">
+  <div class="dark-mode-toggle-container" >
     <label class="switch">
       <input type="checkbox" id="darkModeToggle">
       <span class="slider round"></span>
@@ -98,6 +106,9 @@
   <script type="module" src="../../app/utilities/scripts.js"></script>
   <script type="module" src="../../app/utilities/toggleDarkMode.js"></script>
   <script src="../../app/utilities/responsive.js"></script>
+  <script src="../../app/utilities/keyboardNavigation.js"></script>
+  <script src="../../app/utilities/copyboard.js"></script>
+  <script src="../../app/utilities/zoom.js"></script>
 </body>
 
 </html>
