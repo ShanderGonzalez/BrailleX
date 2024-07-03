@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Traductor Español - Braille</title>
   <link rel="stylesheet" href="../../templates/css/estilosPrincipal.css" />
+  <link rel="stylesheet" href="../../templates/css/estilosModoOscuro.css"/>
   <style>
     .hidden {
       display: none;
@@ -23,35 +24,35 @@
     </div>
     <div class="info">
       <div class="Conocenos">
-        <button class="ConocenosTitulo">Conocenos</button>
+        <a class="ConocenosTitulo" id="conocenosBoton" tabindex="0" aria-label="Conócenos" aria-expanded="false">Conócenos</a>
         <div class="ConocenosOpciones">
-          <a href="../../app/views/MisionVision.html" aria-label="Leer más sobre nuestra misión y visión">Misión y
-            Visión</a>
-          <a href="../../app/views/Equipo.html" aria-label="Conoce a nuestro equipo">Equipo</a>
+          <a href="MisionVision.html" aria-label="Leer más sobre nuestra misión y visión">Misión y Visión</a>
+          <a href="Equipo.html" aria-label="Conoce a nuestro equipo">Equipo</a>
         </div>
       </div>
       <img src="../../images/info-icon.png" alt="icono de informacion" />
     </div>
   </header>
   <main>
-    <h1 class="Titulo">BrailleX</h1>
+    <h1 class="Titulo" >BrailleX</h1>
+    <p id="traduce">Traduce un texto de Español a Braille</p>
     <div class="container">
       <div class="sidebar">
-        <h3>Traductor</h3>
+        <h3 >Traductor</h3>
         <ul>
           <li>
-            <img src="../../images/search-icon.png" alt="icono de buscar" />
+            <img src="../../images/EspBra-icon.png" alt="icono de traduccion español a braille" />
             <a href="index.html" aria-label="Traducir Español a Braille">Español - Braille</a>
           </li>
           <li>
-            <img src="../../images/search-icon.png" alt="icono de buscar" />
+            <img src="../../images/BraEsp-icon.png" alt="icono de traduccion braille a español" />
             <a href="brailleEs.html" aria-label="Traducir Braille a Español">Braille - Español</a>
           </li>
         </ul>
       </div>
 
       <div class="content">
-        <p id="traduce">Traduce un texto de Español a Braille</p>
+        <!--<p id="traduce">Traduce un texto de Español a Braille</p>-->
         <p class="warningCaracteres hidden" id="warningCaracteres">
           * Texto inválido: no se permiten caracteres especiales
         </p>
@@ -61,7 +62,7 @@
           </button>
 
           <button id="limpiarBoton" type="reset" onclick="p()" aria-label="Limpiar Entrada de Texto">
-            <img src="../../images/clear-icon.png" alt="boton de limpiar texto" />
+           <img src="../../images/clear-icon.png" alt="boton de limpiar texto" />
           </button>
         </div>
         <!-- <input class="entradaTexto" type="text" placeholder="Escribe texto en español">-->
@@ -69,9 +70,17 @@
           id="entradaTexto"></textarea>
 
         <button id="traducirBoton" class="botonTraducir" aria-label="Traducir Español a Braille">Traducir</button>
-
+        <div class="botonesZoom1">
+          <button onclick="zoomIn()" id="zoomIn" aria-label="Aumentar tamaño de fuente">+</button>
+          <button onclick="zoomOut()" id="zoomOut" aria-label="Disminuir tamaño de fuente">-</button>
+        </div>
         <div class="respuesta"></div>
-        <div class="divImpresion">
+        <div class="BotonCopiar">
+          <button id="BotonCopiar" aria-label="Copiar Texto Traducido">
+            <img src="../../images/copy-icon.png" alt="boton de copiar texto traducido" />
+          </button>
+        </div >
+        <div class="divImpresion" >
           <input type="checkbox" id="mirror" name="mirror" />
           <p>Impresión en espejo</p>
         </div>
@@ -86,8 +95,7 @@
       </div>
     </div>
   </main>
-  <!-- Agrega esto al final de tu body en index.html -->
-  <div class="dark-mode-toggle-container">
+  <div class="dark-mode-toggle-container" >
     <label class="switch">
       <input type="checkbox" id="darkModeToggle">
       <span class="slider round"></span>
@@ -100,6 +108,11 @@
   <script type="module" src="../../app/utilities/scripts.js"></script>
   <script type="module" src="../../app/utilities/toggleDarkMode.js"></script>
   <script src="../../app/utilities/voz.js"></script>
+  <script src="../../app/utilities/responsive.js"></script>
+  <script src="../../app/utilities/keyboardNavigation.js"></script>
+  <script src="../../app/utilities/copyboard.js"></script>
+  <script src="../../app/utilities/zoom.js"></script>
+
 </body>
 
 </html>
