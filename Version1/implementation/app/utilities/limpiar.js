@@ -23,6 +23,7 @@ var limpiar = document.getElementById('limpiarBoton');
 limpiar.onclick = (e) => {
   document.getElementById('descargarPNG').disabled = true;
   document.getElementById('descargarPDF').disabled = true;
+  document.getElementById('mirror').checked = false;
   e.preventDefault();
   for (let i = 0; i < elementos.length; i++) {
     elementos[i].value = '';

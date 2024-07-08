@@ -543,6 +543,7 @@ body {
 
 #limpiarBoton,
 #BotonVoz,
+#BotonSpeaker,
 #BotonCopiar,
 #zoomOut,
 #zoomIn{
@@ -557,6 +558,10 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0.2, 0.2, 0.2);
   align-items: center;
   justify-content: center;
+}
+
+#BotonSpeaker img{
+  width: 20px;
 }
 
 #zoomIn,
