@@ -7,14 +7,19 @@
   <title>Traductor Español - Braille</title>
   <link rel="stylesheet" href="../../templates/css/estilosPrincipal.css" />
   <link rel="stylesheet" href="../../templates/css/estilosModoOscuro.css"/>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
   <header class="header">
-    <div class="logo">
+    <a href="index.html" class="logo">
       <img src="../../images/logo-proyecto.png" alt="Dev-Sentinels Logo" />
       <p>Dev-Sentinels</p>
-    </div>
+    </a>
     <div class="info">
       <div class="Conocenos">
         <a class="ConocenosTitulo" id="conocenosBoton" tabindex="0" aria-label="Conócenos" aria-expanded="false">Conócenos</a>
@@ -26,11 +31,12 @@
       <img src="../../images/info-icon.png" alt="icono de informacion" />
     </div>
   </header>
-  <main>
-    <h1 class="Titulo">BrailleX</h1>
-    <p id="traduce">Traduce un texto de Braille a Español</p>
+  <div class="TitlesInformation">
+    <h1 id="TituloPage">BrailleX</h1>
+    <p id="subtituloPage">Traduce un texto de Braille a Español</p>
+  </div>
     <div class="container">
-      <div class="sidebar">
+      <aside class="sidebar">
         <h3>Traductor</h3>
         <ul>
           <li>
@@ -42,9 +48,12 @@
             <a href="brailleEs.html" aria-label="Traducir Braille a Español">Braille - Español</a>
           </li>
         </ul>
-      </div>
+      </aside>
 
-      <div class="content">
+      <main class="traductorBraille">
+        <p class="warningCaracteres hidden" id="warningCaracteres">
+          * Texto inválido: no se permiten caracteres especiales
+        </p>
         <div class="divComponentesplusentrada">
           <div class="divComponentes">
             <div class="componentes">
@@ -55,8 +64,10 @@
               <div class="ellipse" id="ellipse-3" tabindex="0"></div>
               <div class="ellipse" id="ellipse-6" tabindex="0"></div>
             </div>
-            <button id="collectButton">Siguiente</button>
-            <button id="spaceButton">Espacio</button>
+            <div class="divBotones">
+              <button id="collectButton">Siguiente</button>
+              <button id="spaceButton">Espacio</button>
+            </div>
           </div>
 
           <div class="entradas">
@@ -66,8 +77,9 @@
             <textarea name="entradaTexto" class="entradaTexto" placeholder="Colocar Braille" id="output"></textarea>
           </div>
         </div>
-
-        <button class="botonTraducir" id="traducirBoton">Traducir</button>
+        <div class="btnTraducir"> 
+          <button class="botonTraducir" id="traducirBoton">Traducir</button>
+        </div>
         <div class="botonesZoom2">
           <button id="BotonSpeaker" aria-label="Escucha algo..." onclick="leerTexto()">
             <img src="../../images/speaker-icon.png" alt="boton de hablar" />
@@ -83,9 +95,9 @@
             <img src="../../images/copy-icon.png" alt="boton de copiar texto traducido" />
           </button>
         </div>
-      </div>
+      </main>
     </div>
-  </main>
+  
   <div class="dark-mode-toggle-container">
     <label class="switch">
       <input type="checkbox" id="darkModeToggle">

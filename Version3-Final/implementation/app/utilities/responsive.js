@@ -2,7 +2,7 @@
 function cambiarTextoResponsive() {
     var elemento = document.querySelector('.ConocenosTitulo');
     if (window.innerWidth <= 480) {
-      elemento.textContent = '=';
+      elemento.textContent = '≡';
     } else {
       elemento.textContent = 'Conócenos';
     }
