@@ -1,4 +1,4 @@
-import BrailleDictionary from "../utilities/dictionary.js";
+import BrailleDictionary from "./dictionary.js";
 import Validator from "./validate.js";
 
 /**

@@ -5,12 +5,14 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "mocha",
         "docs": "jsdoc -c jsdoc.json"
     },
     "author": "Dev-Sentinels",
     "license": "MIT",
     "devDependencies": {
-        "jsdoc": "^4.0.3"
+        "chai": "^5.1.1",
+        "jsdoc": "^4.0.3",
+        "mocha": "^10.7.0"
     }
 }
