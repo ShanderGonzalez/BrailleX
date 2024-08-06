@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traductor Español - Braille</title>
+  <link rel="stylesheet" href="../../templates/css/estilosPrincipal.css" />
+  <link rel="stylesheet" href="../../templates/css/estilosModoOscuro.css"/>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <a href="index.html" class="logo">
+      <img src="../../images/logo-proyecto.png" alt="Dev-Sentinels Logo" />
+      <p>Dev-Sentinels</p>
+    </a>
+    <div class="info">
+      <div class="Conocenos">
+        <a class="ConocenosTitulo" id="conocenosBoton" tabindex="0" aria-label="Conócenos" aria-expanded="false">Conócenos</a>
+        <div class="ConocenosOpciones">
+          <a href="MisionVision.html" aria-label="Leer más sobre nuestra misión y visión">Misión y Visión</a>
+          <a href="Equipo.html" aria-label="Conoce a nuestro equipo">Equipo</a>
+        </div>
+      </div>
+      <img src="../../images/info-icon.png" alt="icono de informacion" />
+    </div>
+  </header>
+  <div class="TitlesInformation">
+    <h1 id="TituloPage">BrailleX</h1>
+    <p id="subtituloPage">Traduce un texto de Braille a Español</p>
+  </div>
+    <div class="container">
+      <aside class="sidebar">
+        <h3>Traductor</h3>
+        <ul>
+          <li>
+            <img src="../../images/EspBra-icon.png" alt="icono de traduccion español a braille" />
+            <a href="index.html" aria-label="Traducir Español a Braille">Español - Braille</a>
+          </li>
+          <li>
+            <img src="../../images/BraEsp-icon.png" alt="icono de traduccion braille a español" />
+            <a href="brailleEs.html" aria-label="Traducir Braille a Español">Braille - Español</a>
+          </li>
+        </ul>
+      </aside>
+
+      <main class="traductorBraille">
+        <p class="warningCaracteres hidden" id="warningCaracteres">
+          * Texto inválido: no se permiten caracteres especiales
+        </p>
+        <div class="divComponentesplusentrada">
+          <div class="divComponentes">
+            <div class="componentes">
+              <div class="ellipse" id="ellipse-1" tabindex="0"></div>
+              <div class="ellipse" id="ellipse-4" tabindex="0"></div>
+              <div class="ellipse" id="ellipse-2" tabindex="0"></div>
+              <div class="ellipse" id="ellipse-5" tabindex="0"></div>
+              <div class="ellipse" id="ellipse-3" tabindex="0"></div>
+              <div class="ellipse" id="ellipse-6" tabindex="0"></div>
+            </div>
+            <div class="divBotones">
+              <button id="collectButton">Siguiente</button>
+              <button id="spaceButton">Espacio</button>
+            </div>
+          </div>
+
+          <div class="entradas">
+            <button id="limpiarBoton" type="reset" onclick="p()" aria-label="Limpiar Entrada de Texto">
+              <img src="../../images/clear-icon.png" alt="boton de limpiar texto" />
+            </button>
+            <textarea name="entradaTexto" class="entradaTexto" placeholder="Colocar Braille" id="output"></textarea>
+          </div>
+        </div>
+        <div class="btnTraducir"> 
+          <button class="botonTraducir" id="traducirBoton">Traducir</button>
+        </div>
+        <div class="botonesZoom2">
+          <button id="BotonSpeaker" aria-label="Escucha algo..." onclick="leerTexto()">
+            <img src="../../images/speaker-icon.png" alt="boton de hablar" />
+          </button>
+          <div>
+            <button onclick="zoomIn1()" id="zoomIn" aria-label="Aumentar tamaño de fuente">+</button>
+            <button onclick="zoomOut1()" id="zoomOut" aria-label="Disminuir tamaño de fuente">-</button>
+          </div>
+        </div>
+        <div class="respuesta" id="respuestaTexto" tabindex="0"></div>
+        <div class="BotonCopiar">
+          <button id="BotonCopiar" aria-label="Copiar Texto Traducido">
+            <img src="../../images/copy-icon.png" alt="boton de copiar texto traducido" />
+          </button>
+        </div>
+      </main>
+    </div>
+  
+  <div class="dark-mode-toggle-container">
+    <label class="switch">
+      <input type="checkbox" id="darkModeToggle">
+      <span class="slider round"></span>
+    </label>
+  </div>
+
+  <script src="../../app/utilities/limpiar.js"></script>
+  <script src="../../app/utilities/pointActions.js" type="module"></script>
+  <script type="module" src="../../app/utilities/toggleDarkMode.js"></script>
+  <script src="../../app/utilities/responsive.js"></script>
+  <script src="../../app/utilities/keyboardNavigation.js"></script>
+  <script src="../../app/utilities/copyboard.js"></script>
+  <script src="../../app/utilities/zoom.js"></script>
+  <script src="../../app/utilities/voz.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+{
+    "source": {
+        "include": [
+            "app/services/.",
+            "app/utilities/."
+        ]
+    },
+    "opts": {
+        "destination": "docs"
+    }
+}
