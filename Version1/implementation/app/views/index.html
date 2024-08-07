@@ -6,109 +6,169 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Traductor Español - Braille</title>
   <link rel="stylesheet" href="../../templates/css/estilosPrincipal.css" />
-  <link rel="stylesheet" href="../../templates/css/estilosModoOscuro.css"/>
   <style>
     .hidden {
       display: none;
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </head>
 
 <body>
-  <header class="header">
+  <div class="header">
     <div class="logo">
       <img src="../../images/logo-proyecto.png" alt="Dev-Sentinels Logo" />
       <p>Dev-Sentinels</p>
     </div>
     <div class="info">
       <div class="Conocenos">
-        <a class="ConocenosTitulo" id="conocenosBoton" tabindex="0" aria-label="Conócenos" aria-expanded="false">Conócenos</a>
+        <div class="ConocenosTitulo">Conocenos</div>
         <div class="ConocenosOpciones">
-          <a href="MisionVision.html" aria-label="Leer más sobre nuestra misión y visión">Misión y Visión</a>
-          <a href="Equipo.html" aria-label="Conoce a nuestro equipo">Equipo</a>
+          <a href="MisionVision.html">Misión y Visión</a>
+          <a href="Equipo.html">Equipo</a>
         </div>
       </div>
       <img src="../../images/info-icon.png" alt="icono de informacion" />
     </div>
-  </header>
-  <main>
-    <h1 class="Titulo" >BrailleX</h1>
-    <p id="traduce">Traduce un texto de Español a Braille</p>
-    <div class="container">
-      <div class="sidebar">
-        <h3 >Traductor</h3>
-        <ul>
-          <li>
-            <img src="../../images/EspBra-icon.png" alt="icono de traduccion español a braille" />
-            <a href="index.html" aria-label="Traducir Español a Braille">Español - Braille</a>
-          </li>
-          <li>
-            <img src="../../images/BraEsp-icon.png" alt="icono de traduccion braille a español" />
-            <a href="brailleEs.html" aria-label="Traducir Braille a Español">Braille - Español</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="content">
-        <!--<p id="traduce">Traduce un texto de Español a Braille</p>-->
-        <p class="warningCaracteres hidden" id="warningCaracteres">
-          * Texto inválido: no se permiten caracteres especiales
-        </p>
-        <div class="botonesEntradaTexto">
-          <button id="BotonVoz" aria-label="Habla algo...">
-            <img src="../../images/voice-icon.png" alt="boton de hablar" />
-          </button>
-
-          <button id="limpiarBoton" type="reset" onclick="p()" aria-label="Limpiar Entrada de Texto">
-           <img src="../../images/clear-icon.png" alt="boton de limpiar texto" />
-          </button>
-        </div>
-        <!-- <input class="entradaTexto" type="text" placeholder="Escribe texto en español">-->
-        <textarea name="entradaTexto" class="entradaTexto" placeholder="Escribe texto en español"
-          id="entradaTexto"></textarea>
-
-        <button id="traducirBoton" class="botonTraducir" aria-label="Traducir Español a Braille">Traducir</button>
-        <div class="botonesZoom1">
-          <button onclick="zoomIn()" id="zoomIn" aria-label="Aumentar tamaño de fuente">+</button>
-          <button onclick="zoomOut()" id="zoomOut" aria-label="Disminuir tamaño de fuente">-</button>
-        </div>
-        <div class="respuesta"></div>
-        <div class="BotonCopiar">
-          <button id="BotonCopiar" aria-label="Copiar Texto Traducido">
-            <img src="../../images/copy-icon.png" alt="boton de copiar texto traducido" />
-          </button>
-        </div >
-        <div class="divImpresion" >
-          <input type="checkbox" id="mirror" name="mirror" />
-          <p>Impresión en espejo</p>
-        </div>
-        <div class="botonesDescargar">
-          <button class="botonDescargarPNG" id="descargarPNG" aria-label="Descargar traduccion en PNG">Descargar en
-            PNG</button>
-          <button class="botonDescargarPDF" id="descargarPDF" aria-label="Descargar contenido en PDF">Descargar en
-            PDF</button>
-        </div>
-      </div>
-    </div>
-  </main>
-  <div class="dark-mode-toggle-container" >
-    <label class="switch">
-      <input type="checkbox" id="darkModeToggle">
-      <span class="slider round"></span>
-    </label>
   </div>
+  <div class="Titulo">BrailleX</div>
+  <div class="container">
+    <div class="sidebar">
+      <h3>Traductor</h3>
+      <ul>
+        <li>
+          <img src="../../images/search-icon.png" alt="icono de buscar" />
+          <a href="index.html">Español - Braille</a>
+        </li>
+        <li>
+          <img src="../../images/search-icon.png" alt="icono de buscar" />
+          <a href="brailleEs.html">Braille - Español</a>
+        </li>
+      </ul>
+    </div>
 
-  <!--SCRIPTS-->
-  <script src="../../app/services/validate.js" type="module"></script>
-  <script src="../../app/utilities/limpiar.js"></script>
-  <script type="module" src="../../app/utilities/scripts.js"></script>
-  <script type="module" src="../../app/utilities/toggleDarkMode.js"></script>
-  <script src="../../app/utilities/responsive.js"></script>
-  <script src="../../app/utilities/keyboardNavigation.js"></script>
-  <script src="../../app/utilities/copyboard.js"></script>
-  <script src="../../app/utilities/zoom.js"></script>
+    <div class="content">
+      <p id="traduce">Traduce un texto de Español a Braille</p>
+      <p class="warningCaracteres hidden" id="warningCaracteres">
+        * Texto inválido: no se permiten caracteres especiales
+      </p>
+      <button id="limpiarBoton" type="reset" onclick="p()">
+        <img src="../../images/clear-icon.png" alt="boton de limpiar texto" />
+      </button>
+      <!-- <input class="entradaTexto" type="text" placeholder="Escribe texto en español">-->
+      <textarea name="entradaTexto" class="entradaTexto" placeholder="Escribe texto en español"
+        id="entradaTexto"></textarea>
+
+      <button id="traducirBoton" class="botonTraducir">Traducir</button>
+
+      <div class="respuesta" id="resultadoTraduccion"></div>
+      <div class="divImpresion">
+        <input type="checkbox" id="mirror" name="mirror" />
+        <p>Impresión en espejo</p>
+      </div>
+
+      <button class="botonDescargar" id="descargarImagenBoton" disabled>
+        Descargar
+      </button>
+    </div>
+  </div>
 </body>
+<script src="../../app/services/validate.js" type="module"></script>
+<script src="../../app/utilities/limpiar.js"></script>
+<script type="module">
+  import Traductor from "../../app/services/traductor.js";
+  document.getElementById("traducirBoton").addEventListener("click", function () {
+    var texto = document.querySelector(".entradaTexto").value;
+    var traductor = new Traductor();
+    // Validar si el texto contiene caracteres especiales antes de la traducción
+    const regex = /[~\/\\«»`|]/g;
+
+    if (regex.test(texto)) {
+      texto = "";
+      return; // Detener la ejecución del resto del código
+    }
+    var traduccion = traductor.traducirEspanolABraille(texto);
+
+    document.querySelector(".respuesta").innerText = traduccion;
+  });
+</script>
+<script type="module">
+  import Traductor from "../../app/services/traductor.js";
+  function actualizarBotonDescargar() {
+    var checkboxMirror = document.getElementById("mirror");
+    var botonDescargar = document.getElementById("descargarImagenBoton");
+
+    if (checkboxMirror.checked) {
+      botonDescargar.disabled = false;
+    } else {
+      botonDescargar.disabled = true;
+    }
+  }
+  document
+    .getElementById("mirror")
+    .addEventListener("change", actualizarBotonDescargar);
+  document
+    .getElementById("entradaTexto")
+    .addEventListener("input", function () {
+    });
+</script>
+
+<script type="module">
+  import Traductor from "../../app/services/traductor.js";
+  document.getElementById("entradaTexto").addEventListener("input", function () {
+    const texto = this.value;
+    const warning = document.getElementById("warningCaracteres");
+
+    const regex = /[~\/\\«»`|]/g; //caracteres no permitidos
+
+    if (regex.test(texto)) {
+      warning.classList.remove("hidden");
+    } else {
+      warning.classList.add("hidden");
+    }
+
+  });
+  document
+    .getElementById("descargarImagenBoton")
+    .addEventListener("click", function () {
+      // Obtener el texto traducido
+      let textoTraducido = document.getElementById("entradaTexto").value;
+      var traductor = new Traductor();
+      textoTraducido = traductor.traducirEspanolABrailleInverso(textoTraducido);
+
+      // Crear un canvas y establecer sus dimensiones
+      var canvas = document.createElement("canvas");
+      var context = canvas.getContext("2d");
+
+      // Establecer el tamaño del canvas
+      canvas.width = 1000; // Ancho en píxeles
+      canvas.height = 150; // Alto en píxeles (ajusta según el contenido)
+
+      // Establecer la fuente y el color del texto
+      context.font = "20px Arial";
+      context.fillStyle = "#FFFFFF"; // Negro
+
+      // Dividir el texto traducido en líneas y dibujar cada línea por separado
+      const lineas = textoTraducido.split("\n");
+      const x = 10; // Coordenada x de inicio
+      let y = 50; // Coordenada y de inicio
+      const lineHeight = 25; // Altura de línea (ajusta según el tamaño de fuente y el interlineado deseado)
+
+      for (let linea of lineas) {
+        context.fillText(linea, x, y);
+        y += lineHeight; // Mover la coordenada y hacia abajo para la siguiente línea
+      }
+
+      // Convertir el canvas a una URL de datos
+      var imgData = canvas.toDataURL("image/png");
+
+      // Crear un enlace para descargar la imagen
+      var link = document.createElement("a");
+      link.download = "traduccion_braille.png";
+      link.href = imgData;
+      link.click();
+    });
+</script>
 
 </html>

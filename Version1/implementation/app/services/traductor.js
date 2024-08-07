@@ -1,6 +1,5 @@
 import BrailleDictionary from "../utilities/dictionary.js";
 import Validator from "./validate.js";
-
 /**
  * Clase que se encarga de traducir texto en español a Braille y viceversa.
  * @class Traductor
@@ -25,7 +24,22 @@ class Traductor {
    * @returns {string} - El texto traducido a Braille en formato Unicode.
    */
   traducirEspanolABraille(texto) {
-    return this.convertirTextoABraille(texto, false);
+    let lineas = texto.split("\n");
+    let brailleTexto = "";
+
+    for (let linea of lineas) {
+      brailleTexto += this.traducirLineaABraille(linea) + "\n";
+    }
+
+    const textoBrailleFormateado = brailleTexto
+      .split(" ")
+      .map((braille) => {
+        return braille + " ";
+      })
+      .join("");
+
+    const brailleUnicode = this.getBrailleUnicode(textoBrailleFormateado);
+    return brailleUnicode.trim();
   }
 
   /**
@@ -34,28 +48,19 @@ class Traductor {
    * @returns {string} - El texto traducido a Braille invertido en formato Unicode.
    */
   traducirEspanolABrailleInverso(texto) {
-    return this.convertirTextoABraille(texto, true);
-  }
-
-  /**
-   * Convierte texto en español a Braille (normal o invertido).
-   * @param {string} texto - El texto en español a traducir.
-   * @param {boolean} invertido - Indica si se debe invertir el texto.
-   * @returns {string} - El texto traducido a Braille en formato Unicode.
-   */
-  convertirTextoABraille(texto, invertido) {
-    const lineas = texto.split("\n");
+    let lineas = texto.split("\n");
     let brailleTexto = "";
 
-    for (const linea of lineas) {
+    for (let linea of lineas) {
       let brailleLinea = this.traducirLineaABraille(linea).split(" ");
-      if (invertido) {
-        brailleLinea = brailleLinea.reverse().map(braille => this.reordenarPuntosBraille(braille));
-      }
-      brailleTexto += brailleLinea.join(" ") + "\n";
+      let brailleLineaInversa = brailleLinea.reverse().map((braille) => {
+        return this.reordenarPuntosBraille(braille);
+      });
+      brailleTexto += brailleLineaInversa.join(" ") + "\n";
     }
 
-    return this.getBrailleUnicode(brailleTexto.trim());
+    const brailleUnicode = this.getBrailleUnicode(brailleTexto.trim());
+    return brailleUnicode.trim();
   }
 
   /**
@@ -64,8 +69,22 @@ class Traductor {
    * @returns {string} - El código Braille reordenado.
    */
   reordenarPuntosBraille(brailleCode) {
-    const inversionMap = { 1: "4", 2: "5", 3: "6", 4: "1", 5: "2", 6: "3" };
-    return brailleCode.split("").map(dot => inversionMap[dot] || dot).join("");
+    const inversionMap = {
+      1: "4",
+      2: "5",
+      3: "6",
+      4: "1",
+      5: "2",
+      6: "3",
+    };
+
+    let brailleArray = brailleCode.replace(/\s/g, "").split("");
+    let invertedBrailleArray = brailleArray.map(
+      (dot) => inversionMap[dot] || dot
+    );
+    let reversedBrailleCode = invertedBrailleArray.join("");
+
+    return reversedBrailleCode;
   }
 
   /**
@@ -74,82 +93,95 @@ class Traductor {
    * @returns {string} - La línea traducida a Braille.
    */
   traducirLineaABraille(texto) {
-    const palabras = texto.split(" ");
     let brailleTexto = "";
     let esNumero = false;
+    let esNumComp = false;
 
-    for (const palabra of palabras) {
-      if (this.validador.isUpperCase(palabra)) {
+    let palabras = texto.split(" ");
+    for (let palabra of palabras) {
+      if (palabra === palabra.toUpperCase() && palabra.match(/[a-zA-Z]/)) {
         brailleTexto += " 46 46";
       }
-
-      const esNumComp = this.validador.isValidEmail(palabra) || this.validador.isValidURL(palabra) || this.validador.isValidTag(palabra);
+      if (
+        this.validador.validarCorreo(palabra) ||
+        this.validador.validarURL(palabra) ||
+        this.validador.validarEtiqueta(palabra)
+      ) {
+        esNumComp = true;
+      }
       esNumero = false;
+      let i = 0;
+      while (i < palabra.length) {
+        let caracter = palabra[i];
 
-      for (let i = 0; i < palabra.length; i++) {
-        const caracter = palabra[i];
-
-        if (this.validador.isNumber(caracter)) {
+        if (caracter >= "0" && caracter <= "9") {
           if (!esNumero && !esNumComp) {
             brailleTexto += " 3456";
             esNumero = true;
           }
-          brailleTexto += " " + this.diccionarioBraille.getNumeroBraille(caracter, esNumComp);
+          let brailleNumero = this.diccionarioBraille.getNumeroBraille(
+            caracter,
+            esNumComp
+          );
+          if (brailleNumero) {
+            brailleTexto += " " + brailleNumero;
+          }
         } else {
           if (esNumero) {
             esNumero = false;
-            if (i + 1 < palabra.length && !this.validador.isNumber(palabra[i + 1]) && !this.validador.isSpace(caracter)) {
+            if (
+              i + 1 < palabra.length &&
+              !palabra[i + 1].match(/\d/) &&
+              !caracter.match(/\s/)
+            ) {
               brailleTexto += " 5";
             }
           }
-          brailleTexto += " " + this.obtenerBrailleDeCaracter(caracter, palabra, i);
+
+          if (caracter.match(/[a-zA-Z\u00C0-\u00FF]/)) {
+            let brailleLetra;
+            if (palabra === palabra.toUpperCase()) {
+              brailleLetra = this.diccionarioBraille.getLetraBraille(
+                caracter.toLowerCase()
+              );
+            } else {
+              if (caracter === caracter.toUpperCase()) {
+                brailleTexto += " 46";
+              }
+              brailleLetra = this.diccionarioBraille.getLetraBraille(
+                caracter.toLowerCase()
+              );
+            }
+            if (brailleLetra) {
+              brailleTexto += " " + brailleLetra;
+            }
+          } else if (caracter.match(/\s/)) {
+            brailleTexto += " ";
+          } else {
+            let brailleSigno;
+            if (
+              palabra[i - 1] &&
+              palabra[i - 1].match(/[0-9]/) &&
+              palabra[i + 1] &&
+              palabra[i + 1].match(/[0-9]/) &&
+              caracter === "."
+            ) {
+              brailleSigno = this.diccionarioBraille.getSigno(",");
+            } else {
+              brailleSigno = this.diccionarioBraille.getSigno(caracter);
+            }
+            if (brailleSigno) {
+              brailleTexto += " " + brailleSigno;
+            }
+          }
         }
+
+        i++;
       }
       brailleTexto += " ";
     }
+
     return brailleTexto.trim();
-  }
-
-  /**
-   * Obtiene el código Braille de un carácter.
-   * @param {string} caracter - El carácter a traducir.
-   * @param {string} palabra - La palabra que contiene el carácter.
-   * @param {number} indice - El índice del carácter en la palabra.
-   * @returns {string} - El código Braille del carácter.
-   */
-  obtenerBrailleDeCaracter(caracter, palabra, indice) {
-    if (this.validador.isLetter(caracter)) {
-      return this.obtenerBrailleDeLetra(caracter, palabra);
-    } else if (this.validador.isSpace(caracter)) {
-      return "";
-    } else {
-      return this.obtenerBrailleDeSigno(caracter, palabra, indice);
-    }
-  }
-
-  /**
-   * Obtiene el código Braille de una letra.
-   * @param {string} letra - La letra a traducir.
-   * @param {string} palabra - La palabra que contiene la letra.
-   * @returns {string} - El código Braille de la letra.
-   */
-  obtenerBrailleDeLetra(letra, palabra) {
-    if (palabra === palabra.toUpperCase()) {
-      return this.diccionarioBraille.getLetraBraille(letra.toLowerCase());
-    } else {
-      return (letra === letra.toUpperCase() ? "46 " : "") + this.diccionarioBraille.getLetraBraille(letra.toLowerCase());
-    }
-  }
-
-  /**
-   * Obtiene el código Braille de un signo.
-   * @param {string} signo - El signo a traducir.
-   * @param {string} palabra - La palabra que contiene el signo.
-   * @param {number} indice - El índice del signo en la palabra.
-   * @returns {string} - El código Braille del signo.
-   */
-  obtenerBrailleDeSigno(signo, palabra, indice) {
-    return this.validador.isDecimalPoint(signo, palabra, indice) ? this.diccionarioBraille.getSigno(",") : (this.diccionarioBraille.getSigno(signo) || "");
   }
 
   /**
@@ -160,10 +192,10 @@ class Traductor {
   traducirBrailleAEspanol(brailleTexto) {
     const brailleCode = this.unicodeToBraille(brailleTexto);
 
-    const lineas = brailleCode.split("\n");
+    let lineas = brailleCode.split("\n");
     let textoEspanol = "";
 
-    for (const linea of lineas) {
+    for (let linea of lineas) {
       textoEspanol += this.traducirLineaAEspanol(linea) + "\n";
     }
 
@@ -176,79 +208,87 @@ class Traductor {
    * @returns {string} - La línea traducida a español.
    */
   traducirLineaAEspanol(brailleLinea) {
-    const palabrasBraille = brailleLinea.split("  ");
     let textoEspanol = "";
     let esNumero = false;
     let esMayuscula = false;
     let esTextoMayuscula = false;
 
-    for (const palabraBraille of palabrasBraille) {
-      const caracteresBraille = palabraBraille.split(" ");
+    // Separar las palabras Braille por espacios dobles
+    let palabrasBraille = brailleLinea.split("  ");
 
-      for (const caracterBraille of caracteresBraille) {
-        if (!caracterBraille) continue;
+    for (let palabraBraille of palabrasBraille) {
+      let caracteresBraille = palabraBraille.split(" ");
+      let i = 0;
+      let aperturaSigno = true;
+
+      while (i < caracteresBraille.length) {
+        let caracterBraille = caracteresBraille[i];
+
+        if (caracterBraille === "") {
+          i++;
+          continue;
+        }
 
         if (caracterBraille === "3456") {
           esNumero = true;
-        } else if (caracterBraille === "46") {
-          if (caracteresBraille[caracteresBraille.indexOf(caracterBraille) + 1] === "46") {
+          i++;
+          continue;
+        }
+
+        if (caracterBraille === "46") {
+          if (caracteresBraille[i + 1] === "46") {
             esTextoMayuscula = true;
+            i += 2;
+            continue;
           } else {
             esMayuscula = true;
+            i++;
+            continue;
           }
-        } else {
-          textoEspanol += this.obtenerEspanolDeCaracter(caracterBraille, esNumero, esMayuscula, esTextoMayuscula);
-          if (esNumero && !this.diccionarioBraille.getInvertNumeroBraille(caracterBraille)) {
-            esNumero = false;
-          }
-          esMayuscula = false;
         }
+
+        let letraEspanol =
+          this.diccionarioBraille.getLetraEspañol(caracterBraille);
+        let signoEspanol =
+          this.diccionarioBraille.getInvertSigno(caracterBraille);
+        let numeroEspanol = esNumero
+          ? this.diccionarioBraille.getInvertNumeroBraille(caracterBraille)
+          : null;
+
+        if (numeroEspanol) {
+          textoEspanol += numeroEspanol;
+        } else if (letraEspanol) {
+          if (esTextoMayuscula) {
+            textoEspanol += letraEspanol.toUpperCase();
+          } else if (esMayuscula) {
+            textoEspanol += letraEspanol.toUpperCase();
+            esMayuscula = false;
+          } else {
+            textoEspanol += letraEspanol;
+          }
+        } else if (signoEspanol) {
+          if (caracterBraille === "26") {
+            textoEspanol += aperturaSigno ? "¿" : "?";
+            aperturaSigno = !aperturaSigno;
+          } else if (caracterBraille === "235") {
+            textoEspanol += aperturaSigno ? "¡" : "!";
+            aperturaSigno = !aperturaSigno;
+          } else {
+            textoEspanol += signoEspanol;
+          }
+        }
+
+        if (esNumero && !numeroEspanol) {
+          esNumero = false;
+        }
+        i++;
       }
+
       textoEspanol += " ";
       esTextoMayuscula = false;
     }
 
     return textoEspanol.trim();
-  }
-
-  /**
-   * Obtiene el carácter español de un código Braille.
-   * @param {string} caracterBraille - El código Braille a traducir.
-   * @param {boolean} esNumero - Indica si el carácter es un número.
-   * @param {boolean} esMayuscula - Indica si el carácter es mayúscula.
-   * @param {boolean} esTextoMayuscula - Indica si el texto es todo mayúscula.
-   * @param {boolean} aperturaSigno - Indica si el signo de apertura está abierto.
-   * @returns {string} - El carácter español.
-   */
-  obtenerEspanolDeCaracter(caracterBraille, esNumero, esMayuscula, esTextoMayuscula, aperturaSigno) {
-    const letraEspanol = this.diccionarioBraille.getLetraEspañol(caracterBraille);
-    const signoEspanol = this.diccionarioBraille.getInvertSigno(caracterBraille);
-    const numeroEspanol = esNumero ? this.diccionarioBraille.getInvertNumeroBraille(caracterBraille) : null;
-
-    if (numeroEspanol) {
-      return numeroEspanol;
-    } else if (letraEspanol) {
-      return esTextoMayuscula ? letraEspanol.toUpperCase() : (esMayuscula ? letraEspanol.toUpperCase() : letraEspanol);
-    } else if (signoEspanol) {
-      return this.obtenerSignoEspecial(caracterBraille, signoEspanol, aperturaSigno);
-    }
-
-    return "";
-  }
-
-  /**
-   * Obtiene el signo especial español de un código Braille.
-   * @param {string} caracterBraille - El código Braille del signo.
-   * @param {string} signoEspanol - El signo en español.
-   * @param {boolean} aperturaSigno - Indica si el signo de apertura está abierto.
-   * @returns {string} - El signo especial en español.
-   */
-  obtenerSignoEspecial(caracterBraille, signoEspanol) {
-    const signosEspeciales = {
-      "26": ["¿", "?"],
-      "235": ["¡", "!"],
-    };
-    return signosEspeciales[caracterBraille] ? (aperturaSigno ? signosEspeciales[caracterBraille][0] : signosEspeciales[caracterBraille][1]) : signoEspanol;
   }
 
   /**
@@ -258,9 +298,9 @@ class Traductor {
    */
   getBrailleMatrix(brailleCode) {
     const brailleArray = brailleCode.split("").map(Number);
-    const matrix = Array(6).fill(0);
+    const matrix = [0, 0, 0, 0, 0, 0];
 
-    brailleArray.forEach(point => {
+    brailleArray.forEach((point) => {
       if (point > 0 && point <= 6) {
         matrix[point - 1] = 1;
       }
@@ -275,13 +315,31 @@ class Traductor {
    * @returns {string} - El texto Braille en formato Unicode.
    */
   getBrailleUnicode(brailleCode) {
-    return brailleCode.split("\n").map(line =>
-      line.split(" ").map(brailleSgn => {
+    let brailleLines = brailleCode.split("\n");
+    let brailleText = "";
+
+    for (let line of brailleLines) {
+      let brailleSign = line.split(" ");
+      let brailleLine = "";
+
+      for (let brailleSgn of brailleSign) {
         const matrix = this.getBrailleMatrix(brailleSgn);
-        const unicodeValue = matrix.reduce((acc, point, index) => acc + (point * Math.pow(2, index)), 0x2800);
-        return String.fromCharCode(unicodeValue);
-      }).join(" ")
-    ).join("\n").trim();
+        if (!matrix) return null;
+
+        const baseUnicode = 0x2800;
+
+        let unicodeValue = baseUnicode;
+        matrix.forEach((point, index) => {
+          if (point === 1) {
+            unicodeValue += Math.pow(2, index);
+          }
+        });
+        brailleLine += String.fromCharCode(unicodeValue) + " ";
+      }
+      brailleText += brailleLine.trim() + "\n";
+    }
+
+    return brailleText.trim();
   }
 
   /**
@@ -290,12 +348,27 @@ class Traductor {
    * @returns {string} - El código Braille.
    */
   unicodeToBraille(unicodeBraille) {
-    return unicodeBraille.split("\n").map(line =>
-      line.split(" ").map(char => {
-        const braillePoints = char.charCodeAt(0) - 0x2800;
-        return Array.from({ length: 6 }, (_, i) => (braillePoints & (1 << i)) !== 0 ? i + 1 : "").join("");
-      }).join(" ")
-    ).join("\n").trim();
+    let brailleCode = "";
+    let lines = unicodeBraille.split("\n");
+
+    for (let line of lines) {
+      let brailleChars = line.split(" ");
+      for (let char of brailleChars) {
+        let unicodeValue = char.charCodeAt(0);
+        let braillePoints = unicodeValue - 0x2800;
+        let brailleCodeStr = "";
+
+        for (let i = 0; i < 6; i++) {
+          if ((braillePoints & (1 << i)) !== 0) {
+            brailleCodeStr += (i + 1).toString();
+          }
+        }
+        brailleCode += brailleCodeStr + " ";
+      }
+      brailleCode = brailleCode.trim() + "\n";
+    }
+
+    return brailleCode.trim();
   }
 }
 
