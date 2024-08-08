@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     function mostrarAlerta(mensaje) {
-        var alerta = document.createElement('div');
+        let alerta = document.createElement('div');
         alerta.textContent = mensaje;
         alerta.style.position = 'fixed';
         alerta.style.left = '50%';

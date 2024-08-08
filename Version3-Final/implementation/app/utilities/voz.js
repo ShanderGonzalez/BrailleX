@@ -94,7 +94,7 @@ function leerTexto() {
 
 // Función para mostrar alerta personalizada persistente
 function mostrarAlerta(mensaje) {
-    var alerta = document.createElement('div');
+    const alerta = document.createElement('div');
     alerta.textContent = mensaje;
     alerta.style.position = 'fixed';
     alerta.style.left = '50%';
@@ -121,7 +121,7 @@ function mostrarAlerta(mensaje) {
 
 // Función para mostrar alerta temporal
 function mostrarAlertaTemporal(mensaje) {
-    var alerta = document.createElement('div');
+    const alerta = document.createElement('div');
     alerta.textContent = mensaje;
     alerta.style.position = 'fixed';
     alerta.style.left = '50%';

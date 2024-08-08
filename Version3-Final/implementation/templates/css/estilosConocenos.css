@@ -1,6 +1,6 @@
 /*Estilos responsive de la pagina conocenos*/
-@media screen and (max-width: 480px), (max-width: 600px) {
-  .Titulo{
+@media screen and (max-width: 480px), screen and (max-width: 600px) {
+  .TituloPage{
     font-size: 30px;
     padding: 20px 0;
     margin: 0;
@@ -112,12 +112,10 @@
   cursor: pointer;
   font-size: 14px;
 }
+
 .backButton:hover {
   background-color: #333;
 }
-
-
-
 
 /* Estilos para la página Nosotros */
 .about-container {
@@ -143,22 +141,4 @@
 
 .vision {
   margin-left: 20px;
-}
-
-/* Botón de regresar */
-.backButton {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 8px 16px;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.backButton:hover {
-  background-color: #333;
 }

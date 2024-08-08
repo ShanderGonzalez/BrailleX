@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const output = document.getElementById("output");
   const collectButton = document.getElementById("collectButton");
   const spaceButton = document.getElementById("spaceButton");
-  const respuesta = document.querySelector(".respuesta");
 
   const validateInput = () => {
     const textoBraille = output.value;
@@ -51,10 +50,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.getElementById("traducirBoton").addEventListener("click", function () {
-  var textoBraille = document.querySelector(".entradaTexto").value;
-  var traductor = new Traductor();
+  const textoBraille = document.querySelector(".entradaTexto").value;
+  const traductor = new Traductor();
 
-  var traduccion = traductor.traducirBrailleAEspanol(textoBraille);
+  const traduccion = traductor.traducirBrailleAEspanol(textoBraille);
 
   // Mostrar la traducción en el div con clase 'respuesta'
   document.querySelector(".respuesta").innerText = traduccion;
