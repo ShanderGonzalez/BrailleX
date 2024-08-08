@@ -4,7 +4,7 @@ import Traductor from "../services/traductor.js";
 // Validación de caracteres especiales
 document.getElementById("entradaTexto").addEventListener("input", function () {
     const texto = this.value;
-    const warning = document.getElementById("warningCaracteres");
+    const warning = document.getElementById("warningCaracteres1");
     const regex = /[~\/\\«»`|]/g; // caracteres no permitidos
 
     if (regex.test(texto)) {
@@ -20,26 +20,26 @@ document.getElementById("traducirBoton").addEventListener("click", function () {
     document.getElementById('descargarPNG').disabled = false;
     document.getElementById('descargarPDF').disabled = false;
 
-    const texto = document.querySelector(".entradaTexto").value;
-    const traductor = new Traductor();
+    var texto = document.querySelector(".entradaTexto").value;
+    var traductor = new Traductor();
     const regex = /[~\/\\«»]/g;
 
     if (regex.test(texto)) {
         texto = "";
         return; // Detener la ejecución del resto del código
     }
-    const traduccion = traductor.traducirEspanolABraille(texto);
+    var traduccion = traductor.traducirEspanolABraille(texto);
     document.querySelector(".respuesta").innerText = traduccion;
 });
 
 // Descargar en PDF
 document.getElementById("descargarPDF").addEventListener("click", function () {
-    const checkboxMirror = document.getElementById("mirror");
-    const traductor = new Traductor();
+    var checkboxMirror = document.getElementById("mirror");
+    var traductor = new Traductor();
 
-    const textoTraducido = document.querySelector(".entradaTexto").value;
+    var textoTraducido = document.querySelector(".entradaTexto").value;
     window.jsPDF = window.jspdf.jsPDF;
-    const doc = new jsPDF();
+    var doc = new jsPDF();
 
     doc.addFont(
         "/Version1/implementation/templates/fonts/SimBraille/Braille.ttf",
@@ -48,7 +48,7 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
     );
 
     doc.setFont("braille"); // Establecer la fuente personalizada
-    const fontSize = 9.5; // Ajusta el tamaño de fuente según sea necesario
+    var fontSize = 9.5; // Ajusta el tamaño de fuente según sea necesario
     doc.setFontSize(fontSize);
 
     function agregarLineaAPDF(doc, linea, xPos, yPos) {
@@ -58,26 +58,26 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
     if (checkboxMirror.checked) {
         textoTraducido = traductor.traducirEspanolABrailleInverso(textoTraducido);
 
-        const pageWidth = doc.internal.pageSize.getWidth();
-        const lineas = textoTraducido.split("\n");
-        const yPos = 10;
-        const lineHeight = fontSize * 1.2;
-        const maxLineasPorPagina = 25;
-        const lineasActuales = 0;
+        var pageWidth = doc.internal.pageSize.getWidth();
+        var lineas = textoTraducido.split("\n");
+        var yPos = 10;
+        var lineHeight = fontSize * 1.2;
+        var maxLineasPorPagina = 25;
+        var lineasActuales = 0;
 
-        for (let i = 0; i < lineas.length; i++) {
-            let linea = lineas[i];
-            let palabras = linea.split(" ");
-            let lineaActual = "";
+        for (var i = 0; i < lineas.length; i++) {
+            var linea = lineas[i];
+            var palabras = linea.split(" ");
+            var lineaActual = "";
 
-            for (let j = palabras.length - 1; j >= 0; j--) {
-                let palabra = palabras[j];
+            for (var j = palabras.length - 1; j >= 0; j--) {
+                var palabra = palabras[j];
 
                 if ((lineaActual.replace(/\s/g, "").length + palabra.length) <= 40) {
                     lineaActual = palabra + " " + lineaActual;
                 } else {
-                    let textWidth = doc.getTextDimensions(lineaActual).w;
-                    let xPos = pageWidth - textWidth - 10;
+                    var textWidth = doc.getTextDimensions(lineaActual).w;
+                    var xPos = pageWidth - textWidth - 10;
                     agregarLineaAPDF(doc, lineaActual, xPos, yPos);
                     yPos += lineHeight;
                     lineaActual = palabra + " ";
@@ -92,8 +92,8 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
             }
 
             if (lineaActual.length > 0) {
-                let textWidth = doc.getTextDimensions(lineaActual).w;
-                let xPos = pageWidth - textWidth - 10;
+                var textWidth = doc.getTextDimensions(lineaActual).w;
+                var xPos = pageWidth - textWidth - 10;
                 agregarLineaAPDF(doc, lineaActual, xPos, yPos);
                 yPos += lineHeight;
                 lineasActuales++;
@@ -109,22 +109,22 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
         doc.save("traduccion_braille_espejo.pdf");
     } else {
         textoTraducido = traductor.traducirEspanolABraille(textoTraducido);
-        let lineas = textoTraducido.split("\n");
+        var lineas = textoTraducido.split("\n");
 
-        let yPos = 10;
-        let lineHeight = fontSize * 1.0;
-        let maxLineasPorPagina = 25;
-        let lineasActuales = 0;
+        var yPos = 10;
+        var lineHeight = fontSize * 1.0;
+        var maxLineasPorPagina = 25;
+        var lineasActuales = 0;
 
         lineas.forEach(function (linea) {
-            let palabras = linea.split(" ");
-            let lineaActual = "";
+            var palabras = linea.split(" ");
+            var lineaActual = "";
 
             palabras.forEach(function (palabra) {
                 if ((lineaActual.replace(/\s/g, "").length + palabra.length) <= 40) {
                     lineaActual += palabra + " ";
                 } else {
-                    let xPos = 10;
+                    var xPos = 10;
                     agregarLineaAPDF(doc, lineaActual, xPos, yPos);
                     yPos += lineHeight;
                     lineaActual = palabra + " ";
@@ -139,7 +139,7 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
             });
 
             if (lineaActual.length > 0) {
-                let xPos = 10;
+                var xPos = 10;
                 agregarLineaAPDF(doc, lineaActual, xPos, yPos);
                 yPos += lineHeight;
                 lineasActuales++;
@@ -159,24 +159,24 @@ document.getElementById("descargarPDF").addEventListener("click", function () {
 
 // Descargar en PNG
 document.getElementById("descargarPNG").addEventListener("click", function () {
-    let checkboxMirror = document.getElementById("mirror");
-    let textoTraducido = document.getElementById("entradaTexto").value;
-    let traductor = new Traductor();
+    var checkboxMirror = document.getElementById("mirror");
+    var textoTraducido = document.getElementById("entradaTexto").value;
+    var traductor = new Traductor();
 
-    let maxCharsPerLine = 100;
-    let lineHeight = 25; // Altura de línea (ajusta según el tamaño de fuente y el interlineado deseado)
-    let padding = 50; // Espacio adicional para el texto
+    var maxCharsPerLine = 100;
+    var lineHeight = 25; // Altura de línea (ajusta según el tamaño de fuente y el interlineado deseado)
+    var padding = 50; // Espacio adicional para el texto
 
     // Traducir texto según la opción seleccionada
     textoTraducido = traductor.traducirEspanolABraille(textoTraducido);
 
     // Dividir el texto en líneas
-    let lineas = dividirTextoEnLineas(textoTraducido, maxCharsPerLine);
+    var lineas = dividirTextoEnLineas(textoTraducido, maxCharsPerLine);
 
     // Ajustar el tamaño del canvas basado en la cantidad de líneas
-    let canvasHeight = lineas.length * lineHeight + padding;
-    let canvas = document.createElement("canvas");
-    let context = canvas.getContext("2d");
+    var canvasHeight = lineas.length * lineHeight + padding;
+    var canvas = document.createElement("canvas");
+    var context = canvas.getContext("2d");
 
     canvas.width = 1000; // Ancho en píxeles
     canvas.height = canvasHeight;
@@ -196,23 +196,23 @@ document.getElementById("descargarPNG").addEventListener("click", function () {
         y += lineHeight; // Mover la coordenada y hacia abajo para la siguiente línea
     }
 
-    const imgData = canvas.toDataURL("image/png");
+    var imgData = canvas.toDataURL("image/png");
 
-    const link = document.createElement("a");
+    var link = document.createElement("a");
     link.download = checkboxMirror.checked ? "traduccion_braille_inverso.png" : "traduccion_braille.png";
     link.href = imgData;
     link.click();
 });
 
 function dividirTextoEnLineas(texto, maxCharsPerLine) {
-    const lineas = [];
-    const parrafos = texto.split("\n");
+    var lineas = [];
+    var parrafos = texto.split("\n");
 
     parrafos.forEach(parrafo => {
-        let palabras = parrafo.split(" ");
-        let lineaActual = "";
+        var palabras = parrafo.split(" ");
+        var lineaActual = "";
 
-        for (let palabra of palabras) {
+        for (var palabra of palabras) {
             if ((lineaActual + palabra).length > maxCharsPerLine) {
                 lineas.push(lineaActual.trim());
                 lineaActual = palabra + " ";
@@ -233,6 +233,3 @@ function dividirTextoEnLineas(texto, maxCharsPerLine) {
 document.getElementById("mirror").addEventListener("change", function () {
     actualizarBotonDescargar();
 });
-
-
-

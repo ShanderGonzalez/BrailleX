@@ -1,5 +1,10 @@
 import Traductor from "../../app/services/traductor.js";
 
+document.addEventListener('click', () => {
+  const warning = document.getElementById("warningCaracteres2");
+  warning.classList.add("hidden");
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const ellipses = document.querySelectorAll(".ellipse");
   const output = document.getElementById("output");
@@ -9,9 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const validateInput = () => {
     const textoBraille = output.value;
     const regex = /^[⠁-⠿\s]*$/; // Solo caracteres braille y espacios
+    const warning = document.getElementById("warningCaracteres2");
 
     if (!regex.test(textoBraille)) {
       output.value = textoBraille.replace(/[^⠁-⠿\s]/g, "");
+      warning.classList.remove("hidden");
     }
   };
 
