@@ -8,7 +8,7 @@ const elementos = document.getElementsByTagName('textarea');
  * El elemento HTML que muestra la respuesta.
  * @type {HTMLElement}
  */
-var respuesta = document.querySelector('.respuesta');
+const respuesta = document.querySelector('.respuesta');
 
 /**
  * El botón utilizado para limpiar los campos de texto.

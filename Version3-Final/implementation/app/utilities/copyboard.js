@@ -1,9 +1,9 @@
 /*funcion para copiar el contenido del area de texto y mostrar una alerta*/
 document.addEventListener('DOMContentLoaded', function() {
-    var botonCopiar = document.getElementById('BotonCopiar');
+    const botonCopiar = document.getElementById('BotonCopiar');
 
     botonCopiar.addEventListener('click', function() {
-        var contenido = document.querySelector('.respuesta').innerText;
+        const contenido = document.querySelector('.respuesta').innerText;
         if (contenido.trim().length > 0) { 
             navigator.clipboard.writeText(contenido).then(function() {
                 mostrarAlerta("Texto copiado al portapapeles");
