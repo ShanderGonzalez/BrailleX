@@ -50,10 +50,7 @@
         </ul>
       </aside>
 
-      <main class="traductorBraille">
-        <p class="warningCaracteres hidden" id="warningCaracteres">
-          * Texto inválido: no se permiten caracteres especiales
-        </p>
+      <main class="traductorBraille"> 
         <div class="divComponentesplusentrada">
           <div class="divComponentes">
             <div class="componentes">
@@ -71,6 +68,9 @@
           </div>
 
           <div class="entradas">
+            <p class="warningCaracteres hidden" id="warningCaracteres2">
+              * Texto inválido: no se permiten caracteres especiales
+            </p>
             <button id="limpiarBoton" type="reset" onclick="p()" aria-label="Limpiar Entrada de Texto">
               <img src="../../images/clear-icon.png" alt="boton de limpiar texto" />
             </button>
@@ -113,6 +113,7 @@
   <script src="../../app/utilities/copyboard.js"></script>
   <script src="../../app/utilities/zoom.js"></script>
   <script src="../../app/utilities/voz.js"></script>
+  
 </body>
 
 </html>

@@ -1,10 +1,10 @@
 //funcion para cambiar el texto en las paginas responsive
 function cambiarTextoResponsive() {
-    var elemento = document.querySelector('.ConocenosTitulo');
-    if (window.innerWidth <= 480) {
-      elemento.textContent = '≡';
+  let elemento = document.getElementById("conocenosBoton");
+    if (window.innerWidth <= 600 ) {
+      elemento.textContent = '☰';
     } else {
-      elemento.textContent = 'Conócenos';
+      elemento.textContent = '☰';
     }
   }
 document.addEventListener('DOMContentLoaded', cambiarTextoResponsive);
@@ -20,14 +20,12 @@ const originalSidebarHTML = sidebar.innerHTML;
 function ajustarSidebar() {
   const traduceElement = document.getElementById('traduce');
   
-  if (window.innerWidth <= 480) {
+  if (window.innerWidth <= 600) {
     traduceElement.insertAdjacentElement('afterend', sidebar);
+  } else if (sidebarNextSibling) {
+    sidebarParent.insertBefore(sidebar, sidebarNextSibling);
   } else {
-    if (sidebarNextSibling) {
-      sidebarParent.insertBefore(sidebar, sidebarNextSibling);
-    } else {
-      sidebarParent.appendChild(sidebar);
-    }
+    sidebarParent.appendChild(sidebar);
   }
 }
 

@@ -6,8 +6,7 @@
 }
 
 * {
-  /*border: 1px solid red;
-    font-family: Arial, Helvetica, sans-serif;*/
+  /*border: 1px solid red;*/
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
 }
@@ -19,9 +18,9 @@ body {
 
 
 /* Estilo responsive para pantallas pequeñas (teléfonos móviles) */
-@media screen and (max-width: 480px), (max-width: 600px){
+@media screen and (max-width: 480px), screen and (max-width: 600px){
   .header {
-    height: 80px;
+    height: auto;
     display: flex;
     background-color: #ffffff;
     border-bottom: 1px solid #000;
@@ -29,7 +28,6 @@ body {
     margin: 0;
     justify-content: space-between;
     width: 100%;
-    height: auto;
   }
 
   .header .logo {
@@ -343,8 +341,9 @@ body {
 
 /*CONTENEDOR - CONTENIDO*/
 .TitlesInformation #TituloPage{
-  width: 80%;
-  padding: 20px 50px 0 50px;
+  width: 100%;
+  font-size: 40px;
+  padding: 20px 0 10px 0;
   margin: 0;
   text-align: center;
 }
@@ -477,8 +476,6 @@ body {
 
 /*COMPONENTES CON GRID*/
 .componentes {
-  /*width: 50px;
-    height: 50px;*/
   display: grid;
   grid-template-columns: repeat(2, 35px);
   grid-template-rows: repeat(3, 35px);

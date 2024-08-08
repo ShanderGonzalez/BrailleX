@@ -4,7 +4,7 @@ import Traductor from "../services/traductor.js";
 // Validación de caracteres especiales
 document.getElementById("entradaTexto").addEventListener("input", function () {
     const texto = this.value;
-    const warning = document.getElementById("warningCaracteres");
+    const warning = document.getElementById("warningCaracteres1");
     const regex = /[~\/\\«»`|]/g; // caracteres no permitidos
 
     if (regex.test(texto)) {
@@ -233,6 +233,3 @@ function dividirTextoEnLineas(texto, maxCharsPerLine) {
 document.getElementById("mirror").addEventListener("change", function () {
     actualizarBotonDescargar();
 });
-
-
-

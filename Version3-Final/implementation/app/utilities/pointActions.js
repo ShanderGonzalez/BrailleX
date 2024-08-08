@@ -1,18 +1,24 @@
 import Traductor from "../../app/services/traductor.js";
 
+document.addEventListener('click', () => {
+  const warning = document.getElementById("warningCaracteres2");
+  warning.classList.add("hidden");
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const ellipses = document.querySelectorAll(".ellipse");
   const output = document.getElementById("output");
   const collectButton = document.getElementById("collectButton");
   const spaceButton = document.getElementById("spaceButton");
-  const respuesta = document.querySelector(".respuesta");
 
   const validateInput = () => {
     const textoBraille = output.value;
     const regex = /^[⠁-⠿\s]*$/; // Solo caracteres braille y espacios
+    const warning = document.getElementById("warningCaracteres2");
 
     if (!regex.test(textoBraille)) {
       output.value = textoBraille.replace(/[^⠁-⠿\s]/g, "");
+      warning.classList.remove("hidden");
     }
   };
 
@@ -51,10 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.getElementById("traducirBoton").addEventListener("click", function () {
-  var textoBraille = document.querySelector(".entradaTexto").value;
-  var traductor = new Traductor();
+  const textoBraille = document.querySelector(".entradaTexto").value;
+  const traductor = new Traductor();
 
-  var traduccion = traductor.traducirBrailleAEspanol(textoBraille);
+  const traduccion = traductor.traducirBrailleAEspanol(textoBraille);
 
   // Mostrar la traducción en el div con clase 'respuesta'
   document.querySelector(".respuesta").innerText = traduccion;
