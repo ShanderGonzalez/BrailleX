@@ -20,13 +20,10 @@ var limpiar = document.getElementById('limpiarBoton');
  * Función que se ejecuta cuando se hace clic en el botón de limpieza.
  * @param {MouseEvent} e - El evento de clic del mouse.
  */
-limpiar.onclick = (e) => {
-  document.getElementById('descargarPNG').disabled = true;
-  document.getElementById('descargarPDF').disabled = true;
-  document.getElementById('mirror').checked = false;
+limpiar.onclick = (e) => { 
   e.preventDefault();
   for (let i = 0; i < elementos.length; i++) {
-    elementos[i].value = '';
+    elementos[i].value = '';          
   }
   if (respuesta) {
     // Si 'respuesta' es un div, span, etc.
@@ -34,7 +31,5 @@ limpiar.onclick = (e) => {
     // Si 'respuesta' es un input o textarea, usa:
     // respuesta.value = '';
   }
-
-  ellipses.forEach((ellipse) => ellipse.classList.remove("painted"));
 }
 

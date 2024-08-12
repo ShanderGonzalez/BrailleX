@@ -100,6 +100,8 @@ class BrailleDictionary {
       "!": "235",
       "¡": "235",
       '"': "236",
+      // "«": "236",
+      // "»": "236",
       "'": "6 236",
       "(": "126",
       ")": "345",
@@ -120,13 +122,19 @@ class BrailleDictionary {
       "+": "235",
       "=": "2356",
       "/": "6 2",
+      // "//": "6 26 2",
+      // "\\": "5 3",
+      // "\\\\": "5 35 3",
       "<": "5 13",
       ">": "46 2",
       "&": "12346",
       "#": "3456",
       "@": "5",
+      _: "6",
       "%": "456",
       "^": "45",
+      $: "456 234",
+      "€": "456 15",
     };
 
     /**
@@ -227,7 +235,13 @@ class BrailleDictionary {
    * @returns {string|null} - El carácter Braille correspondiente, o `null` si no existe.
    */
   getLetraBraille(letra) {
-    return this.alfabetoBrailleEspanol[letra] || this.alfabetoBrailleEspanolMayus[letra] || null;
+    if (this.alfabetoBrailleEspanol[letra]) {
+      return this.alfabetoBrailleEspanol[letra];
+    } else if (this.alfabetoBrailleEspanolMayus[letra]) {
+      return this.alfabetoBrailleEspanolMayus[letra];
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -236,7 +250,13 @@ class BrailleDictionary {
    * @returns {string|null} - El carácter Braille correspondiente, o `null` si no existe.
    */
   getSigno(signo) {
-    return this.signosPuntuacion[signo] || this.signosAuxiliares[signo] || null;
+    if (this.signosPuntuacion[signo]) {
+      return this.signosPuntuacion[signo];
+    } else if (this.signosAuxiliares[signo]) {
+      return this.signosAuxiliares[signo];
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -246,7 +266,13 @@ class BrailleDictionary {
    * @returns {string|null} - El carácter Braille correspondiente, o `null` si no existe.
    */
   getNumeroBraille(numero, esNumComp) {
-    return (esNumComp ? this.numeroComputarizado[numero] : this.numerosBraille[numero]) || null;
+    if (this.numerosBraille[numero] && !esNumComp) {
+      return this.numerosBraille[numero];
+    } else if (this.numeroComputarizado[numero] && esNumComp) {
+      return this.numeroComputarizado[numero];
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -255,7 +281,13 @@ class BrailleDictionary {
    * @returns {string|null} - La letra en español correspondiente, o `null` si no existe.
    */
   getLetraEspañol(braille) {
-    return this.invertAlfabetoBrailleEspanol[braille] || this.invertAlfabetoBrailleEspanolMayus[braille] || null;
+    if (this.invertAlfabetoBrailleEspanol[braille]) {
+      return this.invertAlfabetoBrailleEspanol[braille];
+    } else if (this.invertAlfabetoBrailleEspanolMayus[braille]) {
+      return this.invertAlfabetoBrailleEspanolMayus[braille];
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -264,7 +296,13 @@ class BrailleDictionary {
    * @returns {string|null} - El signo de puntuación o auxiliar correspondiente, o `null` si no existe.
    */
   getInvertSigno(braille) {
-    return this.invertSignosPuntuacion[braille] || this.invertSignosAuxiliares[braille] || null;
+    if (this.invertSignosPuntuacion[braille]) {
+      return this.invertSignosPuntuacion[braille];
+    } else if (this.invertSignosAuxiliares[braille]) {
+      return this.invertSignosAuxiliares[braille];
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -273,7 +311,13 @@ class BrailleDictionary {
    * @returns {number|null} - El número correspondiente, o `null` si no existe.
    */
   getInvertNumeroBraille(braille) {
-    return this.invertNumerosBraille[braille] || this.invertNumeroComputarizado[braille] || null;
+    if (this.invertNumerosBraille[braille]) {
+      return this.invertNumerosBraille[braille];
+    } else if (this.invertNumeroComputarizado[braille]) {
+      return this.invertNumeroComputarizado[braille];
+    } else {
+      return null;
+    }
   }
 }
 

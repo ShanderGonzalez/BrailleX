@@ -1,0 +1,16 @@
+{
+    "name": "braillex",
+    "version": "1.0.0",
+    "description": "Traductor de braille - español",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "docs": "jsdoc -c jsdoc.json"
+    },
+    "author": "Dev-Sentinels",
+    "license": "MIT",
+    "devDependencies": {
+        "jsdoc": "^4.0.3"
+    }
+}

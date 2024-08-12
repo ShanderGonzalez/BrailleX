@@ -1,0 +1,164 @@
+/*Estilos responsive de la pagina conocenos*/
+@media screen and (max-width: 480px), (max-width: 600px) {
+  .Titulo{
+    font-size: 30px;
+    padding: 20px 0;
+    margin: 0;
+  }
+  .container .content{
+    padding: 0 !important;
+  }
+  .Conocenos button  {
+    font-size: 38px;
+  }
+
+  .Conocenos .ConocenosOpciones a {
+    font-size: 17px;
+    text-decoration: none !important;
+  }
+  
+  .team-container {
+    flex-direction: column;
+  }
+  .team-container2 {
+    flex-direction: column;
+  }
+  .team-member {
+    margin: 10px 0 !important;
+    
+  }
+  .team-member img {
+    width: 80px;
+    height: 80px;
+  }
+  .team-member h3 {
+    font-size: 16px;
+  }
+  .team-member p {
+    font-size: 12px;
+  }
+  .about-container {
+    flex-direction: column;
+  }
+  .mission,
+  .vision {
+    width: 100% !important;
+    margin: 10px 0 !important;
+
+  }
+
+}
+
+/* Estilos para la página del equipo */
+
+/* Centrando el contenedor principal */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.team-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px 0;
+}
+.team-container2 {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.team-member {
+  padding: 20px;
+  margin: 0 20px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0px 5px 5px #00000040;
+  text-align: center;
+  background-color: #fff;
+}
+.team-member img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+.team-member h3 {
+  margin: 10px 0 5px 0;
+  font-size: 18px;
+  color: #000;
+}
+.team-member p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Ajuste para la última fila de dos miembros */
+
+/* Botón de regresar */
+.backButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 8px 16px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.backButton:hover {
+  background-color: #333;
+}
+
+
+
+
+/* Estilos para la página Nosotros */
+.about-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 30px;
+}
+
+.mission,
+.vision {
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0px 5px 5px #00000040;
+  background-color: #fff;
+  width: 45%;
+  text-align: justify;
+}
+
+.mission {
+  margin-right: 20px;
+}
+
+.vision {
+  margin-left: 20px;
+}
+
+/* Botón de regresar */
+.backButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 8px 16px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.backButton:hover {
+  background-color: #333;
+}
