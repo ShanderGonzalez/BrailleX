@@ -520,7 +520,7 @@ body {
   color: #ffffff;
   margin: 8px 0 0 0;
   padding: 0;
-  font-size: 15px;
+  font-size: 12px;
 }
 
 #collectButton:hover {
@@ -530,7 +530,7 @@ body {
 /*BOTON DE ESPACIO BRAILLE*/
 #spaceButton {
   width: 60%;
-  height: 30px;
+  height: 35px;
   background-color: #000000;
   border-radius: 10px;
   color: #ffffff;
