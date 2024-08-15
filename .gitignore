@@ -7,4 +7,4 @@ logs/
 # Ignorar todos los archivos .env
 .env
 
-node_modules/**/README*
+Version3-Final/implementation/node_modules/**/README*
