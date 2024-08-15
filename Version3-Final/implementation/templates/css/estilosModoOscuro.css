@@ -147,21 +147,30 @@ input:checked+.slider:before {
 .dark-mode .ConocenosOpciones ul li:hover {
     color: #aaa;
     background-color: #121212;
+    text-decoration: none;    
+}
+
+.dark-mode .sidebar ul li{
+    background-color: #181414;
     text-decoration: none;
+    border: 1px solid #fff;
 }
 
 .dark-mode .sidebar ul li:hover {
-    background: #181414;
+    background:  #1b1b1b;
+    border: 1px solid #5BC1FB;
     text-decoration: none;
 }
+
 
 .dark-mode .sidebar ul li a {
     color: #ffffff;
     text-decoration: none;
     background-color: none;
+    
 }
 
-.dark-mode .container .sidebar {
+.dark-mode .sidebar {
     border-right: 1px solid #2C2C2C;
 }
 

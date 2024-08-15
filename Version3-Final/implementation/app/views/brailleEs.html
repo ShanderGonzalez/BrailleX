@@ -50,10 +50,7 @@
         </ul>
       </aside>
 
-      <main class="traductorBraille">
-        <p class="warningCaracteres hidden" id="warningCaracteres">
-          * Texto inválido: no se permiten caracteres especiales
-        </p>
+      <main class="traductorBraille"> 
         <div class="divComponentesplusentrada">
           <div class="divComponentes">
             <div class="componentes">
@@ -65,12 +62,15 @@
               <div class="ellipse" id="ellipse-6" tabindex="0"></div>
             </div>
             <div class="divBotones">
-              <button id="collectButton">Siguiente</button>
-              <button id="spaceButton">Espacio</button>
+              <button id="collectButton">Siguiente Letra</button>
+              <button id="spaceButton">Siguiente Palabra</button>
             </div>
           </div>
 
           <div class="entradas">
+            <p class="warningCaracteres hidden" id="warningCaracteres2">
+              * Texto inválido: no se permiten caracteres especiales
+            </p>
             <button id="limpiarBoton" type="reset" onclick="p()" aria-label="Limpiar Entrada de Texto">
               <img src="../../images/clear-icon.png" alt="boton de limpiar texto" />
             </button>
@@ -105,14 +105,18 @@
     </label>
   </div>
 
-  <script src="../../app/utilities/limpiar.js"></script>
+    <!--SCRIPTS-->
+  <script type="module" src="../../app/utilities/scripts.js"></script>
+  <script src="../../app/utilities/limpiar_braille.js"></script> 
   <script src="../../app/utilities/pointActions.js" type="module"></script>
+  <script type="module" src="../../app/utilities/scripts.js"></script>
   <script type="module" src="../../app/utilities/toggleDarkMode.js"></script>
   <script src="../../app/utilities/responsive.js"></script>
   <script src="../../app/utilities/keyboardNavigation.js"></script>
   <script src="../../app/utilities/copyboard.js"></script>
   <script src="../../app/utilities/zoom.js"></script>
-  <script src="../../app/utilities/voz.js"></script>
+  <script src="../../app/utilities/voz.js"></script> 
+  
 </body>
 
 </html>
