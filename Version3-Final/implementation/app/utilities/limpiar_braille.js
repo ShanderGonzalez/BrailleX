@@ -21,9 +21,6 @@ const limpiar = document.getElementById('limpiarBoton');
  * @param {MouseEvent} e - El evento de clic del mouse.
  */
 limpiar.onclick = (e) => {
-  document.getElementById('descargarPNG').disabled = true;
-  document.getElementById('descargarPDF').disabled = true;
-  document.getElementById('mirror').checked = false;
   e.preventDefault();
   // Usar for...of para iterar sobre los elementos
   for (const elemento of elementos) {
@@ -35,7 +32,4 @@ limpiar.onclick = (e) => {
     // Si 'respuesta' es un input o textarea, usa:
     // respuesta.value = '';
   }
-  
-  document.getElementsByClassName("ellipse");
-  ellipses.forEach((ellipse) => ellipse.classList.remove("painted"));
 }
