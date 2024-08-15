@@ -5,12 +5,13 @@ import Traductor from "../services/traductor.js";
 document.getElementById("entradaTexto").addEventListener("input", function () {
     const texto = this.value;
     const warning = document.getElementById("warningCaracteres1");
-    const regex = /[~\/\\«»`|]/g; // caracteres no permitidos
+    //const regex = /[~\/\\«»`|]/g; // caracteres no permitidos
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9?¿!@""\s.,;:ü#-]+$/;
 
-    if (regex.test(texto)) {
-        warning.classList.remove("hidden");
-    } else {
+    if (texto === "" || regex.test(texto)) {
         warning.classList.add("hidden");
+    } else {
+        warning.classList.remove("hidden");
     }
 });
 
@@ -22,9 +23,9 @@ document.getElementById("traducirBoton").addEventListener("click", function () {
 
     var texto = document.querySelector(".entradaTexto").value;
     var traductor = new Traductor();
-    const regex = /[~\/\\«»]/g;
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9?¿!@""\s.,;:ü#-]+$/;
 
-    if (regex.test(texto)) {
+    if (!regex.test(texto)) {
         texto = "";
         return; // Detener la ejecución del resto del código
     }
