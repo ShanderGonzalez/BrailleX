@@ -1,10 +1,3 @@
-/**
- * voz.js
- * 
- * Este script maneja la funcionalidad de reconocimiento de voz y síntesis de voz
- * para el traductor.
- */
-
 // Sección para el reconocimiento de voz
 document.addEventListener('DOMContentLoaded', () => {
     // Obtener elementos del DOM
@@ -17,6 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
         console.error('El reconocimiento de voz no es compatible con este navegador.');
+        mostrarAlertaTemporal("Su navegador no es compatible con el reconocimiento de voz.", 5000);
+        
+        // Asignar evento al botón para mostrar el mismo mensaje si no es compatible
+        botonVoz.addEventListener('click', () => {
+            mostrarAlertaTemporal("Su navegador no es compatible con el reconocimiento de voz.", 5000);
+        });
+        
         return;
     }
 
@@ -120,7 +120,7 @@ function mostrarAlerta(mensaje) {
 }
 
 // Función para mostrar alerta temporal
-function mostrarAlertaTemporal(mensaje) {
+function mostrarAlertaTemporal(mensaje, duracion = 2000) {
     const alerta = document.createElement('div');
     alerta.textContent = mensaje;
     alerta.style.position = 'fixed';
@@ -148,5 +148,5 @@ function mostrarAlertaTemporal(mensaje) {
         setTimeout(function() {
             alerta.remove();
         }, 300);
-    }, 2000);
+    }, duracion);
 }
