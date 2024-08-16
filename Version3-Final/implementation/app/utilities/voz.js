@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
         console.error('El reconocimiento de voz no es compatible con este navegador.');
-        mostrarAlertaTemporal("La versión de su navegador no es compatible con el reconocimiento de voz.", 5000);
+        mostrarAlertaTemporal("Su navegador no es compatible con el reconocimiento de voz.", 5000);
         
         // Asignar evento al botón para mostrar el mismo mensaje si no es compatible
         botonVoz.addEventListener('click', () => {
-            mostrarAlertaTemporal("La versión de su navegador no es compatible con el reconocimiento de voz.", 5000);
+            mostrarAlertaTemporal("Su navegador no es compatible con el reconocimiento de voz.", 5000);
         });
         
         return;
