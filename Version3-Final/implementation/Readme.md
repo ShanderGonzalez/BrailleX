@@ -7,11 +7,19 @@ En esta parte se establece el orden de estructura de las carpetas que se llevo a
 implementation
 ├── app
 │   ├── services
+│   │   ├── dictionary.js
 │   │   ├── traductor.js
 │   │   └── validate.js
 │   ├── utilities
-│   │   ├── dictionary.js
-│   │   └── limpiar.js
+│   │   ├── copyboard.js
+│   │   ├── keyboardNavigation.js
+│   │   ├── limpiar.js
+│   │   ├── pointActions.js
+│   │   ├── responsive.js
+│   │   ├── scripts.js
+│   │   ├── toggleDarkMode.js
+│   │   ├── voz.js
+│   │   └── zoom.js
 │   └── views
 │       ├── brailleEs.html
 │       ├── Equipo.html
@@ -20,9 +28,17 @@ implementation
 ├── docs
 ├── images
 ├── node_modules
-└── templates
-    ├── css
-    │   ├── estilosConocenos.css
-    │   └── estilosPrincipal.css
-    └── fonts
+├── templates
+│   ├── css
+│   │   ├── estilosConocenos.css
+│   │   ├── estilosModoOscuro.css
+│   │   └── estilosPrincipal.css
+│   └── fonts
+├── test
+│   ├── brailleDictionary.test.js
+│   ├── traductor.test.js
+│   └── validator.test.js
+├── jsdoc.json
+├── package-lock.json
+└── package.json   
 ```

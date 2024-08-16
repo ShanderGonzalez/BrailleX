@@ -1,0 +1,10 @@
+# Ignorar archivos temporales
+*.tmp
+
+# Ignorar la carpeta de logs
+logs/
+
+# Ignorar todos los archivos .env
+.env
+
+Version3-Final/implementation/node_modules/**/README*
