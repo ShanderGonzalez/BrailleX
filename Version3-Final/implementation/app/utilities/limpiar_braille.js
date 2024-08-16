@@ -2,19 +2,19 @@
  * Obtiene todos los elementos <textarea> del documento.
  * @type {HTMLCollectionOf<HTMLTextAreaElement>}
  */
-const elementos = document.getElementsByTagName('textarea');
+const elementos = document.getElementsByTagName("textarea");
 
 /**
  * El elemento HTML que muestra la respuesta.
  * @type {HTMLElement}
  */
-const respuesta = document.querySelector('.respuesta');
+const respuesta = document.querySelector(".respuesta");
 
 /**
  * El botón utilizado para limpiar los campos de texto.
  * @type {HTMLButtonElement}
  */
-const limpiar = document.getElementById('limpiarBoton');
+const limpiar = document.getElementById("limpiarBoton");
 
 /**
  * Función que se ejecuta cuando se hace clic en el botón de limpieza.
@@ -24,12 +24,12 @@ limpiar.onclick = (e) => {
   e.preventDefault();
   // Usar for...of para iterar sobre los elementos
   for (const elemento of elementos) {
-    elemento.value = '';
+    elemento.value = "";
   }
   if (respuesta) {
     // Si 'respuesta' es un div, span, etc.
-    respuesta.innerHTML = '';
+    respuesta.innerHTML = "";
     // Si 'respuesta' es un input o textarea, usa:
     // respuesta.value = '';
   }
-}
+};

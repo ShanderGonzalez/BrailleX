@@ -7,7 +7,7 @@ class Validator {
   /**
    * Valida si una cadena de texto es un correo electrónico válido.
    * @param {string} correo - El correo electrónico a validar.
-   * @returns {boolean} - `true` si el correo es válido, `false` en caso contrario.
+   * @returns {boolean} - true si el correo es válido, false en caso contrario.
    */
   isValidEmail(email) {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -17,7 +17,7 @@ class Validator {
   /**
      * Valida si una cadena de texto es una URL válida.
      * @param {string} url - La URL a validar.
-     * @returns {boolean} - `true` si la URL es válida, `false` en caso contrario.
+     * @returns {boolean} - true si la URL es válida, false en caso contrario.
      */
   isValidURL(url) {
     const urlPattern = /^(https?:\/\/)?www\.[^\s/$.?#].[^\s]*$/;
@@ -27,7 +27,7 @@ class Validator {
   /**
    * Valida si una cadena de texto es una etiqueta válida.
    * @param {string} etiqueta - La etiqueta a validar.
-   * @returns {boolean} - `true` si la etiqueta es válida, `false` en caso contrario.
+   * @returns {boolean} - true si la etiqueta es válida, false en caso contrario.
    */
   isValidTag(tag) {
     const tagPattern = /^#[a-zA-Z0-9_]+(:\d+)?$/;
@@ -68,6 +68,15 @@ class Validator {
    */
   isUpperCase(word) {
     return word === word.toUpperCase() && /[a-zA-Z]/.test(word);
+  }
+
+  /**
+   * Determina si una palabra está en minúsculas.
+   * @param {string} palabra - La palabra a verificar.
+   * @returns {boolean} - Verdadero si la palabra está en minúsculas, falso en caso contrario.
+   **/
+  isOnlyUpperCase(letter) {
+    return /^[A-Z]$/.test(letter);
   }
 
   /**
