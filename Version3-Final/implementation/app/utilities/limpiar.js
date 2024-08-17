@@ -21,24 +21,6 @@ const limpiar = document.getElementById('limpiarBoton');
  * @param {MouseEvent} e - El evento de clic del mouse.
  */
 limpiar.onclick = (e) => {
-<<<<<<< HEAD
-  document.getElementById("descargarPNG").disabled = true;
-  document.getElementById("descargarPDF").disabled = true;
-  document.getElementById("mirror").checked = false;
-  e.preventDefault();
-  for (let i = 0; i < elementos.length; i++) {
-    elementos[i].value = "";
-  }
-  if (respuesta) {
-    // Si 'respuesta' es un div, span, etc.
-    respuesta.innerHTML = "";
-    // Si 'respuesta' es un input o textarea, usa:
-    // respuesta.value = '';
-  }
-  document.getElementsByClassName("ellipse");
-  ellipses.forEach((ellipse) => ellipse.classList.remove("painted"));
-};
-=======
   document.getElementById('descargarPNG').disabled = true;
   document.getElementById('descargarPDF').disabled = true;
   document.getElementById('mirror').checked = false;
@@ -53,7 +35,7 @@ limpiar.onclick = (e) => {
     // Si 'respuesta' es un input o textarea, usa:
     // respuesta.value = '';
   }
-  
+
   document.getElementsByClassName("ellipse");
   ellipses.forEach((ellipse) => ellipse.classList.remove("painted"));
 }

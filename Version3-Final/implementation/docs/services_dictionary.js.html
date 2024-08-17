@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: utilities/dictionary.js</title>
+    <title>JSDoc: Source: services/dictionary.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: utilities/dictionary.js</h1>
+    <h1 class="page-title">Source: services/dictionary.js</h1>
 
     
 
@@ -128,8 +128,6 @@ class BrailleDictionary {
       "!": "235",
       "¡": "235",
       '"': "236",
-      // "«": "236",
-      // "»": "236",
       "'": "6 236",
       "(": "126",
       ")": "345",
@@ -150,19 +148,13 @@ class BrailleDictionary {
       "+": "235",
       "=": "2356",
       "/": "6 2",
-      // "//": "6 26 2",
-      // "\\": "5 3",
-      // "\\\\": "5 35 3",
       "&lt;": "5 13",
       ">": "46 2",
       "&amp;": "12346",
       "#": "3456",
       "@": "5",
-      _: "6",
       "%": "456",
       "^": "45",
-      $: "456 234",
-      "€": "456 15",
     };
 
     /**
@@ -249,11 +241,14 @@ class BrailleDictionary {
    */
   invertDictionary(dictionary) {
     let invertedDictionary = {};
-
     for (let key in dictionary) {
-      invertedDictionary[dictionary[key]] = key;
+      // Convertir las claves numéricas a enteros para los diccionarios de números
+      if (!isNaN(key)) {
+        invertedDictionary[dictionary[key]] = parseInt(key);
+      } else {
+        invertedDictionary[dictionary[key]] = key;
+      }
     }
-
     return invertedDictionary;
   }
 
@@ -263,13 +258,7 @@ class BrailleDictionary {
    * @returns {string|null} - El carácter Braille correspondiente, o `null` si no existe.
    */
   getLetraBraille(letra) {
-    if (this.alfabetoBrailleEspanol[letra]) {
-      return this.alfabetoBrailleEspanol[letra];
-    } else if (this.alfabetoBrailleEspanolMayus[letra]) {
-      return this.alfabetoBrailleEspanolMayus[letra];
-    } else {
-      return null;
-    }
+    return this.alfabetoBrailleEspanol[letra] || this.alfabetoBrailleEspanolMayus[letra] || null;
   }
 
   /**
@@ -278,13 +267,7 @@ class BrailleDictionary {
    * @returns {string|null} - El carácter Braille correspondiente, o `null` si no existe.
    */
   getSigno(signo) {
-    if (this.signosPuntuacion[signo]) {
-      return this.signosPuntuacion[signo];
-    } else if (this.signosAuxiliares[signo]) {
-      return this.signosAuxiliares[signo];
-    } else {
-      return null;
-    }
+    return this.signosPuntuacion[signo] || this.signosAuxiliares[signo] || null;
   }
 
   /**
@@ -294,13 +277,7 @@ class BrailleDictionary {
    * @returns {string|null} - El carácter Braille correspondiente, o `null` si no existe.
    */
   getNumeroBraille(numero, esNumComp) {
-    if (this.numerosBraille[numero] &amp;&amp; !esNumComp) {
-      return this.numerosBraille[numero];
-    } else if (this.numeroComputarizado[numero] &amp;&amp; esNumComp) {
-      return this.numeroComputarizado[numero];
-    } else {
-      return null;
-    }
+    return (esNumComp ? this.numeroComputarizado[numero] : this.numerosBraille[numero]) || null;
   }
 
   /**
@@ -309,13 +286,7 @@ class BrailleDictionary {
    * @returns {string|null} - La letra en español correspondiente, o `null` si no existe.
    */
   getLetraEspañol(braille) {
-    if (this.invertAlfabetoBrailleEspanol[braille]) {
-      return this.invertAlfabetoBrailleEspanol[braille];
-    } else if (this.invertAlfabetoBrailleEspanolMayus[braille]) {
-      return this.invertAlfabetoBrailleEspanolMayus[braille];
-    } else {
-      return null;
-    }
+    return this.invertAlfabetoBrailleEspanol[braille] || this.invertAlfabetoBrailleEspanolMayus[braille] || null;
   }
 
   /**
@@ -324,13 +295,7 @@ class BrailleDictionary {
    * @returns {string|null} - El signo de puntuación o auxiliar correspondiente, o `null` si no existe.
    */
   getInvertSigno(braille) {
-    if (this.invertSignosPuntuacion[braille]) {
-      return this.invertSignosPuntuacion[braille];
-    } else if (this.invertSignosAuxiliares[braille]) {
-      return this.invertSignosAuxiliares[braille];
-    } else {
-      return null;
-    }
+    return this.invertSignosPuntuacion[braille] || this.invertSignosAuxiliares[braille] || null;
   }
 
   /**
@@ -339,13 +304,7 @@ class BrailleDictionary {
    * @returns {number|null} - El número correspondiente, o `null` si no existe.
    */
   getInvertNumeroBraille(braille) {
-    if (this.invertNumerosBraille[braille]) {
-      return this.invertNumerosBraille[braille];
-    } else if (this.invertNumeroComputarizado[braille]) {
-      return this.invertNumeroComputarizado[braille];
-    } else {
-      return null;
-    }
+    return this.invertNumerosBraille[braille] || this.invertNumeroComputarizado[braille] || null;
   }
 }
 
@@ -360,13 +319,13 @@ export default BrailleDictionary;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-BrailleDictionary.html">BrailleDictionary</a></li><li><a href="module-Traductor.html">Traductor</a></li><li><a href="module-Validator.html">Validator</a></li></ul><h3>Classes</h3><ul><li><a href="module-Traductor-Traductor.html">Traductor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#elementos">elementos</a></li><li><a href="global.html#limpiar">limpiar</a></li><li><a href="global.html#respuesta">respuesta</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-BrailleDictionary.html">BrailleDictionary</a></li><li><a href="module-Traductor.html">Traductor</a></li><li><a href="module-Validator.html">Validator</a></li></ul><h3>Classes</h3><ul><li><a href="module-Traductor-Traductor.html">Traductor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ajustarSidebar">ajustarSidebar</a></li><li><a href="global.html#cambiarTextoResponsive">cambiarTextoResponsive</a></li><li><a href="global.html#closeMenu">closeMenu</a></li><li><a href="global.html#dividirTextoEnLineas">dividirTextoEnLineas</a></li><li><a href="global.html#elementos">elementos</a></li><li><a href="global.html#leerTexto">leerTexto</a></li><li><a href="global.html#limpiar">limpiar</a></li><li><a href="global.html#mostrarAlerta">mostrarAlerta</a></li><li><a href="global.html#mostrarAlertaTemporal">mostrarAlertaTemporal</a></li><li><a href="global.html#respuesta">respuesta</a></li><li><a href="global.html#toggleMenu">toggleMenu</a></li><li><a href="global.html#zoomIn">zoomIn</a></li><li><a href="global.html#zoomIn1">zoomIn1</a></li><li><a href="global.html#zoomOut">zoomOut</a></li><li><a href="global.html#zoomOut1">zoomOut1</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Jun 05 2024 11:52:24 GMT-0500 (hora de Ecuador)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Fri Aug 16 2024 23:14:13 GMT-0500 (hora de Ecuador)
 </footer>
 
 <script> prettyPrint(); </script>

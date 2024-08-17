@@ -94,7 +94,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line16">line 16</a>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -143,6 +143,188 @@
 
     
         <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="convertirTextoABraille"><span class="type-signature"></span>convertirTextoABraille<span class="signature">(texto, invertido)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Convierte texto en español a Braille (normal o invertido).
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>texto</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El texto en español a traducir.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>invertido</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Indica si se debe invertir el texto.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line46">line 46</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - El texto traducido a Braille en formato Unicode.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
 
         
             
@@ -251,7 +433,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line299">line 299</a>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line262">line 262</a>
     </li></ul></dd>
     
 
@@ -410,7 +592,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line317">line 317</a>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line280">line 280</a>
     </li></ul></dd>
     
 
@@ -440,6 +622,1054 @@
         
 <div class="param-desc">
     - El texto Braille en formato Unicode.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="obtenerBrailleDeCaracter"><span class="type-signature"></span>obtenerBrailleDeCaracter<span class="signature">(caracter, palabra, indice)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Obtiene el código Braille de un carácter.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>caracter</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El carácter a traducir.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>palabra</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La palabra que contiene el carácter.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>indice</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El índice del carácter en la palabra.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line123">line 123</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - El código Braille del carácter.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="obtenerBrailleDeLetra"><span class="type-signature"></span>obtenerBrailleDeLetra<span class="signature">(letra, palabra)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Obtiene el código Braille de una letra.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>letra</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La letra a traducir.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>palabra</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La palabra que contiene la letra.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line139">line 139</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - El código Braille de la letra.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="obtenerBrailleDeSigno"><span class="type-signature"></span>obtenerBrailleDeSigno<span class="signature">(signo, palabra, indice)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Obtiene el código Braille de un signo.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>signo</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El signo a traducir.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>palabra</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">La palabra que contiene el signo.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>indice</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El índice del signo en la palabra.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line154">line 154</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - El código Braille del signo.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="obtenerEspanolDeCaracter"><span class="type-signature"></span>obtenerEspanolDeCaracter<span class="signature">(caracterBraille, esNumero, esMayuscula, esTextoMayuscula, aperturaSigno)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Obtiene el carácter español de un código Braille.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>caracterBraille</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El código Braille a traducir.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>esNumero</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Indica si el carácter es un número.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>esMayuscula</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Indica si el carácter es mayúscula.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>esTextoMayuscula</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Indica si el texto es todo mayúscula.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>aperturaSigno</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Indica si el signo de apertura está abierto.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line226">line 226</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - El carácter español.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="obtenerSignoEspecial"><span class="type-signature"></span>obtenerSignoEspecial<span class="signature">(caracterBraille, signoEspanol, aperturaSigno)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Obtiene el signo especial español de un código Braille.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>caracterBraille</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El código Braille del signo.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>signoEspanol</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">El signo en español.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>aperturaSigno</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Indica si el signo de apertura está abierto.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line249">line 249</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - El signo especial en español.
 </div>
 
 
@@ -569,7 +1799,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line71">line 71</a>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line66">line 66</a>
     </li></ul></dd>
     
 
@@ -728,7 +1958,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line192">line 192</a>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line163">line 163</a>
     </li></ul></dd>
     
 
@@ -887,7 +2117,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line26">line 26</a>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -1046,7 +2276,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line50">line 50</a>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line36">line 36</a>
     </li></ul></dd>
     
 
@@ -1205,7 +2435,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line95">line 95</a>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line76">line 76</a>
     </li></ul></dd>
     
 
@@ -1364,7 +2594,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line210">line 210</a>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line181">line 181</a>
     </li></ul></dd>
     
 
@@ -1523,7 +2753,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line350">line 350</a>
+        <a href="services_traductor.js.html">services/traductor.js</a>, <a href="services_traductor.js.html#line295">line 295</a>
     </li></ul></dd>
     
 
@@ -1591,13 +2821,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-BrailleDictionary.html">BrailleDictionary</a></li><li><a href="module-Traductor.html">Traductor</a></li><li><a href="module-Validator.html">Validator</a></li></ul><h3>Classes</h3><ul><li><a href="module-Traductor-Traductor.html">Traductor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#elementos">elementos</a></li><li><a href="global.html#limpiar">limpiar</a></li><li><a href="global.html#respuesta">respuesta</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-BrailleDictionary.html">BrailleDictionary</a></li><li><a href="module-Traductor.html">Traductor</a></li><li><a href="module-Validator.html">Validator</a></li></ul><h3>Classes</h3><ul><li><a href="module-Traductor-Traductor.html">Traductor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ajustarSidebar">ajustarSidebar</a></li><li><a href="global.html#cambiarTextoResponsive">cambiarTextoResponsive</a></li><li><a href="global.html#closeMenu">closeMenu</a></li><li><a href="global.html#dividirTextoEnLineas">dividirTextoEnLineas</a></li><li><a href="global.html#elementos">elementos</a></li><li><a href="global.html#leerTexto">leerTexto</a></li><li><a href="global.html#limpiar">limpiar</a></li><li><a href="global.html#mostrarAlerta">mostrarAlerta</a></li><li><a href="global.html#mostrarAlertaTemporal">mostrarAlertaTemporal</a></li><li><a href="global.html#respuesta">respuesta</a></li><li><a href="global.html#toggleMenu">toggleMenu</a></li><li><a href="global.html#zoomIn">zoomIn</a></li><li><a href="global.html#zoomIn1">zoomIn1</a></li><li><a href="global.html#zoomOut">zoomOut</a></li><li><a href="global.html#zoomOut1">zoomOut1</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Jun 05 2024 11:52:24 GMT-0500 (hora de Ecuador)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Fri Aug 16 2024 23:14:13 GMT-0500 (hora de Ecuador)
 </footer>
 
 <script> prettyPrint(); </script>

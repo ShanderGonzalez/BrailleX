@@ -1,4 +1,7 @@
-//funcion para cambiar el texto en las paginas responsive
+/**
+ * Cambia el texto del botón "Conócenos" a un icono de menú (☰) en pantallas pequeñas (<= 600px),
+ * y lo vuelve a su texto original en pantallas más grandes.
+ */
 function cambiarTextoResponsive() {
   let elemento = document.getElementById("conocenosBoton");
   if (window.innerWidth <= 600) {
@@ -7,16 +10,15 @@ function cambiarTextoResponsive() {
     elemento.textContent = "Conócenos";
   }
 }
-document.addEventListener("DOMContentLoaded", cambiarTextoResponsive);
 
+document.addEventListener("DOMContentLoaded", cambiarTextoResponsive);
 window.addEventListener("resize", cambiarTextoResponsive);
 
-//funcion para ajustar el sidebar en las paginas responsive
-const sidebar = document.querySelector(".sidebar");
-const sidebarParent = sidebar.parentNode;
-const sidebarNextSibling = sidebar.nextSibling;
-const originalSidebarHTML = sidebar.innerHTML;
-
+/**
+ * Ajusta la posición del sidebar en función del tamaño de la ventana.
+ * En pantallas pequeñas (<= 600px), mueve el sidebar debajo del elemento con id "traduce".
+ * En pantallas más grandes, devuelve el sidebar a su posición original en el DOM.
+ */
 function ajustarSidebar() {
   const traduceElement = document.getElementById("traduce");
 

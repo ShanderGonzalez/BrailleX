@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: Validator</title>
+    <title>JSDoc: Source: utilities/responsive.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,132 +17,53 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: Validator</h1>
+    <h1 class="page-title">Source: utilities/responsive.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">Clase que contiene los métodos para validar los campos de los formularios</div>
-        
-
-        
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_validate.js.html">services/validate.js</a>, <a href="services_validate.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Cambia el texto del botón "Conócenos" a un icono de menú (☰) en pantallas pequeñas (&lt;= 600px),
+ * y lo vuelve a su texto original en pantallas más grandes.
+ */
+function cambiarTextoResponsive() {
+  let elemento = document.getElementById("conocenosBoton");
+  if (window.innerWidth &lt;= 600) {
+    elemento.textContent = "☰";
+  } else {
+    elemento.textContent = "Conócenos";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", cambiarTextoResponsive);
+window.addEventListener("resize", cambiarTextoResponsive);
+
+/**
+ * Ajusta la posición del sidebar en función del tamaño de la ventana.
+ * En pantallas pequeñas (&lt;= 600px), mueve el sidebar debajo del elemento con id "traduce".
+ * En pantallas más grandes, devuelve el sidebar a su posición original en el DOM.
+ */
+function ajustarSidebar() {
+  const traduceElement = document.getElementById("traduce");
+
+  if (window.innerWidth &lt;= 600) {
+    traduceElement.insertAdjacentElement("afterend", sidebar);
+  } else if (sidebarNextSibling) {
+    sidebarParent.insertBefore(sidebar, sidebarNextSibling);
+  } else {
+    sidebarParent.appendChild(sidebar);
+  }
+}
+
+window.addEventListener("DOMContentLoaded", ajustarSidebar);
+window.addEventListener("resize", ajustarSidebar);
+</code></pre>
+        </article>
+    </section>
 
 
 
