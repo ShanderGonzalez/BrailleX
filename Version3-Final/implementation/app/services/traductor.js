@@ -79,7 +79,10 @@ class Traductor {
     let esNumero = false;
 
     for (const palabra of palabras) {
-      if (this.validador.isUpperCase(palabra)) {
+
+      if (palabras.length == 1 && this.validador.isOnlyUpperCase(palabra)) {
+        brailleTexto += " 46";
+      } else if (this.validador.isUpperCase(palabra)) {
         brailleTexto += " 46 46";
       }
 

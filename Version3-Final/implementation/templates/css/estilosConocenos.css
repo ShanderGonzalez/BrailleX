@@ -47,6 +47,9 @@
 
   }
 
+  .faq-section {
+    margin: 0px 50px 10px 50px !important;
+}
 }
 
 /* Estilos para la página del equipo */
@@ -141,4 +144,36 @@
 
 .vision {
   margin-left: 20px;
+}
+
+.faq-section {
+    margin:  0px 150px 10px 150px;
+    padding: 20px;
+    background-color: #abbef362;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.faq-section h2 {
+    font-size: 1.5em;
+    margin-top: 20px;
+    color: #000000;
+}
+
+.faq-section p {
+    font-size: 1em;
+    margin: 10px 0;
+    color: #2c2c2c;
+}
+
+.faq-section p strong {
+    color: #000;
+}
+
+.manualLink{
+  text-decoration: none;
+  color: #000;
+  font-size: 1em;
+  margin: 10px 0;
+  text-align: center;
 }

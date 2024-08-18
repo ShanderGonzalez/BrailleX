@@ -35,46 +35,91 @@ class Validator {
   /**
    * Valida si una cadena de texto es un correo electrónico válido.
    * @param {string} correo - El correo electrónico a validar.
-   * @returns {boolean} - `true` si el correo es válido, `false` en caso contrario.
+   * @returns {boolean} - true si el correo es válido, false en caso contrario.
    */
-  validarCorreo(correo) {
-    const patron = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return patron.test(correo);
+  isValidEmail(email) {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(email);
   }
+
   /**
      * Valida si una cadena de texto es una URL válida.
      * @param {string} url - La URL a validar.
-     * @returns {boolean} - `true` si la URL es válida, `false` en caso contrario.
+     * @returns {boolean} - true si la URL es válida, false en caso contrario.
      */
-  validarURL(url) {
-    const patron = /^(https?:\/\/)?www\.[^\s/$.?#].[^\s]*$/;
-    return patron.test(url);
+  isValidURL(url) {
+    const urlPattern = /^(https?:\/\/)?www\.[^\s/$.?#].[^\s]*$/;
+    return urlPattern.test(url);
   }
 
   /**
    * Valida si una cadena de texto es una etiqueta válida.
    * @param {string} etiqueta - La etiqueta a validar.
-   * @returns {boolean} - `true` si la etiqueta es válida, `false` en caso contrario.
+   * @returns {boolean} - true si la etiqueta es válida, false en caso contrario.
    */
-  validarEtiqueta(etiqueta) {
-    const patronEtiqueta = /^#[a-zA-Z0-9_]+(:\d+)?$/;
-    return patronEtiqueta.test(etiqueta);
+  isValidTag(tag) {
+    const tagPattern = /^#[a-zA-Z0-9_]+(:\d+)?$/;
+    return tagPattern.test(tag);
   }
 
   /**
-   * Valida si una cadena de texto contiene solo caracteres en español.
-   * @param {string} texto - El texto a validar.
-   * @returns {boolean} - `true` si el texto contiene solo caracteres en español, `false` en caso contrario.
+   * Determina si un carácter es una letra.
+   * @param {string} caracter - El carácter a verificar.
+   * @returns {boolean} - Verdadero si el carácter es una letra, falso en caso contrario.
    */
-  esEspanol(texto) {
-    const patron =
-      /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ0-9.,;:¿?¡!"«»'&lt;>()[\]{}\-—*+\\/&amp;@#%^$€\s]+$/;
-    return patron.test(texto);
+  isLetter(char) {
+    return /[a-zA-Z\u00C0-\u00FF]/.test(char);
+  }
+
+  /**
+   * Determina si un carácter es un número.
+   * @param {string} caracter - El carácter a verificar.
+   * @returns {boolean} - Verdadero si el carácter es un número, falso en caso contrario.
+   */
+  isNumber(char) {
+    return /\d/.test(char);
+  }
+
+  /**
+   * Determina si un carácter es un espacio.
+   * @param {string} caracter - El carácter a verificar.
+   * @returns {boolean} - Verdadero si el carácter es un espacio, falso en caso contrario.
+   */
+  isSpace(char) {
+    return /\s/.test(char);
+  }
+
+  /**
+   * Determina si una palabra está en mayúsculas.
+   * @param {string} palabra - La palabra a verificar.
+   * @returns {boolean} - Verdadero si la palabra está en mayúsculas, falso en caso contrario.
+   */
+  isUpperCase(word) {
+    return word === word.toUpperCase() &amp;&amp; /[a-zA-Z]/.test(word);
+  }
+
+  /**
+   * Determina si una palabra está en minúsculas.
+   * @param {string} palabra - La palabra a verificar.
+   * @returns {boolean} - Verdadero si la palabra está en minúsculas, falso en caso contrario.
+   **/
+  isOnlyUpperCase(letter) {
+    return /^[A-Z]$/.test(letter);
+  }
+
+  /**
+   * Determina si un signo es un punto decimal.
+   * @param {string} signo - El signo a verificar.
+   * @param {string} palabra - La palabra que contiene el signo.
+   * @param {number} indice - El índice del signo en la palabra.
+   * @returns {boolean} - Verdadero si el signo es un punto decimal, falso en caso contrario.
+   */
+  isDecimalPoint(sign, word, index) {
+    return sign === "." &amp;&amp; this.isNumber(word[index - 1]) &amp;&amp; this.isNumber(word[index + 1]);
   }
 }
 
-export default Validator;
-</code></pre>
+export default Validator;</code></pre>
         </article>
     </section>
 
@@ -84,13 +129,13 @@ export default Validator;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-BrailleDictionary.html">BrailleDictionary</a></li><li><a href="module-Traductor.html">Traductor</a></li><li><a href="module-Validator.html">Validator</a></li></ul><h3>Classes</h3><ul><li><a href="module-Traductor-Traductor.html">Traductor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#elementos">elementos</a></li><li><a href="global.html#limpiar">limpiar</a></li><li><a href="global.html#respuesta">respuesta</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-BrailleDictionary.html">BrailleDictionary</a></li><li><a href="module-Traductor.html">Traductor</a></li><li><a href="module-Validator.html">Validator</a></li></ul><h3>Classes</h3><ul><li><a href="module-Traductor-Traductor.html">Traductor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ajustarSidebar">ajustarSidebar</a></li><li><a href="global.html#cambiarTextoResponsive">cambiarTextoResponsive</a></li><li><a href="global.html#closeMenu">closeMenu</a></li><li><a href="global.html#dividirTextoEnLineas">dividirTextoEnLineas</a></li><li><a href="global.html#elementos">elementos</a></li><li><a href="global.html#leerTexto">leerTexto</a></li><li><a href="global.html#limpiar">limpiar</a></li><li><a href="global.html#mostrarAlerta">mostrarAlerta</a></li><li><a href="global.html#mostrarAlertaTemporal">mostrarAlertaTemporal</a></li><li><a href="global.html#respuesta">respuesta</a></li><li><a href="global.html#toggleMenu">toggleMenu</a></li><li><a href="global.html#zoomIn">zoomIn</a></li><li><a href="global.html#zoomIn1">zoomIn1</a></li><li><a href="global.html#zoomOut">zoomOut</a></li><li><a href="global.html#zoomOut1">zoomOut1</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed Jun 05 2024 11:52:24 GMT-0500 (hora de Ecuador)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Fri Aug 16 2024 23:14:13 GMT-0500 (hora de Ecuador)
 </footer>
 
 <script> prettyPrint(); </script>

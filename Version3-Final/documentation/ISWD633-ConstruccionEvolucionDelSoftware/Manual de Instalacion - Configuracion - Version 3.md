@@ -8,7 +8,7 @@
 **Pasos de Instalación/Configuración:**
 
 - Abre el enlace proporcionado a continuación: 
-    https://shandergonzalez.github.io/BrailleX/Version1/implementation/app/views/index.html
+    https://shandergonzalez.github.io/BrailleX/Version3-Final/implementation/app/views/index.html
     
 - ¡Listo! Ahora puedes comenzar a usar la página web de traducción de español a braille.
 
