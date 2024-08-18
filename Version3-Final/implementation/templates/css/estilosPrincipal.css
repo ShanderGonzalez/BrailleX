@@ -258,7 +258,7 @@ body {
   display: block;
 }
 
-.ConocenosOpciones a {
+.ConocenosOpciones a, .FAQs a {
   display: block;
   color: #000000;
   text-decoration: solid;
@@ -267,7 +267,7 @@ body {
   margin: 0;
 }
 
-.ConocenosOpciones a:hover {
+.ConocenosOpciones a:hover , .FAQs a:hover {
   color: #2e2d38;
   border-radius: 8px;
   border-bottom: 1px solid #000;

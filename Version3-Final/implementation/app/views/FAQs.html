@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quienes-Somos- BrailleX</title>
+    <link rel="stylesheet" href="../../templates/css/estilosPrincipal.css" />
+    <link rel="stylesheet" href="../../templates/css/estilosConocenos.css" />
+    <link rel="stylesheet" href="../../templates/css/estilosModoOscuro.css" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="../../images/logo-proyecto.png" alt="Dev-Sentinels Logo" />
+            <p>Dev-Sentinels</p>
+        </div>
+        <div class="info">
+            <div class="Conocenos">
+                <a class="ConocenosTitulo" id="conocenosBoton" tabindex="0" aria-label="Conócenos"
+                    aria-expanded="false">Conócenos</a>
+                <div class="ConocenosOpciones">
+                    <a href="Equipo.html">Equipo</a>
+                    <a href="index.html">Inicio</a>
+                </div>
+            </div>
+            <div class="FAQs">
+                <a href="FAQs.html" aria-label="Preguntas frecuentes">FAQs</a>
+            </div>
+            <img src="../../images/info-icon.png" alt="icono de información" />
+        </div>
+    </header>
+    <h1 class="Titulo">Preguntas frecuentes</h1>
+    <main>
+        <div class="faq-section">
+            <h2>1. ¿Por qué no puedo traducir?</h2>
+            <p>Asegúrate que no tengas ninguna advertencia, como la siguiente.</p>
+            <p style="color: red; font-size: 14px; text-align: center;" class="warningCaracteres hidden" id="warningCaracteres1">
+                * Texto inválido: no se permiten caracteres especiales.
+              </p>
+            <p>En BraileX algunos caracteres no son permitidos y si están la entrada de texto te notificará con este texto, y no se podrá mostrar una traducción</p>
+            <p><strong>Caracteres no válidos:</strong> Todos los caracteres ajenos al español</p>
+            <br>
+        </div>
+        <div class="faq-section">
+            <br>
+            <h2>2. ¿Por qué no puedo escribir en la entrada de texto en braille?</h2>
+            <p>En BrailleX nos aseguramos de que en la entrada de texto del traductor braille a español no se acepten caracteres como letras, números o cualquier otro que no sea específicamente braille. Por esta razón, aunque los escribas, no aparecerán en la entrada de texto.</p>
+            <p><strong>Recomendación:</strong> Para usar esta caja de entrada, se debe utilizar el componente de entrada braille o copiar y pegar los caracteres braille directamente en la caja de entrada para la traducción.</p>
+            <br>
+        </div>
+        <div class="faq-section">
+            <br>
+            <h2>3. ¿Por qué no puedo descargar en png y pdf?</h2>
+            <p>En BrailleX, la opción de descargar en formatos PNG y PDF solo está disponible después de que se ha realizado una traducción exitosa. Si no puedes descargar el archivo, asegúrate de que la traducción se haya completado y que el texto traducido esté visible en la caja de texto.</p>
+            <p><strong>Recomendación:</strong> Completa la traducción y verifica que el texto esté correctamente mostrado antes de intentar descargar. Si aún encuentras problemas, asegúrate de que el archivo de traducción esté disponible y que no haya errores en el proceso de traducción.</p>
+            <br>
+        </div>
+        <div class="faq-section">
+            <br>
+            <h3>Si tienes más dudas, puedes consultar nuestro </p>
+            <div class="manualLink">
+                <a href="https://github.com/ShanderGonzalez/BrailleX/blob/main/Version3-Final/documentation/ISWD652-CalidadDeSofware/6.%20Guia%20de%20Operacion.pdf" target="_blank">Manual de Usuario</a>
+            </div>
+        </div>
+
+    </main>
+    <button class="backButton" onclick="location.href='index.html'">
+        Regresar a la página inicial
+    </button>
+    <div class="dark-mode-toggle-container">
+        <label class="switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider round"></span>
+        </label>
+    </div>
+    <script type="module" src="../../app/utilities/toggleDarkMode.js"></script>
+    <script src="../../app/utilities/responsive.js"></script>
+    <script src="../../app/utilities/keyboardNavigation.js"></script>
+    <script src="../../app/utilities/scripts.js"></script>
+</body>
+
+</html>
